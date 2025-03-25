@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Nikah</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cs1.css">
+    <link rel="stylesheet" href="css/c2.css">
+    <link rel="stylesheet" href="css/cs3.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+</head>
+<body>
+    <div class="preloader-wrap" data-centerLine="Loading">
+        
+        <div class="percentage-wrapper">
+            <div class="percentage" id="precent">
+                
+                <span class="number number_2">
+                    <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span>
+                </span>
+                <span class="number number_3">
+                    <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span>
+                </span>
+            </div>
+            <div class="percentage-first"><span>Hampir sampai..</span></div>
+            <div class="percentage-last"><span>100</span></div>
+        </div>
+        
+    </div>
+    <div id="magic-cursor">
+        <div id="ball" style="translate: none; rotate: none; scale: none; border-width: 4px; transform: translate(-50%, -50%) translate3d(856.414px, 536.287px, 0px) scale(0.523, 0.523); filter: blur(0px); background-color: rgba(255, 252, 249, 0.027); border-color: rgb(155, 152, 150);" class="">
+        	<div id="ball-drag-x"></div>
+            <div id="ball-drag-y"></div>
+        	<div id="ball-loader" style="left: 0px; top: 0px; border-width: 4px;"></div>
+        </div>
+    </div>
+    <div class="dark-bg">
+        <div class="body-bg">
+            <div class="navbar-new w-nav">
+                <style>
+                    .home-banner-section {
+                        padding-top: 130px;
+                    }
+                </style>
+                <div class="container-large w-container">
+                    <div class="nav-area">
+                        <a class="nav-logo-wrap w-nav-brand" href="/home">
+                            <img src="logo.svg" alt="Logo">
+                        </a>
+                        <nav class="nav-menu-new w-nav-menu">
+                            <div class="nav-menu-wrap">
+                                <a class="nav-link-new w-nav-link" href="/home">Home</a>
+                                <a class="nav-link-new w-nav-link" href="/about">About</a>
+                                <div class="navigation-dropdown w-dropdown">
+                                    <div class="nav-link-new nav-dropdown w-dropdown-toggle">
+                                        <div class="nav-icon w-icon-dropdown-toggle"></div>
+                                        <div>Layanan</div>
+                                    </div>
+                                    <nav class="nav-dropdown-list w-dropdown-list">
+                                        <a class="nav-dropdown-link w-dropdown-link" href="/portfolio">Blog & Tips</a>
+                                        <a class="nav-dropdown-link w-dropdown-link" href="/team">Galeri Inspirasi</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link-new w-nav-link" href="/pricing">Pengaduan</a>
+                            </div>
+                            <div class="nav-button-wrap-new">
+                                <a class="nav-button-dark w-inline-block" href="/contact">Let's Study!
+                                    <div class="button-icon-wrap">
+                                        <img  src="image/star.png" style="width: 30px;height: 30px;"/>
+                                       </div>
+                                </a>
+                                
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <section class="home-banner-section">
+                <div class="w-layout-blockcontainer container-large w-container">
+                    <!-- Area Teks Home Banner -->
+                    <div class="home-banner-text-area">
+                        <div class="home-banner-text-wrap">
+                            <h1 class="banner-title">Smart Nikah</h1>
+                            <div class="banner-text-bg">
+                                <div class="banner-text">Yuk!</div>
+                                <div class="banner-text-cover">
+                                    <img src="image/v1.png"/>
+                                </div>
+                                <div class="banner-text-bg-wrap">
+                                    <img src="image/v1.png" />
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="home-banner-title">Harmoni Nikah</h2>
+                        <div class="banner-content-wrap">
+                            <p>
+                                Bangun rumah tangga dengan ilmu, karena pernikahan bukan sekadar cinta, tapi juga komitmen dan kesiapan.
+                            </p>
+                        </div>
+                        <div class="home-banner-section">
+                           
+                            <img src="image/L4.png" class="floating-image appear-slide-left top-left" alt="Gambar 1">
+                        
+                           
+                            <img src="image/L3.png" class="floating-image appear-scale top-right" alt="Gambar 2">
+                        
+                           
+                            <img src="image/L5.png" class="floating-image appear-scale bottom-left" alt="Gambar 3">
+                        
+                        
+                            <img src="image/L6.png" class="floating-image appear-slide-right bottom-right" alt="Gambar 4">
+                        </div>
+                        
+                        <div>
+                            <div class="home-button-line-wrap">
+                                <img alt="about curve line" class="home-button-line" loading="lazy" 
+                                    src="image/n1.svg"/>
+                            </div>
+                            <div class="about-banner-button-wrap">
+                                <div class="about-banner-button-area">
+                                    <a class="dark-icon-button w-inline-block" href="/about">
+                                        <div>Start Now</div>
+                                        <div class="button-icon-wrap">
+                                            <img loading="lazy" 
+                                                src="image/star.png" style="width: 30px;height: 30px;"/>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Area Kartu Home Banner -->
+                    <div class="home-banner-card-area">
+                        <div class="home-banner-card-holder">
+                            <div class="home-banner-card first-card">
+                                <div class="home-banner-card-wrap">
+                                    <div class="home-banner-card-dot"></div>
+                                    <div>Peran & Tanggung Jawab</div>
+                                </div>
+                                <div class="home-banner-card-image-wrap">
+                                    <img alt="banner card image" loading="eager" 
+                                        src="image/p4.png"/>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="home-banner-card-holder">
+                            <div class="home-banner-card second-card">
+                                <div class="home-banner-card-wrap second">
+                                    <div class="home-banner-card-dot"></div>
+                                    <div>Manajemen Keuangan Keluarga</div>
+                                </div>
+                                <div class="home-banner-card-image-wrap">
+                                    <img alt="banner card image" loading="eager" 
+                                        src="image/p1.png"/>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="home-banner-card-holder">
+                            <div class="home-banner-card third-card">
+                                <div class="home-banner-card-wrap third">
+                                    <div class="home-banner-card-dot"></div>
+                                    <div>Kesiapan Mental</div>
+                                </div>
+                                <div class="home-banner-card-image-wrap">
+                                    <img alt="banner card image" loading="eager" 
+                                        src="image/p3.png"/>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="home-banner-card-holder">
+                            <div class="home-banner-card fourth-card">
+                                <div class="home-banner-card-wrap second">
+                                    <div class="home-banner-card-dot"></div>
+                                    <div>Komunikasi & Penyelesaian Konflik</div>
+                                </div>
+                                <div class="home-banner-card-image-wrap">
+                                    <img alt="banner card image" loading="eager" 
+                                        src="image/p2.png"/>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="home-banner-card-holder">
+                            <div class="home-banner-card fifth-card">
+                                <div class="home-banner-card-wrap fifth">
+                                    <div class="home-banner-card-dot white"></div>
+                                    <div>Pendidikan Seks</div>
+                                </div>
+                                <div class="home-banner-card-image-wrap">
+                                    <img alt="banner card image" loading="eager" 
+                                        src="image/p5.png"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+            <section class="experts-section">
+                <div class="w-layout-blockcontainer container w-container">
+                    <div class="experts-brand-wrap"> 
+                        <div>
+                            <div class="align-center brand-title-wrapper">
+                                <h3 class="brand-title">Cerdas Bersama Smart Nikah, Siap Menjalani Pernikahan</h3>
+                            </div>
+                            <div class="brand-logo-area">
+                                <div class="brand-logo-wrap">
+                                    <div class="brand-logo-holder" style="-webkit-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)">
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L1.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L2.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L1.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L2.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L1.png"/>
+                                        </div>
+                                    </div>
+                                    <div class="brand-logo-holder" style="-webkit-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)">
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L1.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L2.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L1.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L2.png"/>
+                                        </div>
+                                        <div class="brand-logo">
+                                            <img alt="brand logo" src="image/L1.png"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="brand-left-shade"></div>
+                                <div class="brand-right-shade"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="award-section" id="award">
+                <div class="w-layout-blockcontainer container w-container">
+                    <div class="award-area">
+                        <div class="award-image-area">
+                            <img alt="award image" class="award-image" loading="lazy"
+                                 src="image/p3.png" width="286" height="427"/>
+                            <div class="award-image-bg-line"></div>
+                            <div class="award-circle-text-wrap">
+                                <img alt="award text" class="award-circle-text-image" loading="lazy"
+                                     src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/6741546cd0a900ec3a178cff_award-circle-text.svg"/>
+                                <div class="circle-text-arrow">
+                                    <img alt="arrow" loading="lazy"
+                                         src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67415588ac022b886ad7b66d_award-arrow-white.svg"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="award-content-wrap">
+                            <h2 class="section-title">Rencanakan Pernikahan Sempurna dengan Satu Platform!</h2>
+                            <p class="award-text">
+                                Tim kami merancang solusi digital personal, menghadirkan pengalaman lancar dan tak terlupakan untuk momen bahagiamu.
+                            </p>
+                            <div class="award-link-area">
+                                <a class="award-link w-inline-block" href="/about">
+                                    <div>Explore More</div>
+                                    <div class="button-icon-wrap">
+                                        <img alt="arrow" loading="lazy"
+                                             src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67406bc46760980fd39c1900_violet-arrow.svg"/>
+                                    </div>
+                                </a>
+                                <div class="award-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-center">
+                        <div class="award-curve-arrow-wrap">
+                            <img alt="curve arrow" loading="lazy"
+                                 src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67407a0fb9e79dc62afc8c62_award-arrow.svg"/>
+                        </div>
+                    </div>
+                    <div class="award-marquee-area">
+                        <div class="award-marquee-wrap">
+                            <p class="award-marquee-text">Bangun rumah tangga dengan ilmu, </p>
+                            <div class="award-dot"></div>
+                            <p class="award-marquee-text">karena pernikahan bukan sekadar cinta, tapi juga komitmen dan kesiapan.</p>
+                            <div class="award-dot"></div>
+                        </div>
+                        <div class="award-marquee-wrap">
+                            <p class="award-marquee-text">Bangun rumah tangga dengan ilmu, </p>
+                            <div class="award-dot"></div>
+                            <p class="award-marquee-text">karena pernikahan bukan sekadar cinta, tapi juga komitmen dan kesiapan.</p>
+                            <div class="award-dot"></div>
+                        </div>
+                        <style>
+                            
+                        </style>
+                    </div>
+                    
+                </div>
+            </section>
+            <section class="service-section">
+                <div class="w-layout-blockcontainer container w-container">
+                    <div class="align-center">
+                        <div class="subtitle-wrap">
+                            <div class="subtitle-dot"></div>
+                            <p class="subtitle">What We Do</p>
+                        </div>
+                        <h2 class="section-title" id="studio3">Our Services</h2>
+                    </div>
+            
+                    <div class="w-layout-grid service-grid">
+                        <div class="service-card left-side">
+                            <div class="service-icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#bd5196" viewBox="0 0 256 256"><path d="M220,160a12,12,0,1,1-12-12A12,12,0,0,1,220,160Zm-4.55,39.29A48.08,48.08,0,0,1,168,240H144a48.05,48.05,0,0,1-48-48V151.49A64,64,0,0,1,40,88V40a8,8,0,0,1,8-8H72a8,8,0,0,1,0,16H56V88a48,48,0,0,0,48.64,48c26.11-.34,47.36-22.25,47.36-48.83V48H136a8,8,0,0,1,0-16h24a8,8,0,0,1,8,8V87.17c0,32.84-24.53,60.29-56,64.31V192a32,32,0,0,0,32,32h24a32.06,32.06,0,0,0,31.22-25,40,40,0,1,1,16.23.27ZM232,160a24,24,0,1,0-24,24A24,24,0,0,0,232,160Z"></path></svg>  </div>
+                            <a class="service-card-title" >Konsultasi</a>
+                            <p class="service-card-text">
+                                Konsultasi dengan psikolog, konselor pernikahan, atau pemuka agama untuk membangun hubungan yang sehat.
+                            </p>
+                            <a class="service-arrow-link" href="/service-single">
+                                <div>View Service</div>
+                                <img class="button-icon" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/6746c888aeb8e1aec82851b3_arrow.svg" alt="arrow">
+                            </a>
+                        </div>
+            
+                        <div class="service-card">
+                            <div class="service-icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#bd5196" viewBox="0 0 256 256"><path d="M144,200a16,16,0,1,1-16-16A16,16,0,0,1,144,200Zm-16-40a8,8,0,0,0,8-8V48a8,8,0,0,0-16,0V152A8,8,0,0,0,128,160Z"></path></svg>
+                            </div>
+                            <a class="service-card-title" href="/service-single">Pengaduan</a>
+                            <p class="service-card-text">
+                                Laporkan kekerasan dalam rumah tangga secara aman dan dapatkan bantuan profesional.
+                            </p>
+                            <a class="service-arrow-link" href="/service-single">
+                                <div>View Service</div>
+                                <img class="button-icon" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/6746c888aeb8e1aec82851b3_arrow.svg" alt="arrow">
+                            </a>
+                        </div>
+            
+                        <div class="service-card right-side">
+                            <div class="service-icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#bd5196" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM184,96a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,96Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,128Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,160Z"></path></svg>
+                            </div>
+                            <a class="service-card-title" href="/service-single">Artikel & Blog</a>
+                            <p class="service-card-text">
+                                Baca tips, panduan, dan informasi penting untuk membangun pernikahan harmonis.
+                            </p>
+                            <a class="service-arrow-link" href="/service-single">
+                                <div>View Service</div>
+                                <img class="button-icon" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/6746c888aeb8e1aec82851b3_arrow.svg"" alt="arrow">
+                            </a>
+                        </div>
+            
+                        <div class="service-card bottom">
+                            <div class="service-icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#bd5196" viewBox="0 0 256 256"><path d="M80,40a40,40,0,1,0,40,40A40,40,0,0,0,80,40Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,80,104Zm96,16a40,40,0,1,0-40-40A40,40,0,0,0,176,120Zm0-64a24,24,0,1,1-24,24A24,24,0,0,1,176,56ZM80,136a40,40,0,1,0,40,40A40,40,0,0,0,80,136Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,80,200Zm96-64a40,40,0,1,0,40,40A40,40,0,0,0,176,136Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,176,200Z"></path></svg>
+                            </div>
+                            <a class="service-card-title" href="/service-single">Interactive Design</a>
+                            <p class="service-card-text">
+                                Belajar dengan video, simulasi, dan latihan interaktif yang menarik.
+                            </p>
+                            <a class="service-arrow-link" href="/service-single">
+                                <div>View Service</div>
+                                <img class="button-icon" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/6746c888aeb8e1aec82851b3_arrow.svg" alt="arrow">
+                            </a>
+                        </div>
+            
+                        <div class="service-card bottom">
+                            <div class="service-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#bd5196" viewBox="0 0 256 256"><path d="M220.27,158.54a8,8,0,0,0-7.7-.46,20,20,0,1,1,0-36.16A8,8,0,0,0,224,114.69V72a16,16,0,0,0-16-16H171.78a35.36,35.36,0,0,0,.22-4,36.11,36.11,0,0,0-11.36-26.24,36,36,0,0,0-60.55,23.62,36.56,36.56,0,0,0,.14,6.62H64A16,16,0,0,0,48,72v32.22a35.36,35.36,0,0,0-4-.22,36.12,36.12,0,0,0-26.24,11.36,35.7,35.7,0,0,0-9.69,27,36.08,36.08,0,0,0,33.31,33.6,35.68,35.68,0,0,0,6.62-.14V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V165.31A8,8,0,0,0,220.27,158.54ZM208,208H64V165.31a8,8,0,0,0-11.43-7.23,20,20,0,1,1,0-36.16A8,8,0,0,0,64,114.69V72h46.69a8,8,0,0,0,7.23-11.43,20,20,0,1,1,36.16,0A8,8,0,0,0,161.31,72H208v32.23a35.68,35.68,0,0,0-6.62-.14A36,36,0,0,0,204,176a35.36,35.36,0,0,0,4-.22Z"></path></svg>
+                            </div>
+                            <a class="service-card-title" href="/service-single">Quis & Penilaian</a>
+                            <p class="service-card-text">
+                                Uji pemahamanmu tentang hubungan sehat melalui kuis dan tes.
+                            </p>
+                            <a class="service-arrow-link" href="/service-single">
+                                <div>View Service</div>
+                                <img class="button-icon" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/6746c888aeb8e1aec82851b3_arrow.svg" alt="arrow">
+                            </a>
+                        </div>
+            
+                        <div class="service-card bottom">
+                            <div class="service-icon-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#bd5196" viewBox="0 0 256 256"><path d="M210.78,39.25l-130.25-23A16,16,0,0,0,62,29.23l-29.75,169a16,16,0,0,0,13,18.53l130.25,23h0a16,16,0,0,0,18.54-13l29.75-169A16,16,0,0,0,210.78,39.25ZM178.26,224h0L48,201,77.75,32,208,55ZM89.34,58.42a8,8,0,0,1,9.27-6.48l83,14.65a8,8,0,0,1-1.39,15.88,8.36,8.36,0,0,1-1.4-.12l-83-14.66A8,8,0,0,1,89.34,58.42ZM83.8,89.94a8,8,0,0,1,9.27-6.49l83,14.66A8,8,0,0,1,174.67,114a7.55,7.55,0,0,1-1.41-.13l-83-14.65A8,8,0,0,1,83.8,89.94Zm-5.55,31.51A8,8,0,0,1,87.52,115L129,122.29a8,8,0,0,1-1.38,15.88,8.27,8.27,0,0,1-1.4-.12l-41.5-7.33A8,8,0,0,1,78.25,121.45Z"></path></svg>
+                            </div>
+                            <a class="service-card-title" href="/service-single">Sertifikasi</a>
+                            <p class="service-card-text">
+                                Dapatkan sertifikat setelah menyelesaikan modul edukasi pernikahan.
+                            </p>
+                            <a class="service-arrow-link" href="/service-single">
+                                <div>View Service</div>
+                                <img class="button-icon" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/6746c888aeb8e1aec82851b3_arrow.svg" alt="arrow">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+              
+            <section class="information">
+                <div class="info w-layout-blockcontainer container w-container">
+                    <div class="text-section">
+                        <h4 class="hidden" data-animate-in="fadeInLeft" data-animate-out="fadeOutLeft" id="studio2">Expertise</h4>
+                        <h1 class="hidden" data-animate-in="fadeInLeft" data-animate-out="fadeOutLeft" >We Care About You</h1>
+                        <div class="tabs">
+                            <div class="tab active hidden" data-animate-in="fadeInLeft" data-animate-out="fadeOutLeft">Aman</div>
+                            <div class="tab hidden" data-animate-in="fadeInLeft" data-animate-out="fadeOutLeft">Amanah</div>
+                            <div class="tab hidden" data-animate-in="fadeInLeft" data-animate-out="fadeOutLeft">Cerdas</div>
+                            <div class="tab hidden" data-animate-in="fadeInLeft" data-animate-out="fadeOutLeft">Berkah</div>
+                  
+                        </div>
+                        <p class="hidden" data-animate-in="fadeInUp" data-animate-out="fadeOutDown">
+                            Menikah adalah perjalanan besar yang membutuhkan persiapan matang, terutama bagi perempuan. Smart Nikah hadir sebagai aplikasi edukasi yang membantu perempuan memahami segala aspek pernikahan sejak dini.
+                        </p>
+                        <p class="hidden" data-animate-in="fadeInUp" data-animate-out="fadeOutDown">
+                            Dengan materi edukatif, konsultasi interaktif, dan berbagai tips bermanfaat, Smart Nikah mendukung perempuan agar lebih siap dan percaya diri dalam membangun rumah tangga yang harmonis.
+                        </p>
+                        <p class="hidden" data-animate-in="fadeInUp" data-animate-out="fadeOutDown">
+                            Yuk, persiapkan diri lebih baik bersama Smart Nikah!
+                        </p>
+                    </div>
+                  
+                    <div class="image-section hidden" data-animate-in="fadeInRight" data-animate-out="fadeOutRight">
+                        <div class="image-box"></div>
+                        <img class="image-phone" src="image/p3.png" alt="Phone in hand">
+                    </div>
+                </div>
+            </section>
+   
+            <section class="faq-section">
+                <div class="w-layout-blockcontainer container w-container">
+                    <div class="faq-area">
+                        <div class="faq-section-title-area" data-w-id="de84fd58-595b-e2ca-40f1-b801256df057">
+                            <div class="subtitle-wrap">
+                                <p class="subtitle">Punya Pertanyaan?</p>
+                                <div class="subtitle-dot"></div>
+                            </div>
+                            <h2 class="section-title">Frequently Asked Questions</h2>
+                            <p>
+                                <a class="faq-link" href="/contact">Feel free</a> untuk bertanya kepada kami jika ada yang perlu ditanyakan.
+                            </p>
+                        </div>
+                        <div class="faq-whole-wrap">
+                            <!-- FAQ 1 -->
+                            <div class="faq-wrap w-dropdown" data-delay="0" data-hover="false">
+                                <div class="faq-question-wrap first w-dropdown-toggle">
+                                    <div class="faq-question-area">
+                                        <div>01</div>
+                                        <div>Apa saja persyaratan yang diperlukan untuk mendaftar?</div>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <img alt="faq icon" class="faq-initial-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f4fbe8cb5f8c4e62e07_faq-icon.svg"/>
+                                        <img alt="faq icon" class="faq-hover-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f8e51955ba6a6d5e78c_faq-icon-violet.svg"/>
+                                    </div>
+                                </div>
+                                <nav class="faq-answer-wrap w-dropdown-list">
+                                    <div class="faq-answer-area">
+                                        <p>Persyaratan umum termasuk alamat email aktif, nomor telepon, dan dokumen identitas seperti KTP atau paspor. Pastikan data yang Anda masukkan valid.</p>
+                                    </div>
+                                </nav>
+                            </div>
+            
+                            <!-- FAQ 2 -->
+                            <div class="faq-wrap w-dropdown" data-delay="0" data-hover="false">
+                                <div class="faq-question-wrap w-dropdown-toggle">
+                                    <div class="faq-question-area">
+                                        <div>02</div>
+                                        <div>Bagaimana cara mengajukan permohonan atau layanan tertentu melalui aplikasi?</div>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <img alt="faq icon" class="faq-initial-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f4fbe8cb5f8c4e62e07_faq-icon.svg"/>
+                                        <img alt="faq icon" class="faq-hover-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f8e51955ba6a6d5e78c_faq-icon-violet.svg"/>
+                                    </div>
+                                </div>
+                                <nav class="faq-answer-wrap w-dropdown-list">
+                                    <div class="faq-answer-area">
+                                        <p>Pilih menu "Pengaduan" di aplikasi, lalu ikuti langkah-langkah yang ditampilkan. Pastikan Anda melengkapi semua informasi yang diminta.</p>
+                                    </div>
+                                </nav>
+                            </div>
+            
+                            <!-- FAQ 3 -->
+                            <div class="faq-wrap w-dropdown" data-delay="0" data-hover="false">
+                                <div class="faq-question-wrap w-dropdown-toggle">
+                                    <div class="faq-question-area">
+                                        <div>03</div>
+                                        <div>Apakah aplikasi ini kompatibel dengan perangkat atau sistem operasi tertentu?</div>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <img alt="faq icon" class="faq-initial-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f4fbe8cb5f8c4e62e07_faq-icon.svg"/>
+                                        <img alt="faq icon" class="faq-hover-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f8e51955ba6a6d5e78c_faq-icon-violet.svg"/>
+                                    </div>
+                                </div>
+                                <nav class="faq-answer-wrap w-dropdown-list">
+                                    <div class="faq-answer-area">
+                                        <p>Aplikasi ini kompatibel dengan perangkat Android dan iOS versi terbaru. Pastikan perangkat Anda telah diperbarui ke versi sistem operasi yang didukung.</p>
+                                    </div>
+                                </nav>
+                            </div>
+            
+                            <!-- FAQ 4 -->
+                            <div class="faq-wrap w-dropdown" data-delay="0" data-hover="false">
+                                <div class="faq-question-wrap w-dropdown-toggle">
+                                    <div class="faq-question-area">
+                                        <div>04</div>
+                                        <div>Bagaimana keamanan data pribadi saya dijamin dalam aplikasi ini?</div>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <img alt="faq icon" class="faq-initial-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f4fbe8cb5f8c4e62e07_faq-icon.svg"/>
+                                        <img alt="faq icon" class="faq-hover-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f8e51955ba6a6d5e78c_faq-icon-violet.svg"/>
+                                    </div>
+                                </div>
+                                <nav class="faq-answer-wrap w-dropdown-list">
+                                    <div class="faq-answer-area">
+                                        <p>Kami menggunakan teknologi enkripsi dan protokol keamanan terkini untuk melindungi data pribadi Anda. Data Anda hanya dapat diakses oleh pihak yang berwenang.</p>
+                                    </div>
+                                </nav>
+                            </div>
+            
+                            <!-- FAQ 5 -->
+                            <div class="faq-wrap w-dropdown" data-delay="0" data-hover="false">
+                                <div class="faq-question-wrap w-dropdown-toggle">
+                                    <div class="faq-question-area">
+                                        <div>05</div>
+                                        <div>Apa yang harus dilakukan jika aplikasi tidak bisa diakses atau error?</div>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <img alt="faq icon" class="faq-initial-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f4fbe8cb5f8c4e62e07_faq-icon.svg"/>
+                                        <img alt="faq icon" class="faq-hover-icon" loading="lazy" src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/67417f8e51955ba6a6d5e78c_faq-icon-violet.svg"/>
+                                    </div>
+                                </div>
+                                <nav class="faq-answer-wrap w-dropdown-list">
+                                    <div class="faq-answer-area">
+                                        <p>Coba tutup dan buka kembali aplikasi, atau restart perangkat Anda. Jika masalah berlanjut, hubungi tim dukungan kami melalui menu "Bantuan" di aplikasi.</p>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="foot1">
+                <div class="w-layout-blockcontainer container">
+                    <div class="container w-layout-blockcontainer w-container">
+                        <div class="studio" id="studio1">Future</div>
+                        <div class="navigation">
+                            <div>Go Ahead</div>
+                            <div>Next Page</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+       
+<footer class="clapat-footer hidden">        	
+    <div id="footer-container">
+        
+        <div id="backtotop" class="button-wrap left">
+            <div class="icon-wrap parallax-wrap">
+                <div class="button-icon parallax-element">
+                    <i class="fa-solid fa-angle-up"></i>
+                </div>
+            </div>
+            <div class="button-text sticky left" id="backTopBtn"><span data-hover="Back Top">Back Top</span></div> 
+        </div>
+        
+        <div class="footer-middle">
+            <div class="copyright">2025 © <a class="link" target="_blank" href="#">TIM7</a>. All rights reserved.</div>
+        </div>
+        
+        <div class="socials-wrap">            	
+            <div class="socials-icon"><i class="fa-solid fa-share-nodes"></i></div>
+            <div class="socials-text">Follow Us</div>
+            <ul class="socials">
+                <li><span class="parallax-wrap"><a class="parallax-element" href="#" target="_blank">Db</a></span></li>
+                <li><span class="parallax-wrap"><a class="parallax-element" href="#" target="_blank">Tx</a></span></li>
+                <li><span class="parallax-wrap"><a class="parallax-element" href="#" target="_blank">Fb</a></span></li>
+                <li><span class="parallax-wrap"><a class="parallax-element" href="#">In</a></span></li>
+            </ul>                
+        </div>
+        
+    </div>
+</footer>
+</body>
+
+<!-- jQuery -->
+<script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
+    src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=673c57a2e9c6d66986ffebf5" 
+    type="text/javascript">
+</script>
+
+<!-- Webflow.js -->
+<script src="https://cdn.prod.website-files.com/673c57a2e9c6d66986ffebf5/js/webflow.673b3187.c8511ede14f6763f.js" 
+    type="text/javascript">
+</script>
+
+<!-- Google WebFont -->
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" 
+    type="text/javascript">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+  document.getElementById("backTopBtn").addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const cursor = document.querySelector('.cursor');
+    let timeout;
+
+    document.addEventListener('mousemove', (e) => {
+        clearTimeout(timeout); 
+        cursor.style.opacity = 1; 
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+
+        
+        timeout = setTimeout(() => {
+            cursor.style.transform = `translate(${e.clientX}px, -100px)`;
+            cursor.style.opacity = 0;
+        }, 1500);
+    });
+</script>
+<script type="text/javascript">
+   WebFont.load({  
+       google: {    
+           families: ["Unbounded:200,300,regular,500,600,700,800,900",
+                      "Onest:200,300,regular,500,600,700,800,900",
+                      "Funnel Display:300,regular,500,600,700,800"]  
+       }
+   });
+</script>
+<script type="text/javascript">
+   !function(o,c){
+       var n=c.documentElement,t=" w-mod-";
+       n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")
+   }(window,document);
+</script><script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Saat elemen masuk viewport
+                entry.target.classList.remove(entry.target.dataset.animateOut);
+                entry.target.classList.add(entry.target.dataset.animateIn);
+            } else {
+                // Saat elemen keluar viewport
+                entry.target.classList.remove(entry.target.dataset.animateIn);
+                entry.target.classList.add(entry.target.dataset.animateOut);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+</script>
+<script>
+    document.querySelector('.home-banner-section').addEventListener('mouseleave', function() {
+        const images = document.querySelectorAll('.floating-image');
+        images.forEach(img => {
+            const randomX = Math.floor(Math.random() * 50) - 25;
+            const randomY = Math.floor(Math.random() * 50) - 25; 
+            img.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            img.style.opacity = "0";
+        });
+    });
+
+    document.querySelector('.home-banner-section').addEventListener('mouseenter', function() {
+        const images = document.querySelectorAll('.floating-image');
+        images.forEach(img => {
+            img.style.opacity = "1"; 
+        });
+    });
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    let body = document.body;
+    let timeout;
+
+    function showScrollbar() {
+        document.documentElement.style.overflowY = "scroll";
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            document.documentElement.style.overflowY = "hidden";
+        }, 5000); 
+    }
+
+    body.addEventListener("mousemove", showScrollbar);
+    body.addEventListener("scroll", showScrollbar);
+});
+
+</script>
+<script src="js/animate.js"></script>
+<script src="js/j1.js"></script>
+</html>

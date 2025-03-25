@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Animasi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #d3d3d3;
+            text-align: center;
+            height: 200vh; /* Agar bisa scroll */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Layout utama */
+        .container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Teks utama */
+        .studio {
+            font-size: 250px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+   
+        .navigation {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 250px;
+            font-size: 18px;
+            transform: translateY(-50%);
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #d3d3d3;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .back-top {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .socials {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .rights {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .footer a:hover {
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="studio" id="studio">Studio</div>
+        <div class="navigation">
+            <div>Go Ahead</div>
+            <div>Next Page</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        
+        <div class="back-top" onclick="scrollToTop()">
+            ⬆ <span>Back Top</span>
+        </div>
+        <div class="rights">2025 © ClaPat. All rights reserved.</div>
+        <div class="socials">
+            <a href="#">Follow Us</a>
+        </div>
+    </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        // Animasi acak huruf
+        const studioText = document.getElementById("studio");
+        const originalText = studioText.innerText;
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        studioText.addEventListener("mouseenter", function () {
+            let iteration = 0;
+            const interval = setInterval(() => {
+                studioText.innerText = originalText.split("")
+                    .map((char, index) => {
+                        if (index < iteration) {
+                            return originalText[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+
+                if (iteration >= originalText.length) {
+                    clearInterval(interval);
+                }
+                iteration += 1 / 3;
+            }, 30);
+        });
+    </script>
+
+</body>
+</html>
