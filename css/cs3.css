@@ -266,7 +266,7 @@
 .socials-wrap {
     position:relative;
     float: right;
-    color: #000;
+    color: #fff;
     width: 240px;
     height: 160px;
     box-sizing: border-box;
@@ -349,8 +349,8 @@
 }
 
 .footer-middle .copyright a {
-    text-decoration: none; /* Hapus garis bawah */
-    color: inherit; /* Gunakan warna default teks */
+    text-decoration: none; 
+    color: inherit; 
 }
 
 
