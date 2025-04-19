@@ -6,15 +6,17 @@
   font-family: 'Inter', sans-serif;
 }
 
-body {
-  background: white;
-  color: #222;
+html, body {
+  height: 100%;
+  overflow: hidden; /* Disable global scrolling */
 }
 
 .dashboard-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  position: relative;
 }
+
 .sidebar {
     width: 100px;
     height: 100vh;
@@ -131,12 +133,15 @@ body {
   }
   
 
-.main-content {
-    width: 100%;
+  .main-content {
+    flex: 1;
+    overflow-y: auto; /* Enable scrolling only here */
+    overflow-x: hidden;
+    height: 100vh;
+    -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
     padding: 40px;
-    position: relative;
     border-top-right-radius: 100px;
-}
+  }
 
 .main-header {
   display: flex;
@@ -150,6 +155,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding-right: 100px ;
 }
 
 .avatar {
@@ -177,6 +183,7 @@ body {
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  padding-left: 300px;
 }
 
 .search-icon {
