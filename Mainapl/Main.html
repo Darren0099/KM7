@@ -53,13 +53,24 @@
           </div>
           <span>Start searching here...</span>
         </div>
-        <div class="profile">
+        <div class="profile" id="profileDropdownTrigger">
           <div class="avatar">
             <img src="asset/image/Profile1.png" class="avatar" alt="">
           </div>
-          <div class="profile-info">
-            <h2>Dwayne Tatum</h2>
-            <p>Ibu Rumah Tangga</p>
+          <div class="profile-container">
+            <div class="profile-info">
+              <h2>Dwayne Tatum</h2>
+              <p>Ibu Rumah Tangga</p>
+            </div>
+            
+            <div class="dropdown-bubble" id="profileDropdown">
+              <div class="bubble-arrow"></div>
+              <div class="dropdown-content">
+                <a href="#">Profile</a>
+                <a href="#">Email</a>
+                <a href="#">logout</a>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -71,7 +82,7 @@
             Kami berharap kamu sehat selalu<br>
             <span>mari kita mulai dari mana</span>
           </small>
-          <img src="asset/image/M1.png" alt="gambar" class="card-img">
+          <img src="asset/image/c6.png" alt="gambar" class="card-img">
           <img src="asset/image/latar1.png" alt="latar1" class="card-img2">
         </div>
         <div class="card c2 " style="background-color: #87b7ff;">
@@ -127,37 +138,103 @@
         <div class="tab-item" style="background-color: #87b7ff;">Contacts</div>
         <div class="tab-item" style="background-color: #8a8aff;">Address</div>
       </div>
-      <div class="cards-containerr">
-        <!-- Card 2 (Red Card) dimodifikasi sesuai contoh -->
-        <div class="cardr card-redr">
-          <div class="card-image-containerr" style="background-image: url('asset/image/M1.png'); background-size: cover; background-position: center;">
-            <div class="card-contentr" style=" height: 320px; padding: 20px;">
-              <div class="card-headerr">
-                <h2 class="card-titler" style="color: white;">Digital Design Thinking</h2>
-                <p class="card-agencyr" style="color: rgba(255,255,255,0.8);">Create by Couson Agency</p>
+     
+      <div class="cards-container">
+      
+        <!-- Cardd 1 -->
+        <a href="course.html" class="card-link">
+          <div class="cardd">
+              <div class="cardd-image-container">
+                  <img src="asset/image/Typing-cuate.png" class="cardd-image" alt="Research Phase">
               </div>
-              <div class="card-statsr" style="margin-top: auto;">
-                <div class="stat-itemr">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" viewBox="0 0 256 256">
-                    <path d="M213.66,66.34l-40-40A8,8,0,0,0,168,24H88A16,16,0,0,0,72,40V56H56A16,16,0,0,0,40,72V216a16,16,0,0,0,16,16H168a16,16,0,0,0,16-16V200h16a16,16,0,0,0,16-16V72A8,8,0,0,0,213.66,66.34ZM168,216H56V72h76.69L168,107.31v84.53c0,.06,0,.11,0,.16s0,.1,0,.16V216Zm32-32H184V104a8,8,0,0,0-2.34-5.66l-40-40A8,8,0,0,0,136,56H88V40h76.69L200,75.31Zm-56-32a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h48A8,8,0,0,1,144,152Zm0,32a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h48A8,8,0,0,1,144,184Z"></path>
-                  </svg>
-                  <span style="color: white;">17 Files</span>
-                </div>
-                <div class="stat-itemr">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" viewBox="0 0 256 256">
-                    <path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"></path>
-                    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"></path>
-                  </svg>
-                  <span style="color: white;">40 min</span>
-                </div>
+              <div class="cardd-content">
+                  <div class="cardd-header">
+                      <h2 class="cardd-title">MateriA</h2>
+                      <p class="cardd-agency">LembagaA</p>
+                  </div>
+                  <div class="cardd-stats">
+                      <div class="stat-item">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M213.66,66.34l-40-40A8,8,0,0,0,168,24H88A16,16,0,0,0,72,40V56H56A16,16,0,0,0,40,72V216a16,16,0,0,0,16,16H168a16,16,0,0,0,16-16V200h16a16,16,0,0,0,16-16V72A8,8,0,0,0,213.66,66.34ZM136,192H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm0-32H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm64,24H184V104a8,8,0,0,0-2.34-5.66l-40-40A8,8,0,0,0,136,56H88V40h76.69L200,75.31Z"></path></svg>
+                          <span>12 sites</span>
+                      </div>
+                      <div class="stat-item">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M208,96a12,12,0,1,1,12,12A12,12,0,0,1,208,96ZM196,72a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm28.66,56a8,8,0,0,0-8.63,7.31A88.12,88.12,0,1,1,120.66,40,8,8,0,0,0,119.34,24,104.12,104.12,0,1,0,232,136.66,8,8,0,0,0,224.66,128ZM128,56a72,72,0,1,1-72,72A72.08,72.08,0,0,1,128,56Zm-8,72a8,8,0,0,0,8,8h48a8,8,0,0,0,0-16H136V80a8,8,0,0,0-16,0Zm40-80a12,12,0,1,0-12-12A12,12,0,0,0,160,48Z"></path></svg>
+                          <span>25 min</span>
+                      </div>
+                  </div>
               </div>
-            </div>
           </div>
+      </a>
+
+        <!-- Cardd 2 (Red Cardd) -->
+        <div class="cardd">
+            <div class="cardd-image-container">
+                <img src="asset/image/c2.png" class="cardd-image" alt="Prototyping">
+            </div>
+            <div class="cardd-content">
+                <div class="cardd-header">
+                    <h2 class="cardd-title">MateriA</h2>
+                    <p class="cardd-agency">LembagaA</p>
+                </div>
+                <div class="cardd-stats">
+                    <div class="stat-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M213.66,66.34l-40-40A8,8,0,0,0,168,24H88A16,16,0,0,0,72,40V56H56A16,16,0,0,0,40,72V216a16,16,0,0,0,16,16H168a16,16,0,0,0,16-16V200h16a16,16,0,0,0,16-16V72A8,8,0,0,0,213.66,66.34ZM136,192H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm0-32H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm64,24H184V104a8,8,0,0,0-2.34-5.66l-40-40A8,8,0,0,0,136,56H88V40h76.69L200,75.31Z"></path></svg>
+                        <span>12 sites</span>
+                    </div>
+                    <div class="stat-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M208,96a12,12,0,1,1,12,12A12,12,0,0,1,208,96ZM196,72a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm28.66,56a8,8,0,0,0-8.63,7.31A88.12,88.12,0,1,1,120.66,40,8,8,0,0,0,119.34,24,104.12,104.12,0,1,0,232,136.66,8,8,0,0,0,224.66,128ZM128,56a72,72,0,1,1-72,72A72.08,72.08,0,0,1,128,56Zm-8,72a8,8,0,0,0,8,8h48a8,8,0,0,0,0-16H136V80a8,8,0,0,0-16,0Zm40-80a12,12,0,1,0-12-12A12,12,0,0,0,160,48Z"></path></svg>
+                        <span>25 min</span>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Cardd 3 -->
+        <div class="cardd">
+            <div class="cardd-image-container">
+                <img src="asset/image/c3.png" class="cardd-image" alt="Prototyping">
+            </div>
+            <div class="cardd-content">
+                <div class="cardd-header">
+                    <h2 class="cardd-title">MateriA</h2>
+                    <p class="cardd-agency">LembagaA</p>
+                </div>
+                <div class="cardd-stats">
+                    <div class="stat-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M213.66,66.34l-40-40A8,8,0,0,0,168,24H88A16,16,0,0,0,72,40V56H56A16,16,0,0,0,40,72V216a16,16,0,0,0,16,16H168a16,16,0,0,0,16-16V200h16a16,16,0,0,0,16-16V72A8,8,0,0,0,213.66,66.34ZM136,192H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm0-32H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm64,24H184V104a8,8,0,0,0-2.34-5.66l-40-40A8,8,0,0,0,136,56H88V40h76.69L200,75.31Z"></path></svg>
+                        <span>12 sites</span>
+                    </div>
+                    <div class="stat-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M208,96a12,12,0,1,1,12,12A12,12,0,0,1,208,96ZM196,72a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm28.66,56a8,8,0,0,0-8.63,7.31A88.12,88.12,0,1,1,120.66,40,8,8,0,0,0,119.34,24,104.12,104.12,0,1,0,232,136.66,8,8,0,0,0,224.66,128ZM128,56a72,72,0,1,1-72,72A72.08,72.08,0,0,1,128,56Zm-8,72a8,8,0,0,0,8,8h48a8,8,0,0,0,0-16H136V80a8,8,0,0,0-16,0Zm40-80a12,12,0,1,0-12-12A12,12,0,0,0,160,48Z"></path></svg>
+                        <span>25 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cardd">
+          <div class="cardd-image-container">
+              <img src="asset/image/c4.png" class="cardd-image" alt="Prototyping">
+          </div>
+          <div class="cardd-content">
+              <div class="cardd-header">
+                  <h2 class="cardd-title">MateriA</h2>
+                  <p class="cardd-agency">LembagaA</p>
+              </div>
+              <div class="cardd-stats">
+                  <div class="stat-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M213.66,66.34l-40-40A8,8,0,0,0,168,24H88A16,16,0,0,0,72,40V56H56A16,16,0,0,0,40,72V216a16,16,0,0,0,16,16H168a16,16,0,0,0,16-16V200h16a16,16,0,0,0,16-16V72A8,8,0,0,0,213.66,66.34ZM136,192H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm0-32H88a8,8,0,0,1,0-16h48a8,8,0,0,1,0,16Zm64,24H184V104a8,8,0,0,0-2.34-5.66l-40-40A8,8,0,0,0,136,56H88V40h76.69L200,75.31Z"></path></svg>
+                      <span>12 sites</span>
+                  </div>
+                  <div class="stat-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ff8355" viewBox="0 0 256 256"><path d="M208,96a12,12,0,1,1,12,12A12,12,0,0,1,208,96ZM196,72a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm28.66,56a8,8,0,0,0-8.63,7.31A88.12,88.12,0,1,1,120.66,40,8,8,0,0,0,119.34,24,104.12,104.12,0,1,0,232,136.66,8,8,0,0,0,224.66,128ZM128,56a72,72,0,1,1-72,72A72.08,72.08,0,0,1,128,56Zm-8,72a8,8,0,0,0,8,8h48a8,8,0,0,0,0-16H136V80a8,8,0,0,0-16,0Zm40-80a12,12,0,1,0-12-12A12,12,0,0,0,160,48Z"></path></svg>
+                      <span>25 min</span>
+                  </div>
+              </div>
+          </div>
       </div>
+    </div>
     </main>
-
-
 <!-- <aside class="right-content">
       <div class="profile">
         <img src="asset/image/Profile1.png" alt="User" class="profile-pic">
@@ -234,9 +311,9 @@
         </div>
       </div>
     </aside> -->    
-   
-     
   </div>
+
+ 
 
   <script>
     const menuItems = document.querySelectorAll('.menu-item');
@@ -247,6 +324,25 @@
       });
     });
   </script>
+  
+<script>
+  document.getElementById('profileDropdownTrigger').addEventListener('click', function() {
+    document.getElementById('profileDropdown').classList.toggle('show');
+  });
+  
+ 
+  window.addEventListener('click', function(event) {
+    if (!event.target.matches('#profileDropdownTrigger') && !event.target.closest('#profileDropdown')) {
+      var dropdowns = document.getElementsByClassName("dropdown-bubble");
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  });
+</script>
   
 </body>
 </html>

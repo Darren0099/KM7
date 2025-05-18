@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konsultasi Psikolog | Platform Kesehatan Mental</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4F46E5',secondary:'#8B5CF6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+overflow-x: hidden;
+}
+.sidebar {
+transition: all 0.3s ease;
+}
+.sidebar-item {
+transition: all 0.2s ease;
+}
+.sidebar-item:hover {
+background-color: rgba(79, 70, 229, 0.1);
+}
+.sidebar-item.active {
+background-color: rgba(79, 70, 229, 0.1);
+border-left: 3px solid #4F46E5;
+}
+input[type="checkbox"] {
+appearance: none;
+-webkit-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+appearance: none;
+-webkit-appearance: none;
+}
+.custom-checkbox {
+position: relative;
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+transition: all 0.2s ease;
+}
+input[type="checkbox"]:checked + .custom-checkbox {
+background-color: #4F46E5;
+border-color: #4F46E5;
+}
+input[type="checkbox"]:checked + .custom-checkbox::after {
+content: '';
+position: absolute;
+top: 3px;
+left: 6px;
+width: 6px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 44px;
+height: 24px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.switch-slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #e5e7eb;
+transition: .4s;
+border-radius: 34px;
+}
+.switch-slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .switch-slider {
+background-color: #4F46E5;
+}
+input:checked + .switch-slider:before {
+transform: translateX(20px);
+}
+.custom-range {
+-webkit-appearance: none;
+width: 100%;
+height: 6px;
+border-radius: 3px;
+background: #e5e7eb;
+outline: none;
+}
+.custom-range::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: #4F46E5;
+cursor: pointer;
+}
+.custom-range::-moz-range-thumb {
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: #4F46E5;
+cursor: pointer;
+border: none;
+}
+@media (max-width: 768px) {
+.sidebar {
+transform: translateX(-100%);
+}
+.sidebar.open {
+transform: translateX(0);
+}
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="sidebar fixed md:relative w-64 h-screen bg-white shadow-lg z-30 md:transform-none -translate-x-full">
+<div class="flex flex-col h-full">
+<div class="p-4 border-b">
+<h1 class="font-['Pacifico'] text-2xl text-primary">logo</h1>
+</div>
+<nav class="flex-1 overflow-y-auto py-6">
+<div class="flex flex-col gap-6">
+<a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-primary/5 transition-colors">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl bg-[#FFE8E0] text-[#FF5722] mr-4">
+<i class="ri-home-4-line text-xl"></i>
+</div>
+<span class="font-medium">Beranda</span>
+</a>
+<a href="#" class="flex items-center px-6 py-3 bg-primary/5 text-primary">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-white mr-4">
+<i class="ri-mental-health-line text-xl"></i>
+</div>
+<span class="font-medium">Konsultasi Psikolog</span>
+</a>
+<a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-primary/5 transition-colors">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl bg-[#E0F2FF] text-[#2196F3] mr-4">
+<i class="ri-calendar-line text-xl"></i>
+</div>
+<span class="font-medium">Jadwal Konsultasi</span>
+</a>
+<a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-primary/5 transition-colors">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl bg-[#E8F5E9] text-[#4CAF50] mr-4">
+<i class="ri-history-line text-xl"></i>
+</div>
+<span class="font-medium">Riwayat Konsultasi</span>
+</a>
+<a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-primary/5 transition-colors">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl bg-[#FFF3E0] text-[#FF9800] mr-4">
+<i class="ri-user-line text-xl"></i>
+</div>
+<span class="font-medium">Profil Saya</span>
+</a>
+<a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-primary/5 transition-colors">
+<div class="w-10 h-10 flex items-center justify-center rounded-xl bg-[#F3E5F5] text-[#9C27B0] mr-4">
+<i class="ri-settings-3-line text-xl"></i>
+</div>
+<span class="font-medium">Pengaturan</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t">
+<button class="w-full flex items-center justify-center px-4 py-2 bg-gray-100 text-gray-700 rounded-button hover:bg-gray-200 transition-colors">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-logout-box-line"></i>
+</div>
+<span class="whitespace-nowrap">Keluar</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col">
+<!-- Header -->
+<header class="bg-white shadow-sm z-20">
+<div class="flex items-center justify-between px-4 py-4">
+<div class="flex items-center">
+<button id="sidebarToggle" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-menu-line text-xl"></i>
+</button>
+<h1 class="text-xl font-semibold text-gray-800 md:ml-0 ml-2">Konsultasi Psikolog</h1>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative">
+<button class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700 relative">
+<i class="ri-notification-3-line text-xl"></i>
+<span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+</div>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="font-medium text-sm">BP</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-gray-50 p-4 md:p-6">
+<!-- Search and Filter Section -->
+<div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+<div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+<div class="relative flex-1 mb-4 md:mb-0">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-search-line"></i>
+</div>
+</div>
+<input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Cari psikolog berdasarkan nama atau spesialisasi...">
+</div>
+<div class="flex space-x-2">
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-button text-sm text-gray-700 hover:bg-gray-50 flex items-center whitespace-nowrap">
+<div class="w-4 h-4 flex items-center justify-center mr-2 text-gray-500">
+<i class="ri-filter-3-line"></i>
+</div>
+<span>Filter</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-button text-sm hover:bg-primary/90 whitespace-nowrap">Temukan Psikolog</button>
+</div>
+</div>
+</div>
+<!-- Filter Options -->
+<div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Spesialisasi</label>
+<select class="block w-full pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+<option value="">Semua Spesialisasi</option>
+<option value="anxiety">Kecemasan & Stress</option>
+<option value="depression">Depresi</option>
+<option value="relationship">Hubungan & Keluarga</option>
+<option value="trauma">Trauma & PTSD</option>
+<option value="career">Karir & Pengembangan Diri</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Hari Tersedia</label>
+<select class="block w-full pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+<option value="">Semua Hari</option>
+<option value="monday">Senin</option>
+<option value="tuesday">Selasa</option>
+<option value="wednesday">Rabu</option>
+<option value="thursday">Kamis</option>
+<option value="friday">Jumat</option>
+<option value="saturday">Sabtu</option>
+<option value="sunday">Minggu</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Rating Minimum</label>
+<div class="flex items-center space-x-2">
+<input type="range" min="1" max="5" value="4" class="custom-range">
+<span class="text-sm font-medium text-gray-700">4.0</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Rentang Harga</label>
+<select class="block w-full pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+<option value="">Semua Harga</option>
+<option value="0-100000">Rp 0 - Rp 100.000</option>
+<option value="100000-200000">Rp 100.000 - Rp 200.000</option>
+<option value="200000-300000">Rp 200.000 - Rp 300.000</option>
+<option value="300000+">Rp 300.000+</option>
+</select>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span class="text-sm text-gray-700">Tersedia Hari Ini</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span class="text-sm text-gray-700">Bahasa Inggris</span>
+</label>
+</div>
+<button class="text-sm text-primary hover:text-primary/80">Reset Filter</button>
+</div>
+</div>
+<!-- Psychologists Section -->
+<div class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-semibold text-gray-800">Psikolog Tersedia (24)</h2>
+<div class="flex items-center space-x-2">
+<span class="text-sm text-gray-600">Urutkan:</span>
+<select class="text-sm border border-gray-200 rounded-lg pl-3 pr-8 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white">
+<option value="recommended">Direkomendasikan</option>
+<option value="rating">Rating Tertinggi</option>
+<option value="price-low">Harga Terendah</option>
+<option value="price-high">Harga Tertinggi</option>
+<option value="experience">Pengalaman</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Psychologist Card 1 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+<div class="relative">
+<div class="absolute top-3 right-3 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Tersedia Hari Ini</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20female%20psychologist%20with%20glasses%20in%20formal%20attire%2C%20smiling%20warmly%20at%20camera%2C%20clean%20office%20background%2C%20soft%20lighting%2C%20professional%20headshot%20style%2C%20high%20quality%2C%20realistic&width=400&height=250&seq=1&orientation=landscape" alt="Dr. Anita Wijaya" class="w-full h-48 object-cover object-top">
+</div>
+<div class="p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-lg font-semibold text-gray-800">Dr. Anita Wijaya, M.Psi</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400 mr-1">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-sm font-medium">4.9</span>
+</div>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-mental-health-line"></i>
+</div>
+<span>Psikolog Klinis, Kecemasan & Stress</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-time-line"></i>
+</div>
+<span>8 Tahun Pengalaman</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-translate-2"></i>
+</div>
+<span>Bahasa: Indonesia, Inggris</span>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-sm text-gray-500">Mulai dari</span>
+<p class="text-lg font-semibold text-gray-800">Rp 250.000</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-heart-line"></i>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-information-line"></i>
+</button>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white rounded-button hover:bg-primary/90 flex items-center justify-center whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Jadwalkan Konsultasi</span>
+</button>
+</div>
+</div>
+<!-- Psychologist Card 2 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20male%20psychologist%20with%20beard%20in%20casual%20smart%20outfit%2C%20smiling%20confidently%20at%20camera%2C%20modern%20office%20background%2C%20soft%20lighting%2C%20professional%20headshot%20style%2C%20high%20quality%2C%20realistic&width=400&height=250&seq=2&orientation=landscape" alt="Dr. Budi Santoso" class="w-full h-48 object-cover object-top">
+</div>
+<div class="p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-lg font-semibold text-gray-800">Dr. Budi Santoso, M.Psi</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400 mr-1">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-sm font-medium">4.7</span>
+</div>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-mental-health-line"></i>
+</div>
+<span>Psikolog Klinis, Depresi & Trauma</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-time-line"></i>
+</div>
+<span>12 Tahun Pengalaman</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-translate-2"></i>
+</div>
+<span>Bahasa: Indonesia</span>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-sm text-gray-500">Mulai dari</span>
+<p class="text-lg font-semibold text-gray-800">Rp 300.000</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-heart-line"></i>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-information-line"></i>
+</button>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white rounded-button hover:bg-primary/90 flex items-center justify-center whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Jadwalkan Konsultasi</span>
+</button>
+</div>
+</div>
+<!-- Psychologist Card 3 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+<div class="relative">
+<div class="absolute top-3 right-3 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Tersedia Hari Ini</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20young%20female%20psychologist%20with%20hijab%20in%20formal%20attire%2C%20smiling%20warmly%20at%20camera%2C%20clean%20office%20background%2C%20soft%20lighting%2C%20professional%20headshot%20style%2C%20high%20quality%2C%20realistic&width=400&height=250&seq=3&orientation=landscape" alt="Dr. Siti Rahma" class="w-full h-48 object-cover object-top">
+</div>
+<div class="p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-lg font-semibold text-gray-800">Dr. Siti Rahma, M.Psi</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400 mr-1">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-sm font-medium">4.8</span>
+</div>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-mental-health-line"></i>
+</div>
+<span>Psikolog Keluarga & Pernikahan</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-time-line"></i>
+</div>
+<span>6 Tahun Pengalaman</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-translate-2"></i>
+</div>
+<span>Bahasa: Indonesia, Arab</span>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-sm text-gray-500">Mulai dari</span>
+<p class="text-lg font-semibold text-gray-800">Rp 200.000</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-heart-line"></i>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-information-line"></i>
+</button>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white rounded-button hover:bg-primary/90 flex items-center justify-center whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Jadwalkan Konsultasi</span>
+</button>
+</div>
+</div>
+<!-- Psychologist Card 4 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20male%20psychologist%20with%20glasses%20in%20smart%20casual%20outfit%2C%20smiling%20warmly%20at%20camera%2C%20modern%20office%20background%2C%20soft%20lighting%2C%20professional%20headshot%20style%2C%20high%20quality%2C%20realistic&width=400&height=250&seq=4&orientation=landscape" alt="Dr. Denny Pratama" class="w-full h-48 object-cover object-top">
+</div>
+<div class="p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-lg font-semibold text-gray-800">Dr. Denny Pratama, M.Psi</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400 mr-1">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-sm font-medium">4.6</span>
+</div>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-mental-health-line"></i>
+</div>
+<span>Psikolog Anak & Remaja</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-time-line"></i>
+</div>
+<span>9 Tahun Pengalaman</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-translate-2"></i>
+</div>
+<span>Bahasa: Indonesia, Inggris</span>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-sm text-gray-500">Mulai dari</span>
+<p class="text-lg font-semibold text-gray-800">Rp 275.000</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-heart-line"></i>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-information-line"></i>
+</button>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white rounded-button hover:bg-primary/90 flex items-center justify-center whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Jadwalkan Konsultasi</span>
+</button>
+</div>
+</div>
+<!-- Psychologist Card 5 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+<div class="relative">
+<div class="absolute top-3 right-3 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Tersedia Hari Ini</div>
+<img src="https://readdy.ai/api/search-image?query=professional%20female%20psychologist%20with%20long%20hair%20in%20business%20casual%20outfit%2C%20smiling%20warmly%20at%20camera%2C%20clean%20office%20background%2C%20soft%20lighting%2C%20professional%20headshot%20style%2C%20high%20quality%2C%20realistic&width=400&height=250&seq=5&orientation=landscape" alt="Dr. Maya Kusuma" class="w-full h-48 object-cover object-top">
+</div>
+<div class="p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-lg font-semibold text-gray-800">Dr. Maya Kusuma, M.Psi</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400 mr-1">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-sm font-medium">4.9</span>
+</div>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-mental-health-line"></i>
+</div>
+<span>Psikolog Karir & Pengembangan Diri</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-time-line"></i>
+</div>
+<span>10 Tahun Pengalaman</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-translate-2"></i>
+</div>
+<span>Bahasa: Indonesia, Inggris</span>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-sm text-gray-500">Mulai dari</span>
+<p class="text-lg font-semibold text-gray-800">Rp 325.000</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-heart-line"></i>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-information-line"></i>
+</button>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white rounded-button hover:bg-primary/90 flex items-center justify-center whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Jadwalkan Konsultasi</span>
+</button>
+</div>
+</div>
+<!-- Psychologist Card 6 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20male%20psychologist%20with%20short%20hair%20in%20formal%20attire%2C%20smiling%20confidently%20at%20camera%2C%20modern%20office%20background%2C%20soft%20lighting%2C%20professional%20headshot%20style%2C%20high%20quality%2C%20realistic&width=400&height=250&seq=6&orientation=landscape" alt="Dr. Reza Firmansyah" class="w-full h-48 object-cover object-top">
+</div>
+<div class="p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-lg font-semibold text-gray-800">Dr. Reza Firmansyah, M.Psi</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400 mr-1">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-sm font-medium">4.5</span>
+</div>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-mental-health-line"></i>
+</div>
+<span>Psikolog Trauma & PTSD</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-time-line"></i>
+</div>
+<span>7 Tahun Pengalaman</span>
+</div>
+<div class="flex items-center text-sm text-gray-600 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-translate-2"></i>
+</div>
+<span>Bahasa: Indonesia</span>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="text-sm text-gray-500">Mulai dari</span>
+<p class="text-lg font-semibold text-gray-800">Rp 225.000</p>
+</div>
+<div class="flex items-center space-x-2">
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-heart-line"></i>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-information-line"></i>
+</button>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-white rounded-button hover:bg-primary/90 flex items-center justify-center whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-calendar-check-line"></i>
+</div>
+<span>Jadwalkan Konsultasi</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center">
+<nav class="flex items-center">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 mr-2">
+<i class="ri-arrow-left-s-line"></i>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white mr-2">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 mr-2">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 mr-2">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 mr-2">4</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-arrow-right-s-line"></i>
+</button>
+</nav>
+</div>
+</div>
+<!-- FAQ Section -->
+<div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+<h2 class="text-lg font-semibold text-gray-800 mb-4">Pertanyaan Umum</h2>
+<div class="space-y-4">
+<div class="border-b border-gray-100 pb-4">
+<button class="flex items-center justify-between w-full text-left">
+<h3 class="text-base font-medium text-gray-800">Bagaimana cara melakukan konsultasi online?</h3>
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</button>
+<div class="mt-2 text-sm text-gray-600">
+<p>Untuk melakukan konsultasi online, Anda perlu memilih psikolog yang sesuai dengan kebutuhan Anda, pilih jadwal yang tersedia, lakukan pembayaran, dan pada waktu yang ditentukan Anda akan dihubungkan melalui video call dengan psikolog pilihan Anda.</p>
+</div>
+</div>
+<div class="border-b border-gray-100 pb-4">
+<button class="flex items-center justify-between w-full text-left">
+<h3 class="text-base font-medium text-gray-800">Berapa lama durasi satu sesi konsultasi?</h3>
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</button>
+<div class="hidden mt-2 text-sm text-gray-600">
+<p>Satu sesi konsultasi biasanya berlangsung selama 60 menit. Namun, beberapa psikolog mungkin menawarkan durasi yang berbeda, seperti 45 menit atau 90 menit, tergantung pada kebutuhan Anda.</p>
+</div>
+</div>
+<div class="border-b border-gray-100 pb-4">
+<button class="flex items-center justify-between w-full text-left">
+<h3 class="text-base font-medium text-gray-800">Apakah konsultasi saya bersifat rahasia?</h3>
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</button>
+<div class="hidden mt-2 text-sm text-gray-600">
+<p>Ya, semua konsultasi bersifat rahasia dan dilindungi oleh kode etik psikolog. Informasi yang Anda bagikan selama sesi konsultasi tidak akan dibagikan kepada pihak ketiga tanpa persetujuan Anda, kecuali dalam situasi darurat yang mengancam keselamatan.</p>
+</div>
+</div>
+<div class="border-b border-gray-100 pb-4">
+<button class="flex items-center justify-between w-full text-left">
+<h3 class="text-base font-medium text-gray-800">Bagaimana jika saya perlu membatalkan janji konsultasi?</h3>
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</button>
+<div class="hidden mt-2 text-sm text-gray-600">
+<p>Anda dapat membatalkan janji konsultasi melalui halaman "Jadwal Konsultasi" minimal 24 jam sebelum waktu yang dijadwalkan untuk mendapatkan pengembalian dana penuh. Pembatalan kurang dari 24 jam mungkin dikenakan biaya pembatalan.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Testimonials Section -->
+<div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-semibold text-gray-800">Testimoni Pengguna</h2>
+<div class="flex items-center space-x-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-arrow-left-s-line"></i>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50">
+<i class="ri-arrow-right-s-line"></i>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-gray-50 rounded-lg p-4">
+<div class="flex items-center mb-3">
+<div class="flex text-yellow-400">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+<p class="text-sm text-gray-600 mb-4">"Saya sangat terbantu dengan konsultasi bersama Dr. Anita. Beliau sangat memahami masalah saya dan memberikan saran yang praktis. Setelah beberapa sesi, saya merasa jauh lebih baik dalam mengelola kecemasan saya."</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">RD</div>
+<div class="ml-3">
+<h4 class="text-sm font-medium text-gray-800">Ratna Dewi</h4>
+<p class="text-xs text-gray-500">Konsultasi Kecemasan</p>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 rounded-lg p-4">
+<div class="flex items-center mb-3">
+<div class="flex text-yellow-400">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+<p class="text-sm text-gray-600 mb-4">"Dr. Budi sangat profesional dan penuh pengertian. Saya awalnya ragu untuk mencoba terapi online, tapi ternyata sangat nyaman dan efektif. Terima kasih atas bantuannya dalam mengatasi masalah depresi saya."</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">AP</div>
+<div class="ml-3">
+<h4 class="text-sm font-medium text-gray-800">Andi Pratama</h4>
+<p class="text-xs text-gray-500">Konsultasi Depresi</p>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 rounded-lg p-4">
+<div class="flex items-center mb-3">
+<div class="flex text-yellow-400">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-half-fill"></i>
+</div>
+</div>
+<p class="text-sm text-gray-600 mb-4">"Konsultasi dengan Dr. Siti sangat membantu hubungan saya dengan pasangan. Beliau memberikan perspektif baru dan teknik komunikasi yang efektif. Sekarang kami bisa menyelesaikan konflik dengan lebih baik."</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">NH</div>
+<div class="ml-3">
+<h4 class="text-sm font-medium text-gray-800">Nina Hartono</h4>
+<p class="text-xs text-gray-500">Konsultasi Hubungan</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- How It Works Section -->
+<div class="bg-white rounded-lg shadow-sm p-6">
+<h2 class="text-lg font-semibold text-gray-800 mb-6">Cara Kerja Konsultasi Online</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-user-search-line text-2xl"></i>
+</div>
+</div>
+<h3 class="text-base font-medium text-gray-800 mb-2">1. Pilih Psikolog</h3>
+<p class="text-sm text-gray-600">Pilih psikolog yang sesuai dengan kebutuhan dan preferensi Anda</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-calendar-check-line text-2xl"></i>
+</div>
+</div>
+<h3 class="text-base font-medium text-gray-800 mb-2">2. Jadwalkan Sesi</h3>
+<p class="text-sm text-gray-600">Pilih jadwal yang tersedia sesuai dengan waktu luang Anda</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-secure-payment-line text-2xl"></i>
+</div>
+</div>
+<h3 class="text-base font-medium text-gray-800 mb-2">3. Lakukan Pembayaran</h3>
+<p class="text-sm text-gray-600">Bayar dengan metode pembayaran yang tersedia secara aman</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-video-chat-line text-2xl"></i>
+</div>
+</div>
+<h3 class="text-base font-medium text-gray-800 mb-2">4. Mulai Konsultasi</h3>
+<p class="text-sm text-gray-600">Bergabung dalam sesi video call pada waktu yang ditentukan</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebar = document.querySelector('.sidebar');
+sidebarToggle.addEventListener('click', function() {
+sidebar.classList.toggle('open');
+});
+// Close sidebar when clicking outside on mobile
+document.addEventListener('click', function(event) {
+if (window.innerWidth < 768 &&
+!sidebar.contains(event.target) &&
+event.target !== sidebarToggle) {
+sidebar.classList.remove('open');
+}
+});
+// FAQ toggle
+const faqButtons = document.querySelectorAll('.faq-button');
+faqButtons.forEach(button => {
+button.addEventListener('click', function() {
+const content = this.nextElementSibling;
+content.classList.toggle('hidden');
+const icon = this.querySelector('i');
+if (content.classList.contains('hidden')) {
+icon.classList.remove('ri-arrow-up-s-line');
+icon.classList.add('ri-arrow-down-s-line');
+} else {
+icon.classList.remove('ri-arrow-down-s-line');
+icon.classList.add('ri-arrow-up-s-line');
+}
+});
+});
+});
+</script>
+</body>
+</html>

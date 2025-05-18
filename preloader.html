@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preloader</title>
+  <link rel="stylesheet" href="asset/css/course.css">
+</head>
+<body>
+    <style>
+        #wave-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #4facfe, #00f2fe); /* warna ombak */
+  z-index: 10000;
+  transform: translateX(100%);
+  animation: waveSweep 1.5s ease forwards;
+}
+
+@keyframes waveSweep {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+    </style>
+    <div id="wave-overlay"></div>
+
+  <!-- Preloader Section -->
+  <div id="preloader">
+    <img src="asset/image/il2.png" class="illust2" id="float2" alt="">
+    <img src="asset/image/il3.png" class="illust3" id="float3" alt="">
+    <img src="asset/image/il1.png" class="illust1" id="float1" alt="">
+
+    <div class="preloader-container">
+      <div class="text-column">
+        <div class="typing-text1" id="main-text">Tunggu sebentar ya</div>
+        <div class="typing-text" id="sub-text">Materi mu lagi disiapin</div>
+        <div class="counter" id="counter">00</div>
+        <div class="typing-text3">KeepGoing!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content">
+    <h1>Selamat Datang di Halaman Utama! 🎉</h1>
+    <p>Semua konten sudah siap buat kamu 🎓</p>
+  </div>
+
+  <script>
+    let count = 0;
+    const counter = document.getElementById("counter");
+    const mainText = document.getElementById("main-text");
+    const subText = document.getElementById("sub-text");
+    const preloader = document.getElementById("preloader");
+    const mainContent = document.getElementById("main-content");
+
+    const interval = setInterval(() => {
+      count++;
+      if (count <= 100) {
+        counter.textContent = count < 10 ? "0" + count : count;
+      }
+
+      if (count === 100) {
+        clearInterval(interval);
+        mainText.textContent = "Ayo Mulai!";
+        subText.textContent = "";
+
+        // Fade out preloader and show main content
+        preloader.classList.add("fade-out");
+        setTimeout(() => {
+          preloader.style.display = "none";
+          mainContent.classList.add("show");
+        }, 1000); // Delay matches the fade-out duration
+      }
+    }, 50); 
+  </script>
+  <script>
+    // Hapus wave-overlay setelah animasi selesai
+setTimeout(() => {
+  const wave = document.getElementById("wave-overlay");
+  if (wave) wave.remove();
+}, 1500);
+
+  </script>
+</body>
+</html>

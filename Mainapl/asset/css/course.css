@@ -1,0 +1,120 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: white;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease;
+}
+
+.preloader-container {
+  width: 80%;
+  height: 400px;
+  max-width: 900px;
+  background: black;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.text-column {
+  flex: 1;
+  padding-right: 30px;
+  color: white;
+}
+
+.typing-text {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  min-height: 60px;
+}
+
+.typing-text1 {
+  font-size: 49px;
+  min-height: 60px;
+}
+
+.typing-text3 {
+  font-size: 1.5rem;
+  min-height: 60px;
+}
+
+.counter {
+  font-size: 120px;
+  font-weight: normal;
+  margin: 20px 0;
+  color: #ffffff;
+  padding-left: 100px;
+}
+
+.illust1, .illust2, .illust3 {
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.illust1 {
+  padding-top: 100px;
+  padding-right: 00px;
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.illust2 {
+  padding-bottom: 250px;
+  padding-left: 600px;
+  animation: floatDownUp 4s ease-in-out infinite;
+}
+
+.illust3 {
+  padding-top: 300px;
+  padding-left: 600px;
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatDownUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#main-content {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+  text-align: center;
+  padding-top: 100px;
+}
+
+#main-content.show {
+  display: block;
+  opacity: 1;
+}
+

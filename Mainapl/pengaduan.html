@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#6366f1">
+<title>Pengaduan Kekerasan - Layanan Pengaduan Kekerasan Rumah Tangga & Seksual</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config={
+theme:{
+extend:{
+colors:{
+primary:'#6366f1',
+secondary:'#a78bfa'
+},
+borderRadius:{
+'none':'0px',
+'sm':'4px',
+DEFAULT:'8px',
+'md':'12px',
+'lg':'16px',
+'xl':'20px',
+'2xl':'24px',
+'3xl':'32px',
+'full':'9999px',
+'button':'8px'
+}
+}
+}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+background-color: #f9fafb;
+min-height: 100vh;
+overflow-x: hidden;
+}
+@media (max-width: 640px) {
+body {
+font-size: 14px;
+}
+.container {
+padding-left: 1rem;
+padding-right: 1rem;
+}
+}
+.panic-button {
+position: fixed;
+top: 20px;
+right: 20px;
+z-index: 50;
+}
+.quick-exit {
+position: fixed;
+bottom: 20px;
+right: 20px;
+z-index: 50;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.custom-checkbox {
+appearance: none;
+-webkit-appearance: none;
+width: 20px;
+height: 20px;
+border: 2px solid #a78bfa;
+border-radius: 4px;
+outline: none;
+cursor: pointer;
+position: relative;
+}
+.custom-checkbox:checked {
+background-color: #6366f1;
+border-color: #6366f1;
+}
+.custom-checkbox:checked::after {
+content: "";
+position: absolute;
+top: 3px;
+left: 6px;
+width: 6px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 48px;
+height: 24px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #e5e7eb;
+transition: .4s;
+border-radius: 24px;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: #6366f1;
+}
+input:checked + .slider:before {
+transform: translateX(24px);
+}
+select {
+appearance: none;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+background-repeat: no-repeat;
+background-position: right 0.5rem center;
+background-size: 1.5em 1.5em;
+padding-right: 2.5rem;
+}
+</style>
+</head>
+<body>
+<!-- Panic Button -->
+<button class="panic-button bg-red-500 hover:bg-red-600 text-white font-semibold px-3 sm:px-4 py-2 rounded-button shadow-lg flex items-center gap-1 sm:gap-2 transition-all text-sm sm:text-base">
+<div class="w-4 sm:w-5 h-4 sm:h-5 flex items-center justify-center">
+<i class="ri-close-line ri-lg"></i>
+</div>
+<span class="hidden sm:inline">Tutup Cepat</span>
+<span class="sm:hidden">Tutup</span>
+</button>
+<!-- Quick Exit -->
+<button class="quick-exit bg-gray-800 hover:bg-gray-900 text-white font-semibold px-3 sm:px-4 py-2 rounded-button shadow-lg flex items-center gap-1 sm:gap-2 transition-all text-sm sm:text-base">
+<div class="w-4 sm:w-5 h-4 sm:h-5 flex items-center justify-center">
+<i class="ri-logout-box-line ri-lg"></i>
+</div>
+<span class="hidden sm:inline">Keluar Cepat</span>
+<span class="sm:hidden">Keluar</span>
+</button>
+<!-- Back Button -->
+<div class="container mx-auto px-4 pt-6">
+<button class="flex items-center gap-2 text-gray-600 hover:text-primary transition-colors !rounded-button">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-arrow-left-line"></i>
+</div>
+<span>Kembali</span>
+</button>
+</div>
+<!-- Header -->
+<header class="bg-gradient-to-r from-indigo-100 to-purple-100 py-8 sm:py-12 mt-4">
+<div class="container mx-auto px-4">
+<h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 text-center leading-tight">Pengaduan Kekerasan</h1>
+<p class="text-base sm:text-lg md:text-xl text-gray-600 text-center mt-2 px-4">Layanan Pengaduan Kekerasan Rumah Tangga & Seksual</p>
+</div>
+</header>
+<!-- Main Content -->
+<main class="container mx-auto px-4 py-8">
+<!-- Privacy Banner -->
+<div class="bg-blue-50 border-l-4 border-primary p-4 mb-8 rounded shadow-sm">
+<div class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center mr-3 mt-1 text-primary">
+<i class="ri-shield-check-line ri-lg"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-800">Jaminan Kerahasiaan & Privasi</h3>
+<p class="text-gray-600 mt-1">Semua informasi yang Anda berikan akan dijaga kerahasiaannya dengan ketat. Identitas Anda akan dilindungi dan data pengaduan dienkripsi untuk keamanan maksimal.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Form Section -->
+<div class="lg:col-span-2">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Formulir Pengaduan</h2>
+<form>
+<!-- Personal Information -->
+<div class="mb-6">
+<h3 class="text-lg font-medium text-gray-700 mb-3">Informasi Pribadi</h3>
+<div class="mb-4">
+<label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama (opsional)</label>
+<input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Isi nama atau kosongkan untuk anonim">
+</div>
+<div class="mb-4">
+<label for="age" class="block text-sm font-medium text-gray-700 mb-1">Usia</label>
+<input type="number" id="age" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Masukkan usia">
+</div>
+<div class="mb-4">
+<label for="location" class="block text-sm font-medium text-gray-700 mb-1">Lokasi Kejadian</label>
+<input type="text" id="location" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Kota/Kabupaten tempat kejadian">
+</div>
+<div class="mb-4">
+<label for="violence-type" class="block text-sm font-medium text-gray-700 mb-1">Jenis Kekerasan</label>
+<select id="violence-type" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all pr-8">
+<option value="" disabled selected>Pilih jenis kekerasan</option>
+<option value="kdrt">Kekerasan Dalam Rumah Tangga</option>
+<option value="seksual">Kekerasan Seksual</option>
+<option value="psikologis">Kekerasan Psikologis/Verbal</option>
+<option value="ekonomi">Kekerasan Ekonomi</option>
+<option value="lainnya">Lainnya</option>
+</select>
+</div>
+</div>
+<!-- Incident Description -->
+<div class="mb-6">
+<h3 class="text-lg font-medium text-gray-700 mb-3">Deskripsi Kejadian</h3>
+<div class="mb-4">
+<label for="description" class="block text-sm font-medium text-gray-700 mb-1">Ceritakan Kejadian</label>
+<textarea id="description" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Jelaskan apa yang terjadi dengan detail yang Anda ingat. Informasi ini membantu kami memberikan bantuan yang tepat."></textarea>
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-gray-700 mb-1">Bukti Pendukung (opsional)</label>
+<div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded">
+<div class="space-y-1 text-center">
+<div class="w-12 h-12 mx-auto flex items-center justify-center text-gray-400">
+<i class="ri-upload-cloud-line ri-2x"></i>
+</div>
+<div class="flex text-sm text-gray-600">
+<label for="file-upload" class="relative cursor-pointer bg-white rounded font-medium text-primary hover:text-indigo-500 focus-within:outline-none">
+<span>Unggah file</span>
+<input id="file-upload" name="file-upload" type="file" class="sr-only" multiple>
+</label>
+<p class="pl-1">atau seret dan lepas</p>
+</div>
+<p class="text-xs text-gray-500">PNG, JPG, PDF hingga 10MB</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Consent -->
+<div class="mb-6">
+<h3 class="text-lg font-medium text-gray-700 mb-3">Persetujuan</h3>
+<div class="flex items-start mb-4">
+<div class="flex items-center h-5">
+<input id="consent" type="checkbox" class="custom-checkbox">
+</div>
+<label for="consent" class="ml-3 text-sm text-gray-600">
+Saya menyetujui bahwa informasi ini akan diproses sesuai dengan kebijakan privasi untuk membantu penanganan kasus ini.
+</label>
+</div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-sm font-medium text-gray-700">Enkripsi Data Pengaduan</span>
+<label class="custom-switch">
+<input type="checkbox" checked>
+<span class="slider"></span>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700">Hapus Riwayat Otomatis</span>
+<label class="custom-switch">
+<input type="checkbox" checked>
+<span class="slider"></span>
+</label>
+</div>
+</div>
+<!-- Submit Buttons -->
+<div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+<button type="submit" class="flex-1 bg-primary hover:bg-indigo-600 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-button shadow transition-colors whitespace-nowrap text-sm sm:text-base">
+Kirim Pengaduan
+</button>
+<button type="button" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-button shadow transition-colors whitespace-nowrap text-sm sm:text-base">
+Butuh Bantuan Segera
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="lg:col-span-1">
+<!-- Emergency Contacts -->
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-4">Kontak Darurat</h2>
+<div class="space-y-4">
+<div class="bg-red-50 p-4 rounded-md">
+<h3 class="font-semibold text-gray-800 flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2 text-red-500">
+<i class="ri-phone-fill"></i>
+</div>
+Hotline 24 Jam
+</h3>
+<a href="tel:08001234567" class="mt-2 flex items-center justify-between bg-white p-3 rounded border border-red-100 hover:bg-red-50 transition-colors">
+<span class="font-medium text-gray-800">0800-123-4567</span>
+<div class="w-6 h-6 flex items-center justify-center bg-red-500 text-white rounded-full">
+<i class="ri-phone-line"></i>
+</div>
+</a>
+</div>
+<div>
+<h3 class="font-semibold text-gray-800 mb-2">Kontak Penting Lainnya</h3>
+<ul class="space-y-3">
+<li>
+<a href="tel:110" class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200 hover:bg-gray-100 transition-colors">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-500 rounded-full mr-3">
+<i class="ri-police-car-fill"></i>
+</div>
+<div>
+<span class="block font-medium text-gray-800">Polisi</span>
+<span class="text-sm text-gray-500">110</span>
+</div>
+</div>
+<div class="w-6 h-6 flex items-center justify-center bg-blue-500 text-white rounded-full">
+<i class="ri-phone-line"></i>
+</div>
+</a>
+</li>
+<li>
+<a href="tel:119" class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200 hover:bg-gray-100 transition-colors">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-green-100 text-green-500 rounded-full mr-3">
+<i class="ri-hospital-fill"></i>
+</div>
+<div>
+<span class="block font-medium text-gray-800">Ambulans</span>
+<span class="text-sm text-gray-500">119</span>
+</div>
+</div>
+<div class="w-6 h-6 flex items-center justify-center bg-green-500 text-white rounded-full">
+<i class="ri-phone-line"></i>
+</div>
+</a>
+</li>
+<li>
+<a href="tel:08111234567" class="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200 hover:bg-gray-100 transition-colors">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-purple-100 text-purple-500 rounded-full mr-3">
+<i class="ri-heart-fill"></i>
+</div>
+<div>
+<span class="block font-medium text-gray-800">Yayasan Pulih</span>
+<span class="text-sm text-gray-500">0811-1234-567</span>
+</div>
+</div>
+<div class="w-6 h-6 flex items-center justify-center bg-purple-500 text-white rounded-full">
+<i class="ri-phone-line"></i>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Safety Guide -->
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<h2 class="text-xl font-semibold text-gray-800 mb-4">Panduan Keselamatan</h2>
+<div class="space-y-4">
+<div class="border-l-4 border-yellow-400 pl-3 py-2">
+<h3 class="font-medium text-gray-800">Langkah Darurat</h3>
+<p class="text-sm text-gray-600 mt-1">Jika Anda dalam bahaya langsung, segera tinggalkan lokasi dan hubungi 110 (Polisi).</p>
+</div>
+<div>
+<h3 class="font-medium text-gray-800 mb-2">Tips Keselamatan:</h3>
+<ul class="space-y-2 text-sm text-gray-600">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-green-500 mr-2 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span>Siapkan tas darurat dengan dokumen penting dan kebutuhan dasar.</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-green-500 mr-2 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span>Beritahu orang terpercaya tentang situasi Anda.</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-green-500 mr-2 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span>Simpan bukti kekerasan (foto, pesan, rekaman) di tempat aman.</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center text-green-500 mr-2 mt-0.5">
+<i class="ri-check-line"></i>
+</div>
+<span>Kenali rute keluar darurat dari rumah Anda.</span>
+</li>
+</ul>
+</div>
+<div>
+<a href="#" class="text-primary hover:text-indigo-700 font-medium flex items-center">
+<span>Lihat panduan lengkap</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Information -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-100 text-primary rounded-full mb-4">
+<i class="ri-scales-3-line ri-lg"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Informasi Hukum</h3>
+<p class="text-gray-600 mb-4">Pelajari hak-hak Anda dan proses hukum terkait kasus kekerasan dalam rumah tangga dan kekerasan seksual.</p>
+<a href="#" class="text-primary hover:text-indigo-700 font-medium flex items-center">
+<span>Baca selengkapnya</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-full mb-4">
+<i class="ri-mental-health-line ri-lg"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Dukungan Psikologis</h3>
+<p class="text-gray-600 mb-4">Temukan layanan konseling dan dukungan psikologis untuk membantu pemulihan trauma akibat kekerasan.</p>
+<a href="#" class="text-primary hover:text-indigo-700 font-medium flex items-center">
+<span>Temukan bantuan</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-12 h-12 flex items-center justify-center bg-yellow-100 text-yellow-600 rounded-full mb-4">
+<i class="ri-question-answer-line ri-lg"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">FAQ</h3>
+<p class="text-gray-600 mb-4">Jawaban atas pertanyaan umum tentang proses pengaduan dan langkah selanjutnya setelah melaporkan.</p>
+<a href="#" class="text-primary hover:text-indigo-700 font-medium flex items-center">
+<span>Lihat FAQ</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+</div>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Panic Button Functionality
+const panicButton = document.querySelector('.panic-button');
+panicButton.addEventListener('click', function() {
+window.location.href = 'https://www.google.com';
+});
+// Quick Exit Functionality
+const quickExit = document.querySelector('.quick-exit');
+quickExit.addEventListener('click', function() {
+window.location.href = 'https://www.google.com';
+});
+// Emergency Button Functionality
+const emergencyButton = document.querySelector('button[type="button"]');
+emergencyButton.addEventListener('click', function() {
+const confirmation = confirm('Anda akan dihubungkan dengan layanan darurat. Lanjutkan?');
+if (confirmation) {
+window.location.href = 'tel:110';
+}
+});
+// Form Submission
+const form = document.querySelector('form');
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+const consent = document.getElementById('consent');
+if (!consent.checked) {
+alert('Anda harus menyetujui kebijakan privasi untuk melanjutkan.');
+return;
+}
+// Show submission in progress
+const submitButton = form.querySelector('button[type="submit"]');
+const originalText = submitButton.textContent;
+submitButton.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Mengirim...';
+submitButton.disabled = true;
+// Simulate form submission
+setTimeout(() => {
+alert('Laporan Anda telah diterima. Tim kami akan segera menghubungi Anda untuk tindak lanjut. Terima kasih atas keberanian Anda.');
+form.reset();
+submitButton.textContent = originalText;
+submitButton.disabled = false;
+}, 2000);
+});
+});
+</script>
+</body>
+</html>

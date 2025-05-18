@@ -85,6 +85,24 @@ html, body {
     object-fit: contain;
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); /* Efek bayangan opsional */
   }
+
+  
+  .image-latar {
+    position: ;
+    z-index: 0; 
+    width: 1300px;
+    height: auto;
+    right: 0px; 
+    top: 0px; 
+  }
+  
+  .image-latar img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); /* Efek bayangan opsional */
+  }
+  
   
   .menu-item {
     width: 50px;
@@ -150,12 +168,13 @@ html, body {
   margin-bottom: 30px;
 }
 
-
 .profile {
   display: flex;
   align-items: center;
   gap: 12px;
   padding-right: 100px ;
+  cursor: pointer;
+  position: relative;
 }
 
 .avatar {
@@ -165,16 +184,60 @@ html, body {
   background-color: #e0e0e0; /* Placeholder color */
 }
 
-.profile-info h2 {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-info {
+  cursor: pointer;
+  padding: 10px;
+}
+.dropdown-bubble {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-top: 10px;
+  z-index: 1;
+  min-width: 150px;
+  border: 1px solid black; 
 }
 
 .profile-info p {
-  font-size: 12px;
+  font-size: 7px;
   color: #777;
-  margin: 0;
+  margin: 0;}
+
+.bubble-arrow {
+  position: absolute;
+  bottom: 100%;
+  left: 15px;
+  border-width: 0 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent black;
+  
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 4px;
+  font-size: small;
+}
+
+.dropdown-content a:hover {
+  background-color: #f5f5f5;
+}
+
+.show {
+  display: block;
 }
 
 /* Search (Minimalist - No Input Box) */
@@ -241,9 +304,9 @@ html, body {
 
 .card-img {
     position: absolute;
-    bottom: 0px;
+    top: 0px;
     right: 0px;
-    width: 190px; /* sesuaikan ukuran gambar */
+    width: 200px; /* sesuaikan ukuran gambar */
     height: auto;
     opacity: 0.8; /* opsional, biar nggak ganggu teks */
   }

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Pembelajaran Video</title>
+    
+    <!-- External Resources -->
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#60A5FA'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        
+        /* Video Player Styles */
+        .video-container {
+            aspect-ratio: 16/9;
+            background-color: #000;
+        }
+        
+        .progress-map {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .progress-map.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        
+        .progress-line {
+            transition: width 1s ease-in-out;
+        }
+        
+        .progress-node {
+            transition: all 0.3s ease;
+        }
+        
+        .progress-node:hover {
+            transform: scale(1.1);
+        }
+        
+        .custom-video-controls {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+        }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            background-size: 0% 100%;
+            background-image: linear-gradient(#3B82F6, #3B82F6);
+            background-repeat: no-repeat;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* Course Progress Popup Styles */
+        #courseProgressModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .progress-modal-content {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .progress-dot {
+            transition: all 0.3s ease;
+        }
+        
+        .progress-dot:hover {
+            transform: scale(1.1);
+        }
+        
+        .current-course {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            .progress-modal-content {
+                width: 95%;
+                padding: 1rem;
+            }
+            
+            .progress-steps {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-4 py-6">
+        <div class="relative">
+            <!-- Video Container -->
+            <div class="video-container relative rounded-lg shadow-lg overflow-hidden">
+                <video id="videoPlayer" class="w-full h-full object-cover" poster="https://readdy.ai/api/search-image?query=a%20professional%20educational%20video%20thumbnail%20with%20abstract%20blue%20geometric%20shapes%2C%20minimalist%20design%2C%20clean%20background%2C%20modern%20educational%20concept%2C%20high%20quality%20cinematic%20lighting&width=1280&height=720&seq=1&orientation=landscape">
+                    <source src="#" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+                
+                <!-- Navigation Buttons -->
+                <button id="backButton" class="nav-button absolute top-4 left-4 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full z-20">
+                    <div class="w-8 h-8 flex items-center justify-center">
+                        <i class="ri-arrow-left-line ri-lg"></i>
+                    </div>
+                </button>
+                
+                <button id="nextButton" class="nav-button absolute top-4 right-4 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full z-20">
+                    <div class="w-8 h-8 flex items-center justify-center">
+                        <i class="ri-arrow-right-line ri-lg"></i>
+                    </div>
+                </button>
+                
+                <!-- Progress Map (initially hidden) -->
+                <div id="progressMap" class="progress-map fixed inset-0 flex items-center justify-center bg-black/80 z-50 p-4">
+                    <div class="w-11/12 max-w-3xl bg-white rounded-lg p-6">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-semibold mb-2">Progres Pembelajaran</h3>
+                            <p class="text-gray-600">Anda telah menyelesaikan 25% dari materi</p>
+                        </div>
+                        
+                        <div class="relative flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
+                            <!-- Progress Line Background -->
+                            <div class="absolute h-1 bg-gray-200 w-full hidden md:block"></div>
+                            
+                            <!-- Active Progress Line -->
+                            <div class="absolute h-1 bg-primary progress-line hidden md:block" style="width: 25%"></div>
+                            
+                            <!-- Nodes -->
+                            <div class="progress-node z-10 flex flex-col items-center relative">
+                                <div class="w-6 h-6 rounded-full bg-primary border-2 border-white flex items-center justify-center mb-2">
+                                    <i class="ri-check-line ri-sm text-white"></i>
+                                </div>
+                                <span class="text-sm font-medium">Pengenalan</span>
+                            </div>
+                            
+                            <div class="progress-node z-10 flex flex-col items-center relative">
+                                <div class="w-6 h-6 rounded-full bg-white border-2 border-primary flex items-center justify-center mb-2">
+                                    <span class="text-primary text-xs font-bold">2</span>
+                                </div>
+                                <span class="text-sm font-medium">Konsep Dasar</span>
+                            </div>
+                            
+                            <div class="progress-node z-10 flex flex-col items-center relative">
+                                <div class="w-6 h-6 rounded-full bg-gray-200 border-2 border-gray-300 flex items-center justify-center mb-2">
+                                    <span class="text-gray-500 text-xs font-bold">3</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Praktik</span>
+                            </div>
+                            
+                            <div class="progress-node z-10 flex flex-col items-center relative">
+                                <div class="w-6 h-6 rounded-full bg-gray-200 border-2 border-gray-300 flex items-center justify-center mb-2">
+                                    <span class="text-gray-500 text-xs font-bold">4</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Evaluasi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex justify-center space-x-4">
+                            <button onclick="hideProgressMap()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-6 rounded-button font-medium">
+                                Kembali
+                            </button>
+                            <button onclick="continueToNextCourse()" class="bg-primary hover:bg-primary/90 text-white py-2 px-6 rounded-button font-medium">
+                                Lanjutkan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Custom Video Controls -->
+                <div class="custom-video-controls absolute bottom-0 left-0 right-0 px-4 py-3 flex flex-col z-10">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center">
+                            <button id="playPauseBtn" class="text-white mr-3">
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-play-fill ri-lg"></i>
+                                </div>
+                            </button>
+                            <span id="currentTime" class="text-white text-sm">0:00</span>
+                            <span class="text-white mx-1">/</span>
+                            <span id="duration" class="text-white text-sm">10:00</span>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <button id="volumeBtn" class="text-white mr-2">
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-volume-up-line ri-lg"></i>
+                                </div>
+                            </button>
+                            
+                            <div class="relative w-20 hidden md:block">
+                                <input type="range" id="volumeSlider" class="w-full" min="0" max="100" value="100">
+                            </div>
+                            
+                            <button id="fullscreenBtn" class="text-white ml-3">
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-fullscreen-line ri-lg"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full">
+                        <input type="range" id="progressBar" class="w-full" min="0" max="100" value="0">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Description -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Strategi Manajemen Proyek yang Efektif</h1>
+                        <p class="text-gray-600 mt-1">Dipublikasikan pada 18 Mei 2025 • Disampaikan oleh Dr. Budi Santoso</p>
+                    </div>
+                    
+                    <button class="flex items-center bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-button mt-4 md:mt-0 whitespace-nowrap">
+                        <div class="w-5 h-5 flex items-center justify-center mr-2">
+                            <i class="ri-file-pdf-line"></i>
+                        </div>
+                        Unduh Materi PDF
+                    </button>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Deskripsi</h2>
+                    <p class="text-gray-700">
+                        Dalam video pembelajaran ini, kita akan membahas strategi manajemen proyek yang efektif untuk meningkatkan produktivitas tim dan memastikan keberhasilan proyek. Anda akan mempelajari teknik-teknik terbaru dalam perencanaan, pelaksanaan, pemantauan, dan evaluasi proyek yang dapat diterapkan di berbagai industri.
+                    </p>
+                    
+                    <div class="mt-4">
+                        <h3 class="text-md font-semibold text-gray-800 mb-2">Materi yang Dibahas:</h3>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>Pengenalan konsep dasar manajemen proyek</li>
+                            <li>Teknik perencanaan proyek yang efektif</li>
+                            <li>Strategi komunikasi dalam tim proyek</li>
+                            <li>Manajemen risiko dan penyelesaian masalah</li>
+                            <li>Evaluasi keberhasilan proyek dan pembelajaran</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h3 class="text-md font-semibold text-gray-800 mb-2">Prasyarat:</h3>
+                        <p class="text-gray-700">Tidak ada prasyarat khusus. Video ini cocok untuk pemula hingga tingkat menengah.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Progress Modal (Hidden by default) -->
+    <div id="courseProgressModal">
+        <div class="progress-modal-content">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Your Learning Progress</h2>
+                <p class="text-gray-600">Track your progress through the course modules</p>
+            </div>
+            
+            <div class="relative mb-10">
+                <!-- Progress Line Background -->
+                <div class="absolute h-2 bg-gray-200 top-1/2 left-0 right-0 -translate-y-1/2"></div>
+                
+                <!-- Active Progress Line -->
+                <div id="courseProgressLine" class="absolute h-2 bg-primary top-1/2 left-0 -translate-y-1/2 progress-line" style="width: 20%"></div>
+                
+                <!-- Progress Steps -->
+                <div class="relative flex justify-between">
+                    <div class="progress-step flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mb-2 progress-dot">
+                            <i class="ri-check-line text-white text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium">Course 1</span>
+                    </div>
+                    
+                    <div class="progress-step flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center mb-2 progress-dot current-course">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        <span class="text-sm font-medium">Course 2</span>
+                    </div>
+                    
+                    <div class="progress-step flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2 progress-dot">
+                            <span class="text-gray-600 font-bold">3</span>
+                        </div>
+                        <span class="text-sm text-gray-500">Course 3</span>
+                    </div>
+                    
+                    <div class="progress-step flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2 progress-dot">
+                            <span class="text-gray-600 font-bold">4</span>
+                        </div>
+                        <span class="text-sm text-gray-500">Course 4</span>
+                    </div>
+                    
+                    <div class="progress-step flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-2 progress-dot">
+                            <span class="text-gray-600 font-bold">5</span>
+                        </div>
+                        <span class="text-sm text-gray-500">Course 5</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Current Progress</h3>
+                    <span class="text-primary font-bold">20% Complete</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-primary h-2.5 rounded-full" style="width: 20%"></div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button onclick="closeProgressModal()" class="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium">
+                    Back to Course
+                </button>
+                <button onclick="continueToNextCourse()" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-button font-medium">
+                    Continue Learning
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // DOM Elements
+                const videoPlayer = document.getElementById('videoPlayer');
+                const progressMap = document.getElementById('progressMap');
+                const playPauseBtn = document.getElementById('playPauseBtn');
+                const progressBar = document.getElementById('progressBar');
+                const currentTime = document.getElementById('currentTime');
+                const duration = document.getElementById('duration');
+                const volumeBtn = document.getElementById('volumeBtn');
+                const volumeSlider = document.getElementById('volumeSlider');
+                const fullscreenBtn = document.getElementById('fullscreenBtn');
+                const backButton = document.getElementById('backButton');
+                const nextButton = document.getElementById('nextButton');
+                const courseProgressModal = document.getElementById('courseProgressModal');
+
+                // Element validation
+                if (!videoPlayer || !progressMap || !playPauseBtn || !progressBar || !currentTime || 
+                    !duration || !volumeBtn || !volumeSlider || !fullscreenBtn || 
+                    !backButton || !nextButton || !courseProgressModal) {
+                    throw new Error('Required DOM elements not found');
+                }
+
+                // Functions
+                function showProgressMap() {
+                    progressMap.classList.add('show');
+                }
+
+                function hideProgressMap() {
+                    progressMap.classList.remove('show');
+                }
+
+                function showCourseProgressModal() {
+                    courseProgressModal.style.display = 'flex';
+                }
+
+                function closeProgressModal() {
+                    courseProgressModal.style.display = 'none';
+                }
+
+                function continueToNextCourse() {
+                    // In a real app, this would navigate to the next course
+                    alert('Continuing to next course...');
+                    closeProgressModal();
+                    hideProgressMap();
+                }
+
+                function formatTime(seconds) {
+                    const minutes = Math.floor(seconds / 60);
+                    seconds = Math.floor(seconds % 60);
+                    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                }
+
+                // Event Listeners
+                nextButton.addEventListener('click', function() {
+                    showCourseProgressModal();
+                });
+
+                // Video Controls
+                playPauseBtn.addEventListener('click', function() {
+                    if (videoPlayer.paused) {
+                        videoPlayer.play();
+                        playPauseBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-pause-fill ri-lg"></i></div>';
+                        hideProgressMap();
+                    } else {
+                        videoPlayer.pause();
+                        playPauseBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-play-fill ri-lg"></i></div>';
+                        showProgressMap();
+                    }
+                });
+
+                videoPlayer.addEventListener('timeupdate', function() {
+                    const value = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+                    progressBar.value = value;
+                    progressBar.style.backgroundSize = `${value}% 100%`;
+                    
+                    // Update current time display
+                    currentTime.textContent = formatTime(videoPlayer.currentTime);
+                });
+
+                progressBar.addEventListener('input', function() {
+                    const time = (progressBar.value / 100) * videoPlayer.duration;
+                    videoPlayer.currentTime = time;
+                });
+
+                volumeBtn.addEventListener('click', function() {
+                    if (videoPlayer.muted) {
+                        videoPlayer.muted = false;
+                        volumeBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-volume-up-line ri-lg"></i></div>';
+                        volumeSlider.value = videoPlayer.volume * 100;
+                    } else {
+                        videoPlayer.muted = true;
+                        volumeBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-volume-mute-line ri-lg"></i></div>';
+                        volumeSlider.value = 0;
+                    }
+                });
+
+                volumeSlider.addEventListener('input', function() {
+                    videoPlayer.volume = volumeSlider.value / 100;
+                    if (videoPlayer.volume === 0) {
+                        volumeBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-volume-mute-line ri-lg"></i></div>';
+                        videoPlayer.muted = true;
+                    } else {
+                        volumeBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-volume-up-line ri-lg"></i></div>';
+                        videoPlayer.muted = false;
+                    }
+                });
+
+                fullscreenBtn.addEventListener('click', function() {
+                    if (!document.fullscreenElement) {
+                        if (videoPlayer.requestFullscreen) {
+                            videoPlayer.requestFullscreen();
+                        } else if (videoPlayer.webkitRequestFullscreen) {
+                            videoPlayer.webkitRequestFullscreen();
+                        } else if (videoPlayer.msRequestFullscreen) {
+                            videoPlayer.msRequestFullscreen();
+                        }
+                        fullscreenBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-fullscreen-exit-line ri-lg"></i></div>';
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                        fullscreenBtn.innerHTML = '<div class="w-8 h-8 flex items-center justify-center"><i class="ri-fullscreen-line ri-lg"></i></div>';
+                    }
+                });
+
+                backButton.addEventListener('click', function() {
+                    const modal = document.createElement('div');
+                    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                    modal.innerHTML = `
+                        <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Konfirmasi Navigasi</h3>
+                            <p class="text-gray-700 mb-6">Apakah Anda yakin ingin kembali ke halaman sebelumnya?</p>
+                            <div class="flex justify-end gap-4">
+                                <button class="px-4 py-2 text-gray-600 hover:text-gray-800" onclick="this.closest('.fixed').remove()">Batal</button>
+                                <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-primary/90" onclick="window.history.back()">Ya, Kembali</button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                });
+
+                // Set video duration (for demo purposes)
+                duration.textContent = '10:00';
+
+            } catch (error) {
+                console.error('Error initializing video player:', error);
+            }
+        });
+    </script>
+</body>
+</html>
