@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aplikasi Pembelajaran</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#6366f1',
+          secondary: '#f59e0b'
+        },
+        borderRadius: {
+          'none': '0px',
+          'sm': '4px',
+          DEFAULT: '8px',
+          'md': '12px',
+          'lg': '16px',
+          'xl': '20px',
+          '2xl': '24px',
+          '3xl': '32px',
+          'full': '9999px',
+          'button': '8px'
+        }
+      }
+    }
+  }
+</script>
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link rel="stylesheet" href="asset/css/s3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+<div class="flex min-h-screen bg-gray-50">
+   <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="asset/image/2.png" alt="Logo" class="logo-img">
+    </div>
+  
+    <div class="menuitem">
+      <nav class="menu">
+        <a href="#" class="active menu-item"><i class="ph ph-house-simple"></i></a>
+        <a href="#" class="menu-item"><i class="ph ph-chat-circle-dots"></i></a>
+        <a href="#" class="menu-item"><i class="ph ph-tilde"></i></a>
+        <a href="#" class="menu-item"><i class="ph ph-gear-six"></i></a>
+        <a href="#" class="menu-item"><i class="ph ph-sign-out"></i></a>
+      </nav>
+    </div>
+  </aside>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Hello, Sara!</h1>
+        <p class="text-gray-600 mt-1">Today is Monday, 20 October 2021</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <input type="search" placeholder="Cari materi..." class="pl-10 pr-4 py-2 rounded-lg border-none bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm w-64">
+          <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+            <i class="ri-search-line text-gray-400"></i>
+          </div>
+        </div>
+        <div class="relative">
+          <button class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center relative">
+            <i class="ri-notification-3-line text-gray-600"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+        </div>
+        <div class="flex items-center">
+          <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20Indonesian%20man%20with%20short%20black%20hair%2C%20friendly%20smile%2C%20simple%20background%2C%20professional%20look&width=100&height=100&seq=1&orientation=squarish" alt="Profile" class="w-10 h-10 rounded-full object-cover object-top">
+        </div>
+      </div>
+    </header>
+    
+    
+    <!-- Main Content Sections -->
+    <div class="space-y-8">
+      <!-- Welcome Cards -->
+      <div class="grid grid-cols-2 gap-6">
+          <div class="bg-gradient-to-br from-[#FF8D6C] to-[#FF7A54] rounded-2xl p-6 text-white relative overflow-hidden shadow-sm">
+            <div class="relative z-10">
+              <h3 class="text-xl font-bold mb-2">Welcome Back...</h3>
+              <p class="text-white/90 text-sm mb-1">Kami berharap kamu sehat selalu</p>
+              <p class="text-white/90 text-sm mb-4">mari kita mulai dari mana</p>
+              
+           
+              <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="bg-white/20 rounded-lg p-2">
+                  <p class="text-xs font-medium">Materi Selesai</p>
+                  <p class="text-sm font-bold">4/12</p>
+                </div>
+                <div class="bg-white/20 rounded-lg p-2">
+                  <p class="text-xs font-medium">Waktu Belajar</p>
+                  <p class="text-sm font-bold">2.5 Jam</p>
+                </div>
+              </div>
+              
+          
+              <div>
+                <p class="text-xs font-medium mb-1">Langkah Selanjutnya:</p>
+                <div class="flex items-center bg-white/20 rounded-lg p-2">
+                  <div class="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center mr-2">
+                    <i class="ri-arrow-right-line text-white text-xs"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-medium">Course 3 - Materi 2</p>
+                    <p class="text-[10px] text-white/80">Pencegahan Kekerasan Seksual</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+
+          <!-- Progress Card (disederhanakan) -->
+          <div class="bg-gradient-to-br from-[#4C9BFB] to-[#3B86E8] rounded-2xl p-6 text-white relative shadow-sm">
+            <h3 class="text-xl font-bold mb-2">Progress Kamu</h3>
+            <p class="text-white/90 text-sm mb-4">Ayo lanjutkan progress mu hingga selesai!</p>
+            
+            <!-- Progress Bar -->
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs font-medium">Total Progress</span>
+              <span class="text-xs font-medium">35%</span>
+            </div>
+            <div class="w-full bg-white/20 rounded-full h-1.5 mb-4">
+              <div class="bg-white h-1.5 rounded-full" style="width: 35%"></div>
+            </div>
+            
+            <!-- Progress Map dengan penyesuaian posisi -->
+            <h4 class="text-xs font-medium mb-3">Tahap Pembelajaran</h4>
+            <!-- Progress Map yang Dirapikan -->
+          <div class="relative py-4">
+            <!-- Garis progress -->
+            <div class="absolute left-4 right-4 h-[2px] bg-gray-300 top-1/2 transform -translate-y-1/2 z-0"></div>
+            <div class="absolute left-4 w-[45%] h-[2px] bg-indigo-500 top-1/2 transform -translate-y-1/2 z-0"></div>
+            
+            <div class="relative flex justify-between px-2">
+              <!-- Course 1 -->
+              <div class="flex flex-col items-center" style="width: 18%">
+                <div class="w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center mb-1 z-10 border-2 border-white shadow-sm">
+                  <i class="ri-check-line text-white text-xs"></i>
+                </div>
+                <span class="text-[10px] text-center font-medium leading-tight block">Course 1<br><span class="text-gray-600">Dasar</span></span>
+              </div>
+              
+              <!-- Course 2 -->
+              <div class="flex flex-col items-center" style="width: 18%">
+                <div class="w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center mb-1 z-10 border-2 border-white shadow-sm">
+                  <i class="ri-check-line text-white text-xs"></i>
+                </div>
+                <span class="text-[10px] text-center font-medium leading-tight block">Course 2<br><span class="text-gray-600">Pengenalan</span></span>
+              </div>
+              
+              <!-- Course 3 -->
+              <div class="flex flex-col items-center" style="width: 18%">
+                <div class="w-5 h-5 rounded-full bg-white flex items-center justify-center mb-1 z-10 border-2 border-indigo-500 shadow-sm relative">
+                  <span class="text-indigo-500 text-xs font-bold">3</span>
+                </div>
+                <span class="text-[10px] text-center font-medium leading-tight block">Course 3<br><span class="text-gray-600">Sedang</span></span>
+              </div>
+              
+              <!-- Course 4 -->
+              <div class="flex flex-col items-center" style="width: 18%">
+                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center mb-1 z-10 border-2 border-white shadow-sm">
+                  <i class="ri-lock-line text-gray-400 text-xs"></i>
+                </div>
+                <span class="text-[10px] text-center font-medium leading-tight block">Course 4<br><span class="text-gray-400">Lanjutan</span></span>
+              </div>
+              
+              <!-- Quiz -->
+              <div class="flex flex-col items-center" style="width: 18%">
+                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center mb-1 z-10 border-2 border-white shadow-sm">
+                  <i class="ri-lock-line text-gray-400 text-xs"></i>
+                </div>
+                <span class="text-[10px] text-center font-medium leading-tight block">Quiz</span>
+              </div>
+              
+              <!-- Sertifikat -->
+              <div class="flex flex-col items-center" style="width: 18%">
+                <div class="w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center mb-1 z-10 border-2 border-white shadow-sm">
+                  <i class="ri-lock-line text-gray-400 text-xs"></i>
+                </div>
+                <span class="text-[10px] text-center font-medium leading-tight block">Sertifikat</span>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      
+      <!-- Feature Cards -->
+      <div class="grid grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-sm p-6 flex items-center transition-all hover:shadow-md">
+          <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-book-open-line text-primary ri-lg"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-medium text-gray-800">Materi Pembelajaran</h3>
+            <p class="text-sm text-gray-500 mt-1">Akses semua materi pembelajaran</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-6 flex items-center transition-all hover:shadow-md">
+          <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mr-4">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-file-paper-2-line text-secondary ri-lg"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-medium text-gray-800">Pengaduan</h3>
+            <p class="text-sm text-gray-500 mt-1">Laporkan kasus kekerasan</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-6 flex items-center transition-all hover:shadow-md">
+          <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mr-4">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-newspaper-line text-emerald-500 ri-lg"></i>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-medium text-gray-800">Berita Terkini</h3>
+            <p class="text-sm text-gray-500 mt-1">Dapatkan informasi terbaru</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Course Cards Section -->
+      <div>
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold text-gray-800">Kursus Pembelajaran</h2>
+          <a href="#" class="text-sm font-medium text-primary hover:text-indigo-700 transition-colors flex items-center">
+            Lihat Semua
+            <div class="w-5 h-5 flex items-center justify-center ml-1">
+              <i class="ri-arrow-right-line"></i>
+            </div>
+          </a>
+        </div>
+        <div class="course-container">
+          <!-- Course Card 1 -->
+          <div class="course-card">
+            <div class="course-card-inner">
+              <div class="course-box">
+                <div class="course-imgBox">
+                  <img src="https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dasar Pernikahan">
+                </div>
+                <div class="course-time">
+                  <i class="ri-time-line"></i> 4 Jam
+                </div>
+                <div class="course-status status-completed">
+                  Selesai
+                </div>
+                <div class="course-icon">
+                  <a href="#" class="course-iconBox">
+                    <span class="material-symbols-outlined">arrow_outward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>Dasar-dasar Pernikahan</h3>
+              <p>Memahami konsep dasar pernikahan dan fondasi hubungan yang sehat.</p>
+              <ul class="course-tags">
+                <li>8 Materi</li>
+                <li>1.245 Peserta</li>
+                <li>100% Progress</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Course Card 2 -->
+          <div class="course-card">
+            <div class="course-card-inner">
+              <div class="course-box">
+                <div class="course-imgBox">
+                  <img src="https://images.unsplash.com/photo-1613235788366-270e7ac489f3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pencegahan Kekerasan">
+                </div>
+                <div class="course-time">
+                  <i class="ri-time-line"></i> 6 Jam
+                </div>
+                <div class="course-status status-ongoing">
+                  Sedang Berlangsung
+                </div>
+                <div class="course-icon">
+                  <a href="#" class="course-iconBox">
+                    <span class="material-symbols-outlined">arrow_outward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>Pencegahan Kekerasan Seksual</h3>
+              <p>Mengenali, mencegah, dan menangani berbagai bentuk kekerasan seksual.</p>
+              <ul class="course-tags">
+                <li>12 Materi</li>
+                <li>2.387 Peserta</li>
+                <li>35% Progress</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Course Card 3 -->
+          <div class="course-card">
+            <div class="course-card-inner">
+              <div class="course-box">
+                <div class="course-imgBox">
+                  <img src="https://images.unsplash.com/photo-1673847401561-fcd75a7888c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Komunikasi Efektif">
+                </div>
+                <div class="course-time">
+                  <i class="ri-time-line"></i> 5 Jam
+                </div>
+                <div class="course-status status-not-started">
+                  Belum Dimulai
+                </div>
+                <div class="course-icon">
+                  <a href="#" class="course-iconBox">
+                    <span class="material-symbols-outlined">arrow_outward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="course-content">
+              <h3>Komunikasi Efektif dalam Hubungan</h3>
+              <p>Teknik komunikasi yang sehat untuk membangun hubungan yang harmonis.</p>
+              <ul class="course-tags">
+                <li>10 Materi</li>
+                <li>1.876 Peserta</li>
+                <li>0% Progress</li>
+              </ul>
+            </div>
+          </div>
+          
+         
+        </div>
+      </div>
+      
+      <!-- News Section -->
+      <div>
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold text-gray-800">Berita Terkini</h2>
+          <a href="#" class="text-sm font-medium text-primary hover:text-indigo-700 transition-colors flex items-center">
+            Lihat Semua
+            <div class="w-5 h-5 flex items-center justify-center ml-1">
+              <i class="ri-arrow-right-line"></i>
+            </div>
+          </a>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div class="grid grid-cols-3 divide-x divide-gray-100">
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <span class="text-xs font-medium text-gray-500">18 Mei 2025</span>
+              <h3 class="font-bold text-gray-800 mt-2 mb-3">Pemerintah Luncurkan Program Pencegahan Kekerasan Dalam Rumah Tangga</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">Program nasional baru yang bertujuan untuk mengedukasi masyarakat tentang pencegahan kekerasan dalam rumah tangga telah diluncurkan hari ini.</p>
+              <a href="#" class="text-primary font-medium text-sm flex items-center">
+                Baca Selengkapnya
+                <div class="w-4 h-4 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line ri-sm"></i>
+                </div>
+              </a>
+            </div>
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <span class="text-xs font-medium text-gray-500">16 Mei 2025</span>
+              <h3 class="font-bold text-gray-800 mt-2 mb-3">Studi Baru: Komunikasi Terbuka Kunci Hubungan Sehat</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">Penelitian terbaru dari Universitas Indonesia menunjukkan bahwa komunikasi terbuka dan jujur adalah kunci utama dalam membangun dan mempertahankan hubungan yang sehat.</p>
+              <a href="#" class="text-primary font-medium text-sm flex items-center">
+                Baca Selengkapnya
+                <div class="w-4 h-4 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line ri-sm"></i>
+                </div>
+              </a>
+            </div>
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <span class="text-xs font-medium text-gray-500">14 Mei 2025</span>
+              <h3 class="font-bold text-gray-800 mt-2 mb-3">Webinar Gratis: Mengenali Tanda-tanda Kekerasan Seksual</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">YayasanPeduli Perempuan akan mengadakan webinar gratis pada tanggal 25 Mei 2025 tentang cara mengenali tanda-tanda kekerasan seksual dan langkah-langkah untuk mencari bantuan.</p>
+              <a href="#" class="text-primary font-medium text-sm flex items-center">
+                Baca Selengkapnya
+                <div class="w-4 h-4 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line ri-sm"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold text-gray-800">Layanan Pengaduan</h2>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-6">
+          <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8">
+              <h3 class="text-lg font-bold text-gray-800 mb-3">Butuh Bantuan Segera?</h3>
+              <p class="text-gray-600 mb-6">Jika Anda atau seseorang yang Anda kenal mengalami kekerasan dalam rumah tangga atau kekerasan seksual, segera laporkan melalui layanan pengaduan kami. Tim kami siap membantu 24/7.</p>
+              <div class="space-y-4">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-4">
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-phone-line text-red-500"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-500">Hotline Darurat</p>
+                    <p class="font-bold text-gray-800">0800-123-45678</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                    <div class="w-5 h-5 flex items-center justify-center">
+                      <i class="ri-message-2-line text-blue-500"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-500">Chat Bantuan</p>
+                    <p class="font-bold text-gray-800">Tersedia 24/7</p>
+                  </div>
+                </div>
+              </div>
+              <button class="mt-6 bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-button flex items-center justify-center font-medium transition-colors whitespace-nowrap">
+                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                  <i class="ri-alarm-warning-line text-white"></i>
+                </div>
+                Laporkan Kasus Darurat
+              </button>
+            </div>
+            <div class="md:w-1/2 md:border-l border-gray-100 md:pl-8">
+              <h3 class="text-lg font-bold text-gray-800 mb-3">Formulir Pengaduan</h3>
+              <p class="text-gray-600 mb-6">Isi formulir di bawah ini untuk melaporkan kasus non-darurat atau mendapatkan konsultasi.</p>
+              <form>
+                <div class="mb-4">
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                  <input type="text" id="name" class="w-full px-4 py-2 rounded-lg border-none bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm">
+                </div>
+                <div class="mb-4">
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
+                  <input type="tel" id="phone" class="w-full px-4 py-2 rounded-lg border-none bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm">
+                </div>
+                <div class="mb-4">
+                  <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori Pengaduan</label>
+                  <div class="relative">
+                    <select id="category" class="w-full appearance-none px-4 py-2 pr-8 rounded-lg border-none bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm">
+                      <option value="">Pilih kategori</option>
+                      <option value="kdrt">Kekerasan Dalam Rumah Tangga</option>
+                      <option value="ks">Kekerasan Seksual</option>
+                      <option value="konsultasi">Konsultasi Pernikahan</option>
+                      <option value="lainnya">Lainnya</option>
+                    </select>
+                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none w-5 h-5 flex items-center justify-center">
+                      <i class="ri-arrow-down-s-line text-gray-400"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Pesan</label>
+                  <textarea id="message" rows="4" class="w-full px-4 py-2 rounded-lg border-none bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm"></textarea>
+                </div>
+                <div class="mb-6">
+                  <label class="custom-checkbox flex items-center">
+                    <input type="checkbox">
+                    <span class="checkmark mr-3"></span>
+                    <span class="text-sm text-gray-600">Saya menyetujui <a href="#" class="text-primary">kebijakan privasi</a> dan penanganan data</span>
+                  </label>
+                </div>
+                <button type="submit" class="w-full bg-primary hover:bg-indigo-600 text-white py-2 px-4 rounded-button font-medium transition-colors whitespace-nowrap">Kirim Pengaduan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const checkboxes = document.querySelectorAll('.custom-checkbox input[type="checkbox"]');
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const checkmark = this.nextElementSibling;
+      if (this.checked) {
+        checkmark.classList.add('bg-primary', 'border-primary');
+      } else {
+        checkmark.classList.remove('bg-primary', 'border-primary');
+      }
+    });
+  });
+  
+  const rangeSlider = document.querySelector('input[type="range"]');
+  if (rangeSlider) {
+    rangeSlider.addEventListener('input', function() {
+      const value = this.value;
+      const percentage = ((value - this.min) / (this.max - this.min)) * 100;
+      this.style.background = `linear-gradient(to right, #6366f1 0%, #6366f1 ${percentage}%, #e5e7eb ${percentage}%, #e5e7eb 100%)`;
+    });
+    
+    const value = rangeSlider.value;
+    const percentage = ((value - rangeSlider.min) / (rangeSlider.max - rangeSlider.min)) * 100;
+    rangeSlider.style.background = `linear-gradient(to right, #6366f1 0%, #6366f1 ${percentage}%, #e5e7eb ${percentage}%, #e5e7eb 100%)`;
+  }
+});
+</script>
+</body>
+</html>
