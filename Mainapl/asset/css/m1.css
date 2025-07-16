@@ -15,7 +15,7 @@
 }
 
 body {
-  background: #ffffff;
+  background: #f4eae4;
   font-family: 'telegraf', sans-serif;
   color: white;
 }
@@ -26,14 +26,19 @@ body {
   align-items: center;
   padding: 20px 40px;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  background: #f4eae4;
   z-index: 1000;
+  transition: top 0.3s ease-in-out;
 }
+
 
 .navbar-logo {
   font-size: 1.5em;
   font-weight: bold;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 /* === MENU === */
@@ -76,7 +81,7 @@ body {
 .text.bottom {
   color: rgb(255, 255, 255);
   border-radius: 5px;
-  background: rgb(0, 0, 0);
+  background: #A17C8F;
   position: absolute;
   top: 100%;
   left: 0;
@@ -119,7 +124,7 @@ body {
 }
 
 .navbar-cta .text.bottom {
-  background: rgb(0, 0, 0);
+  background:#A17C8F;
   border-radius: 30px;
   color: rgb(255, 255, 255);
   position: absolute;
@@ -160,7 +165,7 @@ body {
     position: relative;
     width: 100%;
     height: 250px;
-    background: #fff;
+    background: #f4eae4;
     border-radius: 1.25rem;
     border-bottom-right-radius: 0;
     overflow: hidden;
@@ -169,7 +174,7 @@ body {
   .course-box {
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #f4eae4;
     border-radius: 1.25rem;
     overflow: hidden;
   }
@@ -191,7 +196,7 @@ body {
     right: -6px;
     width: 6rem;
     height: 6rem;
-    background: #fff;
+    background: #f4eae4;
     border-top-left-radius: 50%;
   }
 
@@ -208,7 +213,7 @@ body {
     width: 20px;
     height: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 5px 5px 0 5px #fff;
+    box-shadow: 5px 5px 0 5px #f4eae4;
   }
 
   .course-icon::after {
@@ -220,13 +225,13 @@ body {
     width: 20px;
     height: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 5px 5px 0 5px #fff;
+    box-shadow: 5px 5px 0 5px #f4eae4;
   }
 
   .course-iconBox {
     position: absolute;
     inset: 10px;
-    background: #6366f1;
+    background: #A17C8F;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -319,6 +324,76 @@ body {
     background: #f3f4f6;
     color: #6b7280;
   }
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-up {
+  opacity: 0;
+}
+
+.animate-up.show {
+  animation: slideUpFadeIn 0.6s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide {
+  opacity: 0;
+}
+
+.animate-slide.in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide.in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-spread {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease;
+}
+.spread-center,
+.spread-left,
+.spread-right {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+.spread-left {
+  transform: translateX(-30px);
+}
+.spread-right {
+  transform: translateX(30px);
+}
 
 
 /* RESPONSIVE MENU */

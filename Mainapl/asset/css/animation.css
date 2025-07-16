@@ -1,0 +1,236 @@
+
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Quicksand', sans-serif;
+overflow-x: hidden;
+scroll-behavior: smooth;
+}
+.hand-drawn {
+font-family: 'Caveat', cursive;
+}
+.section {
+min-height: 100vh;
+width: 100%;
+position: relative;
+overflow: hidden;
+}
+.page-transition {
+transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.floating {
+animation: floating 3s ease-in-out infinite;
+}
+@keyframes floating {
+0% { transform: translate(0, 0px); }
+50% { transform: translate(0, 15px); }
+100% { transform: translate(0, 0px); }
+}
+.floating-slow {
+animation: floating 5s ease-in-out infinite;
+}
+.floating-fast {
+animation: floating 2s ease-in-out infinite;
+}
+.draw-in {
+stroke-dasharray: 1000;
+stroke-dashoffset: 1000;
+animation: draw 2s linear forwards;
+}
+@keyframes draw {
+to { stroke-dashoffset: 0; }
+}
+.appear {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.appear.visible {
+opacity: 1;
+transform: translateY(0);
+}
+.progress-indicator {
+position: fixed;
+right: 20px;
+top: 50%;
+transform: translateY(-50%);
+z-index: 100;
+}
+.progress-dot {
+width: 12px;
+height: 12px;
+border-radius: 50%;
+margin: 10px 0;
+background-color: #ddd;
+transition: background-color 0.3s ease;
+position: relative;
+}
+.progress-dot.active {
+background-color: #6C63FF;
+}
+.progress-dot::before {
+content: '';
+position: absolute;
+top: -4px;
+left: -4px;
+right: -4px;
+bottom: -4px;
+border: 1px solid #ddd;
+border-radius: 50%;
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+.progress-dot.active::before {
+opacity: 1;
+border-color: #6C63FF;
+}
+.cursor-pencil {
+cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236C63FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg>") 0 24, auto;
+}
+.drawing-canvas {
+position: relative;
+width: 100%;
+height: 400px;
+background-color: white;
+border-radius: 8px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+input[type="range"] {
+-webkit-appearance: none;
+appearance: none;
+width: 100%;
+height: 4px;
+background: #f0f0f0;
+border-radius: 2px;
+outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 16px;
+height: 16px;
+background: #6C63FF;
+border-radius: 50%;
+cursor: pointer;
+}
+.custom-checkbox {
+position: relative;
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 2px solid #6C63FF;
+border-radius: 4px;
+cursor: pointer;
+}
+.custom-checkbox.checked::after {
+content: '';
+position: absolute;
+top: 2px;
+left: 6px;
+width: 6px;
+height: 10px;
+border: solid #6C63FF;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 40px;
+height: 20px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.switch-slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #f0f0f0;
+transition: .4s;
+border-radius: 20px;
+}
+.switch-slider:before {
+position: absolute;
+content: "";
+height: 16px;
+width: 16px;
+left: 2px;
+bottom: 2px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .switch-slider {
+background-color: #6C63FF;
+}
+input:checked + .switch-slider:before {
+transform: translateX(20px);
+}
+.step-indicator {
+display: flex;
+justify-content: center;
+margin: 20px 0;
+}
+.step {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background-color: #f0f0f0;
+margin: 0 5px;
+transition: background-color 0.3s ease;
+}
+.step.active {
+background-color: #6C63FF;
+}
+.hand-drawn-border {
+position: relative;
+}
+.hand-drawn-border::after {
+content: '';
+position: absolute;
+top: -2px;
+left: -2px;
+right: -2px;
+bottom: -2px;
+border: 2px solid #6C63FF;
+border-radius: 10px;
+z-index: -1;
+}
+.page-flip-container {
+perspective: 1000px;
+width: 100%;
+height: 100vh;
+overflow: hidden;
+}
+.page {
+width: 100%;
+height: 100%;
+position: absolute;
+transform-origin: center bottom;
+transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+backface-visibility: hidden;
+background-color: white;
+}
+.page.flipped {
+transform: rotateX(-180deg);
+}
+.page-content {
+width: 100%;
+height: 100%;
+padding: 40px;
+box-sizing: border-box;
+}
+.pencil-cursor {
+pointer-events: none;
+position: absolute;
+width: 24px;
+height: 24px;
+z-index: 9999;
+transform: translate(-50%, -50%);
+opacity: 0.8;
+}

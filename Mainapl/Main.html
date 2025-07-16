@@ -30,22 +30,68 @@
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
    <link
       rel="stylesheet"
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
     />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="asset/css/animation.css">
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="navbar-logo">bennet</div>
+  <div class="fixed bottom-6 left-6 z-50">
+  <button id="mainToggle" class="w-14 h-14 bg-[#9b7786] text-white rounded-full shadow-lg flex items-center justify-center text-xl">
+    <i class="ri-headphone-line text-2xl"></i>
+  </button>
+
+  <div id="dropdownPanel" class="mt-4 space-y-2 hidden">
+    <div>
+      <button id="toggleAkses" class="bg-[#9b7786] text-white px-4 py-2 w-64 flex justify-between items-center font-semibold rounded">
+        AKSESBILITAS <i class="ri-arrow-down-s-line"></i>
+      </button>
+      <div id="aksesMenu" class="bg-white w-64 p-4 mt-1 rounded shadow hidden text-sm text-gray-800 space-y-2">
+        <button class="block w-full text-left hover:text-purple-600">Perbesar Teks</button>
+        <button class="block w-full text-left hover:text-purple-600">Ubah Kontras</button>
+        <button class="block w-full text-left hover:text-purple-600">Text-to-Speech</button>
+      </div>
+    </div>
+
+    <div>
+      <button id="toggleKrisis" class="bg-[#9b7786] text-white px-4 py-2 w-64 flex justify-between items-center font-semibold rounded">
+        Pusat Bantuan Krisis <i class="ri-arrow-down-s-line"></i>
+      </button>
+      <div id="krisisMenu" class="bg-white w-72 p-4 mt-1 rounded shadow text-sm text-gray-800 space-y-6 hidden">
+        <div>
+          <a href="tel:08111129129" class="text-yellow-600 font-bold text-lg hover:underline block">08111129129</a>
+          <p class="text-sm mt-1">SAPA 129 (Perlindungan Perempuan & Anak)<br><em></em>protection of women and children</p>
+          <p class="font-semibold mt-1">*24 Jam</p>
+          <p class="italic mt-1">Call this number for any emergencies</p>
+          <hr class="mt-2 border-yellow-300">
+        </div><div>
+          <a href="tel:02131901556" class="text-yellow-600 font-bold text-lg hover:underline block">02131901556</a>
+          <p class="text-sm mt-1">KPAI (Komisi Perlindungan Anak Indonesia)<br><em></em>Indonesian Child Protection Commission</p>
+          <p class="font-semibold mt-1">*Senin–Jumat, 08.00–16.00</p>
+          <hr class="mt-2 border-yellow-300">
+        </div><div>
+          <a href="tel:119" class="text-yellow-600 font-bold text-lg hover:underline block">119</a>
+          <p class="text-sm mt-1">Ambulans / Dinas Kesehatan<br><em></em>Indonesian Child Protection Commission</p>
+          <p class="font-semibold mt-1">*24 Jam</p>
+          <hr class="mt-2 border-yellow-300">
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <nav class="navbar" id="mainNavbar">
+    <div class="navbar-logo">SatuHati</div>
     <div class="navbar-toggle" id="navbar-toggle">
       ☰
     </div>
@@ -66,36 +112,56 @@
       </a>
     </div>
   </nav>
-
+  
   <main class="container mx-auto px-4 py-10 md:px-[90px] md:py-[90px]">
-      <section class="mb-8">
-      <div class="bg-gradient-to-r from-primary/5 to-primary/10 rounded-xl mb-6 overflow-hidden relative ">
-          <div class="absolute inset-0 bg-[url('https://readdy.ai/api/search-image?query=abstract%20geometric%20pattern%20with%20soft%20pastel%20colors%2C%20modern%20minimal%20design%20for%20background&width=1920&height=400&seq=14&orientation=landscape')] opacity-10 bg-cover bg-center"></div>
-          <div class="container relative px-6 py-12 flex flex-col md:flex-row items-center justify-between">
-            <div class="max-w-2xl">
-              <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Selamat Datang di Platform Edukasi Pencegahan Pernikahan Dini</h1>
-              <p class="max-w-md text-gray-600 mb-8">Mari bersama-sama membangun kesadaran dan pemahaman tentang dampak pernikahan dini serta mencegah kekerasan dalam rumah tangga melalui edukasi yang komprehensif.</p>
-              <div class="flex flex-wrap gap-4">
-                <button class="bg-primary text-white font-medium py-3 px-6 rounded-button shadow-sm hover:bg-primary/90 transition whitespace-nowrap flex items-center">
-                  <i class="ri-book-open-line mr-2"></i>
-                  Mulai Pembelajaran
-                </button>
-                <button class="bg-white text-primary font-medium py-3 px-6 rounded-button shadow-sm hover:bg-gray-50 border border-primary/20 transition whitespace-nowrap flex items-center">
-                  <i class="ri-phone-line mr-2"></i>
-                  Laporkan Kasus
-                </button>
-              </div>
+
+            
+          <section class="mb-8">
+          <div class="relative rounded-xl mb-6 overflow-hidden" style="background: #A17C8F;
+        background: linear-gradient(25deg, rgba(161, 124, 143, 1) 26%, rgba(197, 156, 172, 1) 69%);">
+          <div class="absolute inset-0 bg-[url('https://readdy.ai/api/search-image?query=abstract%20geometric%20pattern%20with%20soft%20pastel%20colors%2C%20modern%20minimal%20design%20for%20background&width=1920&height=400&seq=14&orientation=landscape')] bg-cover bg-center opacity-20 mix-blend-soft-light"></div>
+
+          <div class="container relative px-6 py-12 flex flex-col md:flex-row items-center justify-between">   <div class="max-w-2xl">
+              <h1 class="text-3xl md:text-4xl font-bold text-white-900 mb-4">
+                Selamat Datang di Platform Edukasi Pencegahan Pernikahan Dini
+              </h1>
+              <p class="max-w-md text-white-600 mb-8">
+                Mari bersama-sama membangun kesadaran dan pemahaman tentang dampak pernikahan dini serta mencegah kekerasan dalam rumah tangga melalui edukasi yang komprehensif.
+              </p>
+                <div class="flex flex-wrap gap-4">
+
+
+          <button 
+            style="background-color: #15151c; color: #ffffff;" 
+            class="font-medium py-3 px-6 rounded-button shadow-sm hover:opacity-90 transition whitespace-nowrap flex items-center"
+          >
+            <i class="ri-book-open-line mr-2" style="color: #ffffff;"></i>
+            <a href="Course.html">Mulai Pembelajaran</a>
+          </button>
+
+
+          <button 
+            style="background-color: #ffffff; color: #6C63FF; border: 1px solid rgba(108, 99, 255, 0.2);" 
+            class="font-medium py-3 px-6 rounded-button shadow-sm hover:bg-gray-50 transition whitespace-nowrap flex items-center"
+          >
+            <i class="ri-phone-line mr-2" style="color: black;"></i>
+            <a href="" style="color: black;">Laporkan Kasus</a>
+          </button>
+
+        </div>
+
             </div>
             <div class="mt-8 md:mt-0">
               <img src="https://readdy.ai/api/search-image?query=3D%20illustration%20of%20education%20and%20community%20support%2C%20showing%20diverse%20group%20of%20people%2C%20books%2C%20and%20protective%20symbols%2C%20modern%20minimal%20style&width=400&height=300&seq=15&orientation=landscape" alt="Education Illustration" class="w-full max-w-md">
             </div>
           </div>
         </div>
+
       
       <!-- Dashboard Stats -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Total Learning Hours -->
-          <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="bg-white rounded-lg p-6 shadow-sm animate-up" style="animation-delay: 0.5s;">
             <div class="flex items-center justify-between mb-4">
               <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
                 <i class="ri-time-line text-2xl"></i>
@@ -115,7 +181,7 @@
           </div>
           
           <!-- Active Courses -->
-          <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="bg-white rounded-lg p-6 shadow-sm animate-up" style="animation-delay: 1s;">
             <div class="flex items-center justify-between mb-4">
               <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600">
                 <i class="ri-book-open-line text-2xl"></i>
@@ -135,7 +201,7 @@
           </div>
           
           <!-- Completion Rate -->
-          <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="bg-white rounded-lg p-6 shadow-sm animate-up" style="animation-delay: 1.5s;">
             <div class="flex items-center justify-between mb-4">
               <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600">
                 <i class="ri-medal-line text-2xl"></i>
@@ -155,7 +221,7 @@
           </div>
           
           <!-- Weekly Progress -->
-          <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="bg-white rounded-lg p-6 shadow-sm animate-up" style="animation-delay: 2s;">
             <div class="flex items-center justify-between mb-4">
               <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center text-yellow-600">
                 <i class="ri-line-chart-line text-2xl"></i>
@@ -201,54 +267,54 @@
 
           <!--Kategori Kursus-->
           <section class="mb-10">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-xl font-bold text-gray-800">Kursus Aktif</h2>
-          <a href="#" class="text-primary text-sm font-medium hover:underline">Lihat Semua</a>
-        </div>
-
-        <div class="flex md:grid md:grid-cols-5 gap-4 overflow-x-auto md:overflow-visible pb-4 custom-scrollbar justify-center md:justify-start">
-          
-          <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 transform hover:scale-105 hover:bg-[rgb(2,2,30)]">
-            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-3 transition-all duration-300">
-              <i class="ri-heart-line text-2xl text-primary"></i>
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-xl font-bold text-gray-800">Kursus Aktif</h2>
+              <a href="#" class="text-blue-600 text-sm font-medium hover:underline">Lihat Semua</a>
             </div>
-            <h3 class="text-gray-800 font-medium group-hover:text-white transition-all duration-300">Dampak Pernikahan Dini</h3>
-            <p class="text-gray-500 text-sm mt-1 group-hover:text-white transition-all duration-300">12 Modul</p>
-          </div>
 
-          <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 transform hover:scale-105 hover:bg-[rgb(2,2,30)]">
-            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3 transition-all duration-300">
-              <i class="ri-shield-line text-2xl text-purple-600"></i>
+            <div class="flex md:grid md:grid-cols-5 gap-4 overflow-x-auto md:overflow-visible pb-4 custom-scrollbar justify-center md:justify-start">
+
+              <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 hover:scale-105 hover:bg-[rgb(2,2,30)] animate-slide" data-slide="left">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
+                  <i class="ri-heart-line text-2xl text-blue-600"></i>
+                </div>
+                <h3 class="text-gray-800 font-medium group-hover:text-white">Dampak Pernikahan Dini</h3>
+                <p class="text-gray-500 text-sm mt-1 group-hover:text-white">12 Modul</p>
+              </div>
+
+              <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 hover:scale-105 hover:bg-[rgb(2,2,30)] animate-slide" data-slide="right">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+                  <i class="ri-shield-line text-2xl text-purple-600"></i>
+                </div>
+                <h3 class="text-gray-800 font-medium group-hover:text-white">Pencegahan KDRT</h3>
+                <p class="text-gray-500 text-sm mt-1 group-hover:text-white">8 Modul</p>
+              </div>
+
+              <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 hover:scale-105 hover:bg-[rgb(2,2,30)] animate-slide" data-slide="left">
+                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-3">
+                  <i class="ri-scales-3-line text-2xl text-green-600"></i>
+                </div>
+                <h3 class="text-gray-800 font-medium group-hover:text-white">Hak & Perlindungan</h3>
+                <p class="text-gray-500 text-sm mt-1 group-hover:text-white">10 Modul</p>
+              </div>
+
+              <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 hover:scale-105 hover:bg-[rgb(2,2,30)] animate-slide" data-slide="right">
+                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-3">
+                  <i class="ri-mental-health-line text-2xl text-orange-600"></i>
+                </div>
+                <h3 class="text-gray-800 font-medium group-hover:text-white">Kesehatan Mental</h3>
+                <p class="text-gray-500 text-sm mt-1 group-hover:text-white">6 Modul</p>
+              </div>
+
+              <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 hover:scale-105 hover:bg-[rgb(2,2,30)] animate-slide" data-slide="left">
+                <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-3">
+                  <i class="ri-first-aid-kit-line text-2xl text-red-600"></i>
+                </div>
+                <h3 class="text-gray-800 font-medium group-hover:text-white">Kesehatan Reproduksi</h3>
+                <p class="text-gray-500 text-sm mt-1 group-hover:text-white">9 Modul</p>
+              </div>
+
             </div>
-            <h3 class="text-gray-800 font-medium group-hover:text-white transition-all duration-300">Pencegahan KDRT</h3>
-            <p class="text-gray-500 text-sm mt-1 group-hover:text-white transition-all duration-300">8 Modul</p>
-          </div>
-
-          <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 transform hover:scale-105 hover:bg-[rgb(2,2,30)]">
-            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-3 transition-all duration-300">
-              <i class="ri-scales-3-line text-2xl text-green-600"></i>
-            </div>
-            <h3 class="text-gray-800 font-medium group-hover:text-white transition-all duration-300">Hak & Perlindungan</h3>
-            <p class="text-gray-500 text-sm mt-1 group-hover:text-white transition-all duration-300">10 Modul</p>
-          </div>
-
-          <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 transform hover:scale-105 hover:bg-[rgb(2,2,30)]">
-            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-3 transition-all duration-300">
-              <i class="ri-mental-health-line text-2xl text-orange-600"></i>
-            </div>
-            <h3 class="text-gray-800 font-medium group-hover:text-white transition-all duration-300">Kesehatan Mental</h3>
-            <p class="text-gray-500 text-sm mt-1 group-hover:text-white transition-all duration-300">6 Modul</p>
-          </div>
-
-          <div class="group bg-white rounded-xl p-4 flex flex-col items-center justify-center text-center min-w-[160px] transition-all duration-300 transform hover:scale-105 hover:bg-[rgb(2,2,30)]">
-            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-3 transition-all duration-300">
-              <i class="ri-first-aid-kit-line text-2xl text-red-600"></i>
-            </div>
-            <h3 class="text-gray-800 font-medium group-hover:text-white transition-all duration-300">Kesehatan Reproduksi</h3>
-            <p class="text-gray-500 text-sm mt-1 group-hover:text-white transition-all duration-300">9 Modul</p>
-          </div>
-
-        </div>
           </section>
 
         
@@ -268,11 +334,11 @@
             <div class="course-container flex md:grid overflow-x-auto md:overflow-visible gap-6 pb-4 snap-x scroll-smooth">
               
               <!-- Card 1 -->
-              <div class="course-card min-w-[300px] md:min-w-0 snap-start">
+              <div class="course-card card-1 min-w-[300px] md:min-w-0 snap-start">
                 <div class="course-card-inner">
                   <div class="course-box">
                     <div class="course-imgBox">
-                      <img src="https://images.unsplash.com/photo-1601049676869-702ea24cfd58?q=80&w=2073&auto=format&fit=crop" alt="Dasar Pernikahan" />
+                      <img src="asset/image/Mod1.jpg" alt="Dasar Pernikahan" />
                     </div>
                     <div class="course-time"><i class="ri-time-line"></i> 4 Jam</div>
                     <div class="course-status status-completed">Selesai</div>
@@ -293,11 +359,11 @@
               </div>
 
               <!-- Card 2 -->
-              <div class="course-card min-w-[300px] md:min-w-0 snap-start">
+              <div class="course-card card-2 min-w-[300px] md:min-w-0 snap-start">
                 <div class="course-card-inner">
                   <div class="course-box">
                     <div class="course-imgBox">
-                      <img src="https://images.unsplash.com/photo-1613235788366-270e7ac489f3?q=80&w=2070&auto=format&fit=crop" alt="Pencegahan Kekerasan" />
+                      <img src="asset/image/Mod2.png" alt="Pencegahan Kekerasan" />
                     </div>
                     <div class="course-time"><i class="ri-time-line"></i> 6 Jam</div>
                     <div class="course-status status-ongoing">Sedang Berlangsung</div>
@@ -318,11 +384,11 @@
               </div>
 
               <!-- Card 3 -->
-              <div class="course-card min-w-[300px] md:min-w-0 snap-start">
+              <div class="course-card card-3 min-w-[300px] md:min-w-0 snap-start">
                 <div class="course-card-inner">
                   <div class="course-box">
                     <div class="course-imgBox">
-                      <img src="https://images.unsplash.com/photo-1673847401561-fcd75a7888c5?q=80&w=2070&auto=format&fit=crop" alt="Komunikasi Efektif" />
+                      <img src="asset/image/Mod3.jpg" alt="Komunikasi Efektif" />
                     </div>
                     <div class="course-time"><i class="ri-time-line"></i> 5 Jam</div>
                     <div class="course-status status-not-started">Belum Dimulai</div>
@@ -343,11 +409,11 @@
               </div>
 
               <!-- Card 4 -->
-              <div class="course-card min-w-[300px] md:min-w-0 snap-start">
+              <div class="course-card card-4 subcard  min-w-[300px] md:min-w-0 snap-start">
                 <div class="course-card-inner">
                   <div class="course-box">
                     <div class="course-imgBox">
-                      <img src="https://images.unsplash.com/photo-1609451446117-88d5b76b0984?q=80&w=2070&auto=format&fit=crop" alt="Gizi Remaja" />
+                      <img src="asset/image/Mod4.jpg" alt="Gizi Remaja" />
                     </div>
                     <div class="course-time"><i class="ri-time-line"></i> 3 Jam</div>
                     <div class="course-status status-not-started">Belum Dimulai</div>
@@ -368,11 +434,11 @@
               </div>
 
               <!-- Card 5 -->
-              <div class="course-card min-w-[300px] md:min-w-0 snap-start">
+              <div class="course-card card-5 subcard min-w-[300px] md:min-w-0 snap-start">
                 <div class="course-card-inner">
                   <div class="course-box">
                     <div class="course-imgBox">
-                      <img src="https://images.unsplash.com/photo-1511193311917-33d4fa0c2b63?q=80&w=2070&auto=format&fit=crop" alt="Hak Anak" />
+                      <img src="asset/image/Mod5.jpg" alt="Hak Anak" />
                     </div>
                     <div class="course-time"><i class="ri-time-line"></i> 7 Jam</div>
                     <div class="course-status status-ongoing">Sedang Berlangsung</div>
@@ -393,11 +459,11 @@
               </div>
 
               <!-- Card 6 -->
-              <div class="course-card min-w-[300px] md:min-w-0 snap-start">
+              <div class="course-card card-6 subcardmin-w-[300px] md:min-w-0 snap-start">
                 <div class="course-card-inner">
                   <div class="course-box">
                     <div class="course-imgBox">
-                      <img src="https://images.unsplash.com/photo-1600267165686-38b2ee1dbb87?q=80&w=2070&auto=format&fit=crop" alt="Kesehatan Mental" />
+                      <img src="asset/image/Mod6.jpg" alt="Kesehatan Mental" />
                     </div>
                     <div class="course-time"><i class="ri-time-line"></i> 2.5 Jam</div>
                     <div class="course-status status-completed">Selesai</div>
@@ -419,8 +485,27 @@
 
             </div>
           </section>
-    </main>
-  
+  </main>
+
+  <footer class="w-full bg-white border-t border-gray-200 py-6">
+            <div class="max-w-6xl mx-auto px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-gray-500 text-sm">© 2025 Pusat Pembelajaran SatuHati. Hak Cipta Dilindungi.</p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="text-gray-500 hover:text-primary transition-colors">
+                            <span class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-question-line"></i>
+                            </span>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-primary transition-colors">
+                            <span class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-settings-line"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+  </footer>
 </body>
 
 
@@ -433,5 +518,135 @@
     menu.classList.toggle('active');
   });
 </script>
+<script id="weeklyProgressChart">
+document.addEventListener('DOMContentLoaded', function() {
+const chartDom = document.getElementById('weeklyProgressChart');
+if (!chartDom) return;
+const myChart = echarts.init(chartDom);
+const option = {
+animation: false,
+grid: {
+top: 10,
+right: 10,
+bottom: 20,
+left: 40
+},
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.8)',
+borderColor: '#E5E7EB',
+borderWidth: 1,
+textStyle: {
+color: '#1F2937'
+}
+},
+xAxis: {
+type: 'category',
+data: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+axisLine: {
+lineStyle: {
+color: '#C59CAC'
+}
+},
+axisTick: {
+show: false
+},
+axisLabel: {
+color: '#6B7280',
+fontSize: 10
+}
+},
+yAxis: {
+type: 'value',
+min: 0,
+max: 3,
+interval: 1,
+axisLine: {
+show: false
+},
+axisTick: {
+show: false
+},
+splitLine: {
+lineStyle: {
+color: '#F3F4F6'
+}
+},
+axisLabel: {
+color: '#A17C8F',
+fontSize: 10,
+formatter: '{value} jam'
+}
+},
+series: [
+{
+name: 'Jam Belajar',
+type: 'line',
+data: [1.2, 0.8, 1.5, 2.2, 0.9, 0, 0],
+smooth: true,
+symbol: 'none',
+lineStyle: {
+width: 3,
+color: 'rgba(87, 181, 231, 1)'
+},
+areaStyle: {
+color: {
+type: 'linear',
+x: 0,
+y: 0,
+x2: 0,
+y2: 1,
+colorStops: [
+{
+offset: 0,
+color: 'rgba(87, 181, 231, 0.2)'
+},
+{
+offset: 1,
+color: 'rgba(87, 181, 231, 0.05)'
+}
+]
+}
+}
+},
+{
+name: 'Target',
+type: 'line',
+data: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+lineStyle: {
+width: 2,
+type: 'dashed',
+color: 'rgba(252, 141, 98, 0.8)'
+},
+symbol: 'none'
+}
+]
+};
+myChart.setOption(option);
+window.addEventListener('resize', function() {
+myChart.resize();
+});
+});
+</script>
+<script>
+  let prevScrollPos = window.pageYOffset;
+  const navbar = document.getElementById("mainNavbar");
+
+  window.addEventListener("scroll", () => {
+    const currentScrollPos = window.pageYOffset;
+
+    if (prevScrollPos > currentScrollPos) {
+      // Scroll ke atas → navbar muncul
+      navbar.style.top = "0";
+    } else {
+      // Scroll ke bawah → navbar sembunyi
+      navbar.style.top = "-100px";
+    }
+
+    prevScrollPos = currentScrollPos;
+  });
+</script>
+<script src="asset/js/main.js"></script>
+
 
 </html>
