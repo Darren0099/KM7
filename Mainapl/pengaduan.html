@@ -29,7 +29,7 @@
                 }
             }
         }
-    </script>
+    </script><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -181,9 +181,9 @@
 }
     </style>
 </head>
-            
+<body>
 
-        <body>
+   
             <button class="quick-exit bg-gray-800 hover:bg-gray-900 text-white font-semibold px-3 sm:px-4 py-2 rounded-button shadow-lg flex items-center gap-1 sm:gap-2 transition-all text-sm sm:text-base">
                 <div class="w-4 sm:w-5 h-4 sm:h-5 flex items-center justify-center">
                     <i class="ri-logout-box-line ri-lg"></i>
@@ -516,55 +516,81 @@
         </footer>
             </main>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Panic Button Functionality
-                    const panicButton = document.querySelector('.panic-button');
-                    panicButton.addEventListener('click', function() {
-                        window.location.href = 'https://www.google.com';
-                    });
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.quick-exit').addEventListener('click', function() {
+            window.location.href = 'https://www.google.com';
+        });
 
-                    // Quick Exit Functionality
-                    const quickExit = document.querySelector('.quick-exit');
-                    quickExit.addEventListener('click', function() {
-                        window.location.href = 'https://www.google.com';
-                    });
+        document.querySelector('.bg-red-500').addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Bantuan Darurat',
+                html: `<div class="text-left p-2">
+                        <p>Anda akan menghubungi:</p>
+                        <div class="bg-red-50 p-3 mt-2 rounded-md flex items-center">
+                            <i class="ri-phone-fill text-red-500 mr-2"></i>
+                            <span class="font-semibold">110 (Polisi)</span>
+                        </div>
+                      </div>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#6366f1',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hubungi Sekarang',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'tel:110';
+                }
+            });
+        });
 
-                    // Emergency Button Functionality
-                    const emergencyButton = document.querySelector('button[type="button"]');
-                    emergencyButton.addEventListener('click', function() {
-                        const confirmation = confirm('Anda akan dihubungkan dengan layanan darurat. Lanjutkan?');
-                        if (confirmation) {
-                            window.location.href = 'tel:110';
-                        }
-                    });
-
-                    // Form Submission
-                    const form = document.querySelector('form');
-                    form.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        const consent = document.getElementById('consent');
-                        if (!consent.checked) {
-                            alert('Anda harus menyetujui kebijakan privasi untuk melanjutkan.');
-                            return;
-                        }
-
-                        // Show submission in progress
-                        const submitButton = form.querySelector('button[type="submit"]');
-                        const originalText = submitButton.textContent;
-                        submitButton.innerHTML = '<span class="inline-block animate-spin mr-2">⟳</span> Mengirim...';
-                        submitButton.disabled = true;
-
-                        // Simulate form submission
-                        setTimeout(() => {
-                            alert('Laporan Anda telah diterima. Tim kami akan segera menghubungi Anda untuk tindak lanjut. Terima kasih atas keberanian Anda.');
-                            form.reset();
-                            submitButton.textContent = originalText;
-                            submitButton.disabled = false;
-                        }, 2000);
-                    });
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('consent').checked) {
+                Swal.fire({
+                    title: 'Persetujuan Diperlukan',
+                    text: 'Anda harus menyetujui kebijakan privasi',
+                    icon: 'error',
+                    confirmButtonText: 'Mengerti'
                 });
-            </script>
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i> Mengirim...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                Swal.fire({
+                    title: 'Terima Kasih!',
+                    html: `<div class="text-center py-2">
+                            <i class="ri-checkbox-circle-fill text-4xl text-green-500 mb-2"></i>
+                            <p>Laporan Anda telah diterima</p>
+                          </div>`,
+                    confirmButtonText: 'Selesai'
+                });
+                e.target.reset();
+                submitBtn.innerHTML = 'Kirim Pengaduan';
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    if (el.classList.contains('animate-up')) el.classList.add('show');
+                    if (el.classList.contains('animate-slide')) el.classList.add(`in-${el.dataset.slide}`);
+                }
+            });
+        }, { threshold: 0.1 }).observe(document.querySelector('.animate-up'));
+    });
+</script>
+
             <script>
             const allAnimatedItems = document.querySelectorAll('.animate-up, .animate-slide');
 
