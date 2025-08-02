@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Pengaduan - Informasi Lanjutan</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+            transition: max-height 0.3s ease-in;
+        }
+        .accordion-arrow {
+            transition: transform 0.3s ease;
+        }
+        .accordion-arrow.rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-inter">
+    <div class="max-w-4xl mx-auto bg-white min-h-screen shadow-sm">
+        <header class="bg-white border-b border-gray-200 px-6 py-4">
+            <div class="flex items-center justify-between mb-4">
+                <a href="pengaduan.html" class="flex items-center justify-center w-10 h-10 text-gray-600 hover:text-blue-600 hover:bg-blue-100 rounded-full transition-colors">
+                    <i class="ri-arrow-left-line ri-lg"></i>
+                </a>
+                <div class="flex items-center justify-center w-10 h-10">
+                    <i class="ri-question-line ri-lg text-primary"></i>
+                </div>
+            </div>
+            <div class="text-center">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">FAQ Pengaduan</h1>
+                <p class="text-gray-600 text-sm leading-relaxed">Informasi Lanjutan Setelah Melaporkan Kasus Kekerasan</p>
+            </div>
+        </header>
+
+        <main class="px-6 py-6">
+            <div class="space-y-4">
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" data-target="faq-1">
+                        <span class="font-medium text-gray-900 pr-4">Apa yang terjadi setelah saya melaporkan kasus?</span>
+                        <div class="flex items-center justify-center w-6 h-6">
+                            <i class="ri-arrow-down-s-line accordion-arrow text-gray-500"></i>
+                        </div>
+                    </button>
+                    <div id="faq-1" class="accordion-content">
+                        <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                            <p class="mb-3">Setelah Anda melaporkan kasus, sistem kami akan:</p>
+                            <ul class="space-y-2 ml-4">
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Memberikan nomor tiket pengaduan untuk tracking</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Mengirimkan konfirmasi penerimaan laporan via SMS/email</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Meneruskan laporan ke tim penanganan yang sesuai</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Memulai proses verifikasi dan investigasi awal</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" data-target="faq-2">
+                        <span class="font-medium text-gray-900 pr-4">Berapa lama proses penanganan kasus?</span>
+                        <div class="flex items-center justify-center w-6 h-6">
+                            <i class="ri-arrow-down-s-line accordion-arrow text-gray-500"></i>
+                        </div>
+                    </button>
+                    <div id="faq-2" class="accordion-content">
+                        <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                            <p class="mb-3">Waktu penanganan bervariasi tergantung kompleksitas kasus:</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-time-line text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-green-800">Respon Awal</div>
+                                        <div class="text-sm text-green-600">1-2 hari kerja</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-search-line text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-blue-800">Investigasi</div>
+                                        <div class="text-sm text-blue-600">7-14 hari kerja</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-file-text-line text-orange-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-orange-800">Penyelesaian</div>
+                                        <div class="text-sm text-orange-600">14-30 hari kerja</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" data-target="faq-3">
+                        <span class="font-medium text-gray-900 pr-4">Siapa yang akan menghubungi saya?</span>
+                        <div class="flex items-center justify-center w-6 h-6">
+                            <i class="ri-arrow-down-s-line accordion-arrow text-gray-500"></i>
+                        </div>
+                    </button>
+                    <div id="faq-3" class="accordion-content">
+                        <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                            <p class="mb-4">Tim yang akan menghubungi Anda meliputi:</p>
+                            <div class="grid gap-4">
+                                <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-10 h-10 bg-primary text-white rounded-full mr-4 flex-shrink-0">
+                                        <i class="ri-user-line"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Petugas Intake</div>
+                                        <div class="text-sm text-gray-600 mt-1">Menghubungi dalam 24 jam untuk konfirmasi dan klarifikasi data</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-10 h-10 bg-secondary text-white rounded-full mr-4 flex-shrink-0">
+                                        <i class="ri-shield-user-line"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Konselor Pendamping</div>
+                                        <div class="text-sm text-gray-600 mt-1">Memberikan dukungan psikologis dan pendampingan</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-10 h-10 bg-orange-500 text-white rounded-full mr-4 flex-shrink-0">
+                                        <i class="ri-scales-3-line"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Tim Legal</div>
+                                        <div class="text-sm text-gray-600 mt-1">Memberikan bantuan hukum jika diperlukan</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" data-target="faq-4">
+                        <span class="font-medium text-gray-900 pr-4">Dokumen apa yang perlu saya siapkan?</span>
+                        <div class="flex items-center justify-center w-6 h-6">
+                            <i class="ri-arrow-down-s-line accordion-arrow text-gray-500"></i>
+                        </div>
+                    </button>
+                    <div id="faq-4" class="accordion-content">
+                        <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                            <p class="mb-4">Dokumen pendukung yang dapat Anda siapkan:</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-file-text-line text-blue-600"></i>
+                                    </div>
+                                    <span>Identitas diri (KTP/SIM/Paspor)</span>
+                                </div>
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-camera-line text-green-600"></i>
+                                    </div>
+                                    <span>Foto/video bukti kejadian (jika ada)</span>
+                                </div>
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-hospital-line text-red-600"></i>
+                                    </div>
+                                    <span>Surat keterangan medis (jika ada)</span>
+                                </div>
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-message-3-line text-purple-600"></i>
+                                    </div>
+                                    <span>Screenshot percakapan/komunikasi</span>
+                                </div>
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-user-voice-line text-orange-600"></i>
+                                    </div>
+                                    <span>Daftar saksi (nama dan kontak)</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                                <p class="text-sm text-yellow-800">
+                                    <strong>Catatan:</strong> Semua dokumen bersifat opsional. Tidak memiliki dokumen tidak akan menghambat proses penanganan kasus Anda.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" data-target="faq-5">
+                        <span class="font-medium text-gray-900 pr-4">Bagaimana cara melacak status pengaduan saya?</span>
+                        <div class="flex items-center justify-center w-6 h-6">
+                            <i class="ri-arrow-down-s-line accordion-arrow text-gray-500"></i>
+                        </div>
+                    </button>
+                    <div id="faq-5" class="accordion-content">
+                        <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                            <p class="mb-4">Anda dapat melacak status pengaduan melalui:</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-smartphone-line text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-blue-800">Aplikasi Mobile</div>
+                                        <div class="text-sm text-blue-600">Menu "Status Pengaduan" dengan nomor tiket</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-message-2-line text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-green-800">SMS/WhatsApp</div>
+                                        <div class="text-sm text-green-600">Update otomatis setiap perubahan status</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-phone-line text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-purple-800">Hotline</div>
+                                        <div class="text-sm text-purple-600">Hubungi 0800-1234-5678 (24/7)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" data-target="faq-6">
+                        <span class="font-medium text-gray-900 pr-4">Apakah identitas saya akan dirahasiakan?</span>
+                        <div class="flex items-center justify-center w-6 h-6">
+                            <i class="ri-arrow-down-s-line accordion-arrow text-gray-500"></i>
+                        </div>
+                    </button>
+                    <div id="faq-6" class="accordion-content">
+                        <div class="px-6 pb-5 text-gray-700 leading-relaxed">
+                            <div class="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                                <div class="flex items-center mb-2">
+                                    <div class="flex items-center justify-center w-8 h-8 mr-3">
+                                        <i class="ri-shield-check-line text-green-600 ri-lg"></i>
+                                    </div>
+                                    <span class="font-medium text-green-800">Ya, identitas Anda dilindungi sepenuhnya</span>
+                                </div>
+                            </div>
+                            <p class="mb-3">Langkah-langkah perlindungan identitas:</p>
+                            <ul class="space-y-2 ml-4">
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Data pribadi hanya diakses oleh tim penanganan resmi</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Sistem enkripsi tingkat tinggi untuk semua data</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Identitas tidak akan dibagikan tanpa persetujuan Anda</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span>Opsi pelaporan anonim tersedia untuk kasus tertentu</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-6 border border-blue-100">
+                <div class="text-center mb-6">
+                    <div class="flex items-center justify-center w-16 h-16 bg-primary text-white rounded-full mx-auto mb-4">
+                        <i class="ri-customer-service-2-line ri-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Butuh Bantuan Lebih Lanjut?</h3>
+                    <p class="text-gray-600 text-sm">Tim kami siap membantu Anda 24/7</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center w-10 h-10 bg-green-100 text-green-600 rounded-full mr-4">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium text-gray-900">Hotline Darurat</div>
+                                <div class="text-sm text-gray-600">0800-1234-5678</div>
+                            </div>
+                        </div>
+                        <button class="px-4 py-2 bg-green-600 text-white text-sm font-medium !rounded-button hover:bg-green-700 transition-colors whitespace-nowrap">
+                            Hubungi
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center w-10 h-10 bg-blue-100 text-blue-600 rounded-full mr-4">
+                                <i class="ri-message-3-line"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium text-gray-900">Chat dengan Petugas</div>
+                                <div class="text-sm text-gray-600">Respon dalam 5 menit</div>
+                            </div>
+                        </div>
+                        <button class="px-4 py-2 bg-primary text-white text-sm font-medium !rounded-button hover:bg-blue-700 transition-colors whitespace-nowrap">
+                            Chat
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <button class="w-full flex items-center justify-center px-4 py-3 bg-white border border-gray-300 text-gray-700 font-medium !rounded-button hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center justify-center w-5 h-5 mr-2">
+                            <i class="ri-book-open-line"></i>
+                        </div>
+                        Panduan Lengkap Proses Pengaduan
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script id="accordion-functionality">
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+            
+            accordionTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const content = document.getElementById(targetId);
+                    const arrow = this.querySelector('.accordion-arrow');
+                    
+                    const isOpen = content.classList.contains('open');
+                    
+                    accordionTriggers.forEach(otherTrigger => {
+                        const otherTargetId = otherTrigger.getAttribute('data-target');
+                        const otherContent = document.getElementById(otherTargetId);
+                        const otherArrow = otherTrigger.querySelector('.accordion-arrow');
+                        
+                        otherContent.classList.remove('open');
+                        otherArrow.classList.remove('rotate');
+                    });
+                    
+                    if (!isOpen) {
+                        content.classList.add('open');
+                        arrow.classList.add('rotate');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script id="smooth-scroll">
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionTriggers = document.querySelectorAll('.accordion-trigger');
+            
+            accordionTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    setTimeout(() => {
+                        this.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest'
+                        });
+                    }, 300);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
