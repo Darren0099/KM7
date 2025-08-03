@@ -41,7 +41,7 @@
         <style>
         /* Header Styles */
         .header-container {
-            background-color: #f8f9fa;
+            background-color: #f4eae4;;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: relative;
         }
@@ -71,14 +71,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #e9ecef;
+            background-color: #9b7786;
             border-radius: 20px;
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.3s ease;
         }
         .back-button:hover {
-            color: #495057;
+            color: white;
         }
         .back-button:hover .icon {
             transform: translateX(-4px);
@@ -87,12 +87,11 @@
             transform: scaleX(1);
         }
 
-        /* Welcome Popup Styles */
         .welcome-popup {
             position: absolute;
             right: 20px;
             top: 60px;
-            background-color: white;
+            background-color: #9b7786;
             padding: 12px 16px;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -108,7 +107,7 @@
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-bottom: 8px solid white;
+            border-bottom: 8px solid #9b7786;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
@@ -121,7 +120,9 @@
                 extend: {
                     colors: {
                         primary: '#dc2626',
-                        secondary: '#059669'
+                        secondary: '#059669',
+                        customcream: '#f4eae4',
+                        ungu: '#9b7786'
                     },
                     borderRadius: {
                         'none': '0px',
@@ -139,7 +140,6 @@
             }
         }
 
-        // Sample locations data with iframe URLs
         const locations = [
             {
                 id: 1,
@@ -183,7 +183,6 @@
             }
         ];
 
-        // Make popup draggable
         function makeDraggable(popup) {
             const header = popup.querySelector('.popup-header');
             let isDragging = false;
@@ -202,7 +201,6 @@
                 const x = e.clientX - offsetX;
                 const y = e.clientY - offsetY;
                 
-                // Keep popup within viewport
                 const maxX = window.innerWidth - popup.offsetWidth;
                 const maxY = window.innerHeight - popup.offsetHeight;
                 
@@ -226,7 +224,7 @@
             popup.querySelectorAll('p.text-sm.text-gray-600')[2].textContent = location.phone;
             popup.querySelectorAll('p.text-sm.text-gray-600')[3].textContent = location.distance + ' • 5 menit berkendara';
             
-            // Update icon color based on type
+  
             const iconElement = popup.querySelector('.w-4.h-4');
             iconElement.className = 'w-4 h-4 rounded-full flex-shrink-0';
             
@@ -238,7 +236,6 @@
                 iconElement.classList.add('bg-secondary');
             }
             
-            // Position popup in the center if it's not already positioned
             if (!popup.style.left || !popup.style.top) {
                 popup.style.left = '50%';
                 popup.style.top = '50%';
@@ -247,27 +244,21 @@
                 popup.style.transform = 'none';
             }
             
-            // Show popup
             popup.classList.remove('hidden');
             
-            // Change the iframe to show this location
             changeMapIframe(location.iframeUrl);
             
-            // Make sure draggable is initialized
             makeDraggable(popup);
         }
 
         function changeMapIframe(iframeUrl) {
-            // Hide all iframes
             document.querySelectorAll('.map-iframe').forEach(iframe => {
                 iframe.classList.add('hidden-map');
             });
             
-            // Check if we already have an iframe for this URL
             let iframe = document.querySelector(`.map-iframe[data-src="${iframeUrl}"]`);
             
             if (!iframe) {
-                // Create new iframe if it doesn't exist
                 iframe = document.createElement('iframe');
                 iframe.className = 'map-iframe';
                 iframe.setAttribute('data-src', iframeUrl);
@@ -275,24 +266,18 @@
                 iframe.setAttribute('allowfullscreen', '');
                 iframe.setAttribute('loading', 'lazy');
                 iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-                
-                // Add to container
                 document.getElementById('map-container').appendChild(iframe);
             }
             
-            // Show the selected iframe
             iframe.classList.remove('hidden-map');
         }
 
-        // Initialize with the first location's map
         document.addEventListener('DOMContentLoaded', function() {
             changeMapIframe(locations[0].iframeUrl);
             
-            // Initialize draggable for popup
             const popup = document.getElementById('location-popup');
             makeDraggable(popup);
             
-            // Close popup when clicking the close button
             popup.querySelector('.popup-close').addEventListener('click', () => {
                 popup.classList.add('hidden');
             });
@@ -305,34 +290,31 @@
            <div class="header-container py-4 border-b border-gray-200">
             <div class="px-6">
                 <div class="flex items-center justify-between max-w-6xl mx-auto">
-                    <!-- Back button -->
+            
                     <a href="main.html" class="back-button text-gray-700">
                         <div class="hover-bg"></div>
                         <i class="ri-arrow-left-line icon text-xl mr-2"></i>
                         <span class="text">Kembali</span>
                     </a>
                     
-                    <!-- Welcome text (static) -->
                     <div class="text-gray-600 font-medium">
                         <p>Peta Interaktif</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Welcome popup (hidden by default) -->
             <div class="welcome-popup">
-                <p class="text-sm">Selamat datang di Peta Interaktif</p>
+                <p class="text-sm text-white">Selamat datang di Peta Interaktif</p>
             </div>
         </div>
                <script>
-            // Welcome popup logic - show on every page load
             document.addEventListener('DOMContentLoaded', function() {
                 const welcomePopup = document.querySelector('.welcome-popup');
                 
-                // Show popup
+            
                 welcomePopup.style.display = 'block';
                 
-                // Auto-hide after 3 seconds
+             
                 setTimeout(() => {
                     welcomePopup.style.animation = 'fadeIn 0.3s ease-out reverse';
                     setTimeout(() => {
@@ -342,7 +324,7 @@
             });
         </script>
         <div class="flex h-screen">
-            <div class="w-96 bg-white border-r border-gray-200 flex flex-col">
+            <div class="w-96 bg-customcream border-r border-gray-200 flex flex-col">
                 <div class="p-6 border-b border-gray-100">
                     <h2 class="text-xl font-semibold text-gray-900 mb-4">Filter Pencarian</h2>
                     <div class="space-y-6">
@@ -503,17 +485,18 @@
                     </button>
                 </div>
                 <div class="absolute bottom-4 right-4 flex space-x-2">
-                   <button id="btn-lokasi-saya" class="bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center space-x-2">
+                  <button id="btn-lokasi-saya" class="bg-ungu px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center space-x-2">
                         <div class="w-4 h-4 flex items-center justify-center">
-                            <i class="ri-navigation-line text-gray-700 text-sm"></i>
+                            <i class="ri-navigation-line text-white text-sm"></i> 
                         </div>
-                        <span class="text-sm text-gray-700">Lokasi Saya</span>
+                        <span class="text-sm text-white">Lokasi Saya</span> 
                     </button>
-                    <button class="bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center space-x-2">
+
+                    <button class="bg-ungu px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center space-x-2">
                         <div class="w-4 h-4 flex items-center justify-center">
-                            <i class="ri-share-line text-gray-700 text-sm"></i>
+                            <i class="ri-share-line text-white text-sm"></i> 
                         </div>
-                        <span class="text-sm text-gray-700">Bagikan</span>
+                        <span class="text-sm text-white">Bagikan</span> 
                     </button>
                 </div>
                 <div id="location-popup" class="bg-white rounded-xl shadow-xl p-6 max-w-sm w-96 hidden">
