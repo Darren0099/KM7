@@ -9,15 +9,110 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>
     <style>
         :where([class^="ri-"])::before {
             content: "\f3c2";
         }
-        #map {
-            height: 100%;
+        #map-container {
+            height: 100vh;
             width: 100%;
+            position: relative;
+        }
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .hidden-map {
+            display: none;
+        }
+        #location-popup {
+            position: absolute;
+            cursor: move;
+            z-index: 1000;
+        }
+        #location-popup .popup-header {
+            cursor: move;
+        }
+        #location-popup .popup-content {
+            cursor: auto;
+        }
+    </style> 
+        <style>
+        /* Header Styles */
+        .header-container {
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        /* Back Button Styles */
+        .back-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .back-button .icon {
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        .back-button .text {
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .back-button .hover-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #e9ecef;
+            border-radius: 20px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .back-button:hover {
+            color: #495057;
+        }
+        .back-button:hover .icon {
+            transform: translateX(-4px);
+        }
+        .back-button:hover .hover-bg {
+            transform: scaleX(1);
+        }
+
+        /* Welcome Popup Styles */
+        .welcome-popup {
+            position: absolute;
+            right: 20px;
+            top: 60px;
+            background-color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .welcome-popup::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid white;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
     <script>
@@ -44,23 +139,7 @@
             }
         }
 
-        // Custom icons for different location types
-        const customIcons = {
-            'safehouse': {
-                url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
-                scaledSize: new google.maps.Size(32, 32)
-            },
-            'legal': {
-                url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                scaledSize: new google.maps.Size(32, 32)
-            },
-            'counseling': {
-                url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                scaledSize: new google.maps.Size(32, 32)
-            }
-        };
-
-        // Sample locations data
+        // Sample locations data with iframe URLs
         const locations = [
             {
                 id: 1,
@@ -70,7 +149,7 @@
                 hours: "08:00 - 16:00",
                 distance: "1.5 km",
                 phone: "(0711) 357007",
-                position: { lat: -2.991035, lng: 104.756418 }
+                iframeUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.02537910939677!2d104.72403214401585!3d-2.9846903755496688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b759239be7fa3%3A0x5d9705d6e7eca407!2sDinas%20Pemberdayaan%20Perempuan%2C%20Perlindungan%20Anak%20Dan%20Pemberdayaan%20Masyarakat%20Kota%20Palembang!5e0!3m2!1sid!2sid!4v1754187045715!5m2!1sid!2sid"
             },
             {
                 id: 2,
@@ -80,7 +159,7 @@
                 hours: "24 Jam",
                 distance: "2.3 km",
                 phone: "110",
-                position: { lat: -2.983452, lng: 104.753689 }
+                iframeUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.3436187623342!2d104.76912637363783!3d-3.001863696974124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9d95920a39eb%3A0xca72f23dac4d6900!2sPolrestabes%20Palembang!5e0!3m2!1sid!2sid!4v1754187331788!5m2!1sid!2sid"
             },
             {
                 id: 3,
@@ -90,129 +169,51 @@
                 hours: "08:00 - 16:00",
                 distance: "3.1 km",
                 phone: "(0711) 362345",
-                position: { lat: -2.989123, lng: 104.759876 }
+                iframeUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15937.753313581634!2d104.70529943704604!3d-2.9757791488709198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b75be0c717b73%3A0x18b8cc9122cc5bc3!2sBDK%20Palembang%20Kementerian%20Agama%20RI!5e0!3m2!1sid!2sid!4v1754187304167!5m2!1sid!2sid"
+            },
+            {
+                id: 4,
+                name: "Dinas Pemberdayaan Perempuan dan Perlindungan Anak Provinsi Sumsel",
+                address: "Jl. Kapten A. Rivai No.2, Palembang",
+                type: "safehouse",
+                hours: "08:00 - 16:00",
+                distance: "2.8 km",
+                phone: "(0711) 315969",
+                iframeUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63750.49938272283!2d104.6518740216797!3d-2.984650200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b75e07ea23f55%3A0x2e7b6776ab0a6a8b!2sDinas%20Pemberdayaan%20Perempuan%20dan%20Perlindungan%20Anak%20Provinsi%20Sumsel!5e0!3m2!1sid!2sid!4v1754187381888!5m2!1sid!2sid"
             }
         ];
 
-        let map;
-        let markers = [];
-        let userMarker;
-        let userPosition;
+        // Make popup draggable
+        function makeDraggable(popup) {
+            const header = popup.querySelector('.popup-header');
+            let isDragging = false;
+            let offsetX, offsetY;
 
-        function initMap() {
-            // Default center (Palembang)
-            const defaultCenter = { lat: -2.991035, lng: 104.756418 };
-            
-            // Initialize map
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: defaultCenter,
-                zoom: 14,
-                mapTypeControl: false,
-                streetViewControl: false,
-                fullscreenControl: false
+            header.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                offsetX = e.clientX - popup.getBoundingClientRect().left;
+                offsetY = e.clientY - popup.getBoundingClientRect().top;
+                popup.style.cursor = 'grabbing';
             });
 
-            // Add markers for sample locations
-            locations.forEach(location => {
-                const marker = new google.maps.Marker({
-                    position: location.position,
-                    map: map,
-                    icon: customIcons[location.type],
-                    title: location.name
-                });
-
-                // Add click event to show info window
-                marker.addListener('click', () => {
-                    showLocationPopup(location);
-                });
-
-                markers.push(marker);
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                
+                // Keep popup within viewport
+                const maxX = window.innerWidth - popup.offsetWidth;
+                const maxY = window.innerHeight - popup.offsetHeight;
+                
+                popup.style.left = `${Math.min(Math.max(0, x), maxX)}px`;
+                popup.style.top = `${Math.min(Math.max(0, y), maxY)}px`;
             });
 
-            // Add event listener for "Lokasi Saya" button
-            document.getElementById('btn-lokasi-saya').addEventListener('click', () => {
-    getCurrentLocation();
-});
-
-
-            // Add zoom controls
-            document.querySelector('.bg-white.p-3.rounded-lg:nth-child(1)').addEventListener('click', () => {
-                map.setZoom(map.getZoom() + 1);
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                popup.style.cursor = 'move';
             });
-
-            document.querySelector('.bg-white.p-3.rounded-lg:nth-child(2)').addEventListener('click', () => {
-                map.setZoom(map.getZoom() - 1);
-            });
-
-            // Add center to current location control
-            document.querySelector('.bg-white.p-3.rounded-lg:nth-child(3)').addEventListener('click', () => {
-                if (userPosition) {
-                    map.panTo(userPosition);
-                } else {
-                    getCurrentLocation();
-                }
-            });
-        }
-
-        function getCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        userPosition = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        };
-
-                        // Remove previous user marker if exists
-                        if (userMarker) {
-                            userMarker.setMap(null);
-                        }
-
-                        // Add user marker with blue dot icon
-                        userMarker = new google.maps.Marker({
-                            position: userPosition,
-                            map: map,
-                            icon: {
-                                url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                                scaledSize: new google.maps.Size(32, 32)
-                            },
-                            title: 'Lokasi Anda'
-                        });
-
-                        // Center map on user's location
-                        map.panTo(userPosition);
-
-                        // Show success message
-                        alert('Lokasi Anda berhasil ditemukan dan ditandai di peta dengan titik biru.');
-                    },
-                    (error) => {
-                        // Handle errors
-                        let errorMessage;
-                        switch(error.code) {
-                            case error.PERMISSION_DENIED:
-                                errorMessage = "Akses lokasi ditolak. Silakan izinkan akses lokasi di pengaturan browser Anda.";
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                errorMessage = "Informasi lokasi tidak tersedia.";
-                                break;
-                            case error.TIMEOUT:
-                                errorMessage = "Permintaan lokasi melebihi batas waktu.";
-                                break;
-                            case error.UNKNOWN_ERROR:
-                                errorMessage = "Terjadi kesalahan yang tidak diketahui.";
-                                break;
-                        }
-                        alert(errorMessage);
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 5000,
-                        maximumAge: 0
-                    }
-                );
-            } else {
-                alert("Browser Anda tidak mendukung geolokasi.");
-            }
         }
 
         function showLocationPopup(location) {
@@ -237,25 +238,109 @@
                 iconElement.classList.add('bg-secondary');
             }
             
+            // Position popup in the center if it's not already positioned
+            if (!popup.style.left || !popup.style.top) {
+                popup.style.left = '50%';
+                popup.style.top = '50%';
+                popup.style.transform = 'translate(-50%, -50%)';
+            } else {
+                popup.style.transform = 'none';
+            }
+            
             // Show popup
             popup.classList.remove('hidden');
             
-            // Center map on this location
-            map.panTo(location.position);
+            // Change the iframe to show this location
+            changeMapIframe(location.iframeUrl);
+            
+            // Make sure draggable is initialized
+            makeDraggable(popup);
         }
+
+        function changeMapIframe(iframeUrl) {
+            // Hide all iframes
+            document.querySelectorAll('.map-iframe').forEach(iframe => {
+                iframe.classList.add('hidden-map');
+            });
+            
+            // Check if we already have an iframe for this URL
+            let iframe = document.querySelector(`.map-iframe[data-src="${iframeUrl}"]`);
+            
+            if (!iframe) {
+                // Create new iframe if it doesn't exist
+                iframe = document.createElement('iframe');
+                iframe.className = 'map-iframe';
+                iframe.setAttribute('data-src', iframeUrl);
+                iframe.src = iframeUrl;
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('loading', 'lazy');
+                iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+                
+                // Add to container
+                document.getElementById('map-container').appendChild(iframe);
+            }
+            
+            // Show the selected iframe
+            iframe.classList.remove('hidden-map');
+        }
+
+        // Initialize with the first location's map
+        document.addEventListener('DOMContentLoaded', function() {
+            changeMapIframe(locations[0].iframeUrl);
+            
+            // Initialize draggable for popup
+            const popup = document.getElementById('location-popup');
+            makeDraggable(popup);
+            
+            // Close popup when clicking the close button
+            popup.querySelector('.popup-close').addEventListener('click', () => {
+                popup.classList.add('hidden');
+            });
+        });
     </script>
 </head>
 <body class="bg-gray-50 font-sans">
    
     <main class="min-h-screen">
-        <div class="bg-white py-8 border-b border-gray-100">
+           <div class="header-container py-4 border-b border-gray-200">
             <div class="px-6">
-                <div class="text-center max-w-4xl mx-auto">
-                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Peta Digital Rumah Aman dan Instansi Pendukung</h1>
-                    <p class="text-lg text-gray-600">Temukan lokasi rumah aman, lembaga bantuan hukum, dan layanan konseling terdekat dengan informasi lengkap jam operasional dan kontak darurat</p>
+                <div class="flex items-center justify-between max-w-6xl mx-auto">
+                    <!-- Back button -->
+                    <a href="main.html" class="back-button text-gray-700">
+                        <div class="hover-bg"></div>
+                        <i class="ri-arrow-left-line icon text-xl mr-2"></i>
+                        <span class="text">Kembali</span>
+                    </a>
+                    
+                    <!-- Welcome text (static) -->
+                    <div class="text-gray-600 font-medium">
+                        <p>Peta Interaktif</p>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Welcome popup (hidden by default) -->
+            <div class="welcome-popup">
+                <p class="text-sm">Selamat datang di Peta Interaktif</p>
+            </div>
         </div>
+               <script>
+            // Welcome popup logic - show on every page load
+            document.addEventListener('DOMContentLoaded', function() {
+                const welcomePopup = document.querySelector('.welcome-popup');
+                
+                // Show popup
+                welcomePopup.style.display = 'block';
+                
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    welcomePopup.style.animation = 'fadeIn 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        welcomePopup.style.display = 'none';
+                    }, 300);
+                }, 3000);
+            });
+        </script>
         <div class="flex h-screen">
             <div class="w-96 bg-white border-r border-gray-200 flex flex-col">
                 <div class="p-6 border-b border-gray-100">
@@ -275,24 +360,14 @@
                                     <option>Bogor</option>
                                     <option>Depok</option>
                                     <option>Tangerang</option>
-                                    <option>Bekasi</option>
+                                    <option>Palembang</option>
                                 </select>
                                 <div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center pointer-events-none">
                                     <i class="ri-arrow-down-s-line text-gray-400"></i>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label class="text-sm font-medium text-gray-700 mb-3 block">Radius Pencarian</label>
-                            <div class="px-2">
-                                <input type="range" min="1" max="50" value="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider">
-                                <div class="flex justify-between text-xs text-gray-500 mt-2">
-                                    <span>1 km</span>
-                                    <span id="radius-value">10 km</span>
-                                    <span>50 km</span>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div>
                             <label class="text-sm font-medium text-gray-700 mb-3 block">Pencarian</label>
                             <div class="relative">
@@ -378,21 +453,37 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer bg-white" onclick="showLocationPopup(locations[3])">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-3 h-3 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-gray-900">Dinas Pemberdayaan Perempuan dan Perlindungan Anak Provinsi Sumsel</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Jl. Kapten A. Rivai No.2, Palembang</p>
+                                    <div class="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                                        <span class="flex items-center space-x-1">
+                                            <div class="w-3 h-3 flex items-center justify-center">
+                                                <i class="ri-time-line text-xs"></i>
+                                            </div>
+                                            <span>08:00 - 16:00</span>
+                                        </span>
+                                        <span class="flex items-center space-x-1">
+                                            <div class="w-3 h-3 flex items-center justify-center">
+                                                <i class="ri-map-pin-line text-xs"></i>
+                                            </div>
+                                            <span>2.8 km</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="flex-1 relative">
-                <div style="width: 100%; max-width: 600px; margin: auto;">
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.02537910939677!2d104.72403214401585!3d-2.9846903755496688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b759239be7fa3%3A0x5d9705d6e7eca407!2sDinas%20Pemberdayaan%20Perempuan%2C%20Perlindungan%20Anak%20Dan%20Pemberdayaan%20Masyarakat%20Kota%20Palembang!5e0!3m2!1sid!2sid!4v1754187045715!5m2!1sid!2sid" 
-    width="100%" 
-    height="450" 
-    style="border:0;" 
-    allowfullscreen="" 
-    loading="lazy" 
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
+                <div id="map-container">
+                    <!-- Iframes will be dynamically inserted here -->
+                </div>
 
                 <div class="absolute top-4 right-4 flex flex-col space-y-2">
                     <button class="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -425,19 +516,19 @@
                         <span class="text-sm text-gray-700">Bagikan</span>
                     </button>
                 </div>
-                <div id="location-popup" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 max-w-sm w-96 hidden">
-                    <div class="flex items-start justify-between mb-4">
+                <div id="location-popup" class="bg-white rounded-xl shadow-xl p-6 max-w-sm w-96 hidden">
+                    <div class="flex items-start justify-between mb-4 popup-header">
                         <div class="flex items-center space-x-3">
                             <div class="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
                             <h3 class="font-semibold text-gray-900">DP3APM Kota Palembang</h3>
                         </div>
-                        <button class="text-gray-400 hover:text-gray-600" onclick="document.getElementById('location-popup').classList.add('hidden')">
+                        <button class="text-gray-400 hover:text-gray-600 popup-close">
                             <div class="w-5 h-5 flex items-center justify-center">
                                 <i class="ri-close-line"></i>
                             </div>
                         </button>
                     </div>
-                    <div class="space-y-3 mb-6">
+                    <div class="space-y-3 mb-6 popup-content">
                         <div class="flex items-start space-x-3">
                             <div class="w-4 h-4 flex items-center justify-center mt-0.5">
                                 <i class="ri-map-pin-line text-gray-500 text-sm"></i>
@@ -463,7 +554,7 @@
                             <p class="text-sm text-gray-600">1.5 km • 5 menit berkendara</p>
                         </div>
                     </div>
-                    <div class="flex space-x-3">
+                    <div class="flex space-x-3 popup-content">
                         <button class="flex-1 bg-primary text-white py-3 px-4 !rounded-button text-sm font-medium hover:bg-red-700 transition-colors whitespace-nowrap flex items-center justify-center space-x-2">
                             <i class="ri-navigation-line"></i>
                             <span>Petunjuk Arah</span>
