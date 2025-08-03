@@ -1,1239 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start Drawing Simply</title>
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#6C63FF',secondary:'#FFB6C1'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-<style>
-:where([class^="ri-"])::before { content: "\f3c2"; }
-body {
-font-family: 'Quicksand', sans-serif;
-overflow-x: hidden;
-scroll-behavior: smooth;
-}
-.hand-drawn {
-font-family: 'Caveat', cursive;
-}
-.section {
-min-height: 100vh;
-width: 100%;
-position: relative;
-overflow: hidden;
-}
-.page-transition {
-transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-.floating {
-animation: floating 3s ease-in-out infinite;
-}
-@keyframes floating {
-0% { transform: translate(0, 0px); }
-50% { transform: translate(0, 15px); }
-100% { transform: translate(0, 0px); }
-}
-.floating-slow {
-animation: floating 5s ease-in-out infinite;
-}
-.floating-fast {
-animation: floating 2s ease-in-out infinite;
-}
-.draw-in {
-stroke-dasharray: 1000;
-stroke-dashoffset: 1000;
-animation: draw 2s linear forwards;
-}
-@keyframes draw {
-to { stroke-dashoffset: 0; }
-}
-.appear {
-opacity: 0;
-transform: translateY(20px);
-transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.appear.visible {
-opacity: 1;
-transform: translateY(0);
-}
-.progress-indicator {
-position: fixed;
-right: 20px;
-top: 50%;
-transform: translateY(-50%);
-z-index: 100;
-}
-.progress-dot {
-width: 12px;
-height: 12px;
-border-radius: 50%;
-margin: 10px 0;
-background-color: #ddd;
-transition: background-color 0.3s ease;
-position: relative;
-}
-.progress-dot.active {
-background-color: #6C63FF;
-}
-.progress-dot::before {
-content: '';
-position: absolute;
-top: -4px;
-left: -4px;
-right: -4px;
-bottom: -4px;
-border: 1px solid #ddd;
-border-radius: 50%;
-opacity: 0;
-transition: opacity 0.3s ease;
-}
-.progress-dot.active::before {
-opacity: 1;
-border-color: #6C63FF;
-}
-.cursor-pencil {
-cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236C63FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg>") 0 24, auto;
-}
-.drawing-canvas {
-position: relative;
-width: 100%;
-height: 400px;
-background-color: white;
-border-radius: 8px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-input[type="range"] {
--webkit-appearance: none;
-appearance: none;
-width: 100%;
-height: 4px;
-background: #f0f0f0;
-border-radius: 2px;
-outline: none;
-}
-input[type="range"]::-webkit-slider-thumb {
--webkit-appearance: none;
-appearance: none;
-width: 16px;
-height: 16px;
-background: #6C63FF;
-border-radius: 50%;
-cursor: pointer;
-}
-.custom-checkbox {
-position: relative;
-display: inline-block;
-width: 20px;
-height: 20px;
-border: 2px solid #6C63FF;
-border-radius: 4px;
-cursor: pointer;
-}
-.custom-checkbox.checked::after {
-content: '';
-position: absolute;
-top: 2px;
-left: 6px;
-width: 6px;
-height: 10px;
-border: solid #6C63FF;
-border-width: 0 2px 2px 0;
-transform: rotate(45deg);
-}
-.custom-switch {
-position: relative;
-display: inline-block;
-width: 40px;
-height: 20px;
-}
-.custom-switch input {
-opacity: 0;
-width: 0;
-height: 0;
-}
-.switch-slider {
-position: absolute;
-cursor: pointer;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: #f0f0f0;
-transition: .4s;
-border-radius: 20px;
-}
-.switch-slider:before {
-position: absolute;
-content: "";
-height: 16px;
-width: 16px;
-left: 2px;
-bottom: 2px;
-background-color: white;
-transition: .4s;
-border-radius: 50%;
-}
-input:checked + .switch-slider {
-background-color: #6C63FF;
-}
-input:checked + .switch-slider:before {
-transform: translateX(20px);
-}
-.step-indicator {
-display: flex;
-justify-content: center;
-margin: 20px 0;
-}
-.step {
-width: 10px;
-height: 10px;
-border-radius: 50%;
-background-color: #f0f0f0;
-margin: 0 5px;
-transition: background-color 0.3s ease;
-}
-.step.active {
-background-color: #6C63FF;
-}
-.hand-drawn-border {
-position: relative;
-}
-.hand-drawn-border::after {
-content: '';
-position: absolute;
-top: -2px;
-left: -2px;
-right: -2px;
-bottom: -2px;
-border: 2px solid #6C63FF;
-border-radius: 10px;
-z-index: -1;
-}
-.page-flip-container {
-perspective: 1000px;
-width: 100%;
-height: 100vh;
-overflow: hidden;
-}
-.page {
-width: 100%;
-height: 100%;
-position: absolute;
-transform-origin: center bottom;
-transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-backface-visibility: hidden;
-background-color: white;
-}
-.page.flipped {
-transform: rotateX(-180deg);
-}
-.page-content {
-width: 100%;
-height: 100%;
-padding: 40px;
-box-sizing: border-box;
-}
-.pencil-cursor {
-pointer-events: none;
-position: absolute;
-width: 24px;
-height: 24px;
-z-index: 9999;
-transform: translate(-50%, -50%);
-opacity: 0.8;
-}
-</style>
+  <title>Form Pengaduan dengan Lokasi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+    .form-container {
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+    }
+  </style>
 </head>
-<body class="bg-white">
-<div class="progress-indicator">
-<div class="progress-dot active" data-section="0"></div>
-<div class="progress-dot" data-section="1"></div>
-<div class="progress-dot" data-section="2"></div>
-<div class="progress-dot" data-section="3"></div>
-<div class="progress-dot" data-section="4"></div>
-<div class="progress-dot" data-section="5"></div>
-</div>
-<!-- Cover Page -->
-<section id="cover" class="section flex items-center justify-center relative">
-<div class="absolute inset-0 overflow-hidden">
-<div class="floating-slow absolute top-[8%] left-[12%]">
-<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M50 20C30 20 20 40 20 50C20 60 30 80 50 80C70 80 80 60 80 50C80 40 70 20 50 20Z" stroke="#FFB6C1" stroke-width="2"/>
-<path class="draw-in" d="M50 30C35 30 30 45 30 50C30 55 35 70 50 70C65 70 70 55 70 50C70 45 65 30 50 30Z" stroke="#FFB6C1" stroke-width="2"/>
-<path class="draw-in" d="M50 40C45 40 40 45 40 50C40 55 45 60 50 60C55 60 60 55 60 50C60 45 55 40 50 40Z" stroke="#FFB6C1" stroke-width="2"/>
-</svg>
-</div>
-<div class="floating absolute top-[15%] right-[18%]">
-<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M40 10L48 32L70 40L48 48L40 70L32 48L10 40L32 32L40 10Z" stroke="#6C63FF" stroke-width="2"/>
-<circle class="draw-in" cx="40" cy="40" r="5" stroke="#6C63FF" stroke-width="2"/>
-</svg>
-</div>
-<div class="floating-fast absolute top-[35%] left-[20%]">
-<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M30 10C20 10 10 20 10 30C10 40 20 50 30 50C40 50 50 40 50 30" stroke="#FFB6C1" stroke-width="2"/>
-<path class="draw-in" d="M30 20L40 30L50 30" stroke="#FFB6C1" stroke-width="2"/>
-<circle class="draw-in" cx="30" cy="30" r="3" stroke="#FFB6C1" stroke-width="2"/>
-</svg>
-</div>
-<div class="floating-slow absolute bottom-[25%] right-[22%]">
-<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M45 10C25 30 25 60 45 80" stroke="#6C63FF" stroke-width="2"/>
-<path class="draw-in" d="M25 45C45 25 75 25 85 45" stroke="#6C63FF" stroke-width="2"/>
-<path class="draw-in" d="M65 20C45 40 45 70 65 90" stroke="#6C63FF" stroke-width="2"/>
-<path class="draw-in" d="M5 45C25 65 55 65 75 45" stroke="#6C63FF" stroke-width="2"/>
-<circle class="draw-in" cx="45" cy="45" r="4" stroke="#6C63FF" stroke-width="2"/>
-</svg>
-</div>
-<div class="floating absolute bottom-[15%] left-[15%]">
-<svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M35 10L45 30L65 35L45 40L35 60L25 40L5 35L25 30L35 10Z" stroke="#FFB6C1" stroke-width="2"/>
-<circle class="draw-in" cx="35" cy="35" r="3" fill="#FFB6C1"/>
-</svg>
-</div>
-<div class="floating-fast absolute top-[25%] left-[75%]">
-<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M10 25C15 15 35 15 40 25C35 35 15 35 10 25Z" stroke="#6C63FF" stroke-width="2"/>
-<path class="draw-in" d="M25 10C35 15 35 35 25 40C15 35 15 15 25 10Z" stroke="#6C63FF" stroke-width="2"/>
-<circle class="draw-in" cx="25" cy="25" r="3" stroke="#6C63FF" stroke-width="2"/>
-</svg>
-</div>
-<div class="floating-slow absolute bottom-[35%] right-[10%]">
-<svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M20 32.5C25 20 40 20 45 32.5C40 45 25 45 20 32.5Z" stroke="#FFB6C1" stroke-width="2"/>
-<path class="draw-in" d="M32.5 20C45 25 45 40 32.5 45C20 40 20 25 32.5 20Z" stroke="#FFB6C1" stroke-width="2"/>
-<circle class="draw-in" cx="32.5" cy="32.5" r="2" fill="#FFB6C1"/>
-</svg>
-</div>
-</div>
-<div class="text-center z-10">
-<div class="relative inline-block mb-4">
-<h1 class="hand-drawn text-8xl mb-2 text-gray-800 relative">Start Drawing Simply</h1>
-</div>
-<div class="max-w-2xl mx-auto mb-8">
-<p class="text-2xl text-gray-600 leading-relaxed">Discover the joy of line drawing through our step-by-step approach. Transform simple lines into beautiful artwork. No experience needed.</p>
-</div>
-<div class="flex flex-col items-center gap-6">
-<button class="!rounded-button bg-primary text-white px-12 py-5 text-xl font-medium hover:bg-opacity-90 transition-all duration-300 flex items-center mx-auto whitespace-nowrap group">
-Begin Your Journey
-<div class="w-7 h-7 flex items-center justify-center ml-3 group-hover:translate-x-1 transition-transform">
-<i class="ri-arrow-right-line"></i>
-</div>
-</button>
-<div class="flex items-center gap-8 text-gray-500">
-<div class="flex items-center">
-<div class="w-5 h-5 flex items-center justify-center mr-2">
-<i class="ri-time-line"></i>
-</div>
-<span>4-week course</span>
-</div>
-<div class="flex items-center">
-<div class="w-5 h-5 flex items-center justify-center mr-2">
-<i class="ri-user-line"></i>
-</div>
-<span>Beginner friendly</span>
-</div>
-<div class="flex items-center">
-<div class="w-5 h-5 flex items-center justify-center mr-2">
-<i class="ri-pencil-line"></i>
-</div>
-<span>20+ exercises</span>
-</div>
-</div>
-</div>
-</div>
-<div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-<div class="flex flex-col items-center gap-2">
-<p class="text-gray-500 text-sm mb-1">Scroll to explore</p>
-<div class="w-12 h-12 flex items-center justify-center animate-bounce cursor-pointer hover:text-opacity-80 transition-all" onclick="document.getElementById('basic-lines').scrollIntoView({behavior: 'smooth'})">
-<i class="ri-arrow-down-line text-primary text-3xl"></i>
-</div>
-</div>
-</div>
-</section>
-<!-- Basic Lines Section -->
-<section id="basic-lines" class="section bg-white py-20">
-<div class="container mx-auto px-4 max-w-6xl">
-<h2 class="hand-drawn text-4xl text-center mb-16 text-gray-800 appear">Basic Lines: The Foundation</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-<div class="appear">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-<h3 class="hand-drawn text-2xl mb-4 text-gray-700">Straight Lines</h3>
-<div class="h-64 bg-white rounded-md p-4 mb-4 relative">
-<svg width="100%" height="100%" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M50 50L250 50" stroke="#6C63FF" stroke-width="3" stroke-linecap="round"/>
-<path class="draw-in" d="M50 100L250 100" stroke="#FFB6C1" stroke-width="3" stroke-linecap="round" style="animation-delay: 0.5s"/>
-<path class="draw-in" d="M50 150L250 150" stroke="#6C63FF" stroke-width="3" stroke-linecap="round" style="animation-delay: 1s"/>
-</svg>
-<div class="absolute bottom-2 right-2 text-xs text-gray-400">Try with different pressure</div>
-</div>
-<p class="text-gray-600 hand-drawn text-lg">Start with your pencil at one point, breathe, and draw a steady line to the end point. Practice light, medium, and heavy pressure.</p>
-</div>
-</div>
-<div class="appear" style="transition-delay: 0.2s">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-<h3 class="hand-drawn text-2xl mb-4 text-gray-700">Curved Lines</h3>
-<div class="h-64 bg-white rounded-md p-4 mb-4 relative">
-<svg width="100%" height="100%" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M50 150C90 50 210 50 250 150" stroke="#6C63FF" stroke-width="3" stroke-linecap="round"/>
-<path class="draw-in" d="M50 50C90 150 210 150 250 50" stroke="#FFB6C1" stroke-width="3" stroke-linecap="round" style="animation-delay: 0.5s"/>
-<path class="draw-in" d="M50 100C110 150 190 50 250 100" stroke="#6C63FF" stroke-width="3" stroke-linecap="round" style="animation-delay: 1s"/>
-</svg>
-<div class="absolute bottom-2 right-2 text-xs text-gray-400">Feel the flow</div>
-</div>
-<p class="text-gray-600 hand-drawn text-lg">Allow your hand to move naturally in an arc. Don't force it—let your wrist and arm create the curve with gentle movement.</p>
-</div>
-</div>
-<div class="appear" style="transition-delay: 0.4s">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-<h3 class="hand-drawn text-2xl mb-4 text-gray-700">Hatching Techniques</h3>
-<div class="h-64 bg-white rounded-md p-4 mb-4 relative">
-<svg width="100%" height="100%" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g class="draw-in">
-<path d="M50 30L100 30" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M50 45L100 45" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M50 60L100 60" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M50 75L100 75" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-</g>
-<g class="draw-in" style="animation-delay: 0.5s">
-<path d="M150 30L200 30" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-<path d="M150 45L200 45" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-<path d="M145 60L205 60" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-<path d="M140 75L210 75" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-</g>
-<g class="draw-in" style="animation-delay: 1s">
-<path d="M50 130L100 130" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M50 145L100 145" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M50 160L100 160" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M50 175L100 175" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M50 130L50 175" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M65 130L65 175" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M80 130L80 175" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-<path d="M95 130L95 175" stroke="#6C63FF" stroke-width="2" stroke-linecap="round"/>
-</g>
-<g class="draw-in" style="animation-delay: 1.5s">
-<path d="M150 130L200 175" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-<path d="M160 130L210 175" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-<path d="M170 130L220 175" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-<path d="M140 130L190 175" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-<path d="M130 130L180 175" stroke="#FFB6C1" stroke-width="2" stroke-linecap="round"/>
-</g>
-</svg>
-<div class="absolute bottom-2 right-2 text-xs text-gray-400">Create texture and shadow</div>
-</div>
-<p class="text-gray-600 hand-drawn text-lg">Parallel lines create texture and shadow. Vary the spacing and direction to create different effects and dimensions.</p>
-</div>
-</div>
-<div class="appear" style="transition-delay: 0.6s">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-<h3 class="hand-drawn text-2xl mb-4 text-gray-700">Dotting Technique</h3>
-<div class="h-64 bg-white rounded-md p-4 mb-4 relative">
-<svg width="100%" height="100%" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle class="draw-in" cx="75" cy="50" r="3" fill="#6C63FF"/>
-<circle class="draw-in" cx="90" cy="50" r="3" fill="#6C63FF"/>
-<circle class="draw-in" cx="105" cy="50" r="3" fill="#6C63FF"/>
-<circle class="draw-in" cx="120" cy="50" r="3" fill="#6C63FF"/>
-<circle class="draw-in" cx="135" cy="50" r="3" fill="#6C63FF"/>
-<circle class="draw-in" cx="75" cy="65" r="2" fill="#FFB6C1"/>
-<circle class="draw-in" cx="85" cy="65" r="2" fill="#FFB6C1"/>
-<circle class="draw-in" cx="95" cy="65" r="2" fill="#FFB6C1"/>
-<circle class="draw-in" cx="105" cy="65" r="2" fill="#FFB6C1"/>
-<circle class="draw-in" cx="115" cy="65" r="2" fill="#FFB6C1"/>
-<circle class="draw-in" cx="125" cy="65" r="2" fill="#FFB6C1"/>
-<circle class="draw-in" cx="135" cy="65" r="2" fill="#FFB6C1"/>
-<circle class="draw-in" cx="150" cy="100" r="40" stroke="#6C63FF" stroke-width="1" stroke-dasharray="2 4"/>
-<circle class="draw-in" cx="130" cy="90" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="135" cy="85" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="140" cy="82" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="145" cy="80" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="150" cy="79" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="155" cy="80" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="160" cy="82" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="165" cy="85" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="170" cy="90" r="1" fill="#6C63FF"/>
-<circle class="draw-in" cx="130" cy="110" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="135" cy="115" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="140" cy="118" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="145" cy="120" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="150" cy="121" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="155" cy="120" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="160" cy="118" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="165" cy="115" r="1" fill="#FFB6C1"/>
-<circle class="draw-in" cx="170" cy="110" r="1" fill="#FFB6C1"/>
-</svg>
-<div class="absolute bottom-2 right-2 text-xs text-gray-400">Patience creates beauty</div>
-</div>
-<p class="text-gray-600 hand-drawn text-lg">Build up texture and tone gradually with dots. The closer together, the darker the area appears. Perfect for creating soft gradients.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Shapes & Composition Section -->
-<section id="shapes" class="section bg-white py-20">
-<div class="container mx-auto px-4 max-w-6xl">
-<h2 class="hand-drawn text-4xl text-center mb-16 text-gray-800 appear">Shapes & Composition</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-<div class="appear">
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm h-full">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700 text-center">Simple Cat</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Basic Circle -->
-<circle class="draw-in" cx="100" cy="100" r="50" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Cat Head Shape -->
-<path class="draw-in" d="M70 80C70 60 130 60 130 80C130 100 115 130 100 130C85 130 70 100 70 80Z" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<!-- Step 3: Ears -->
-<path class="draw-in" d="M70 80L60 50L85 70" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1s"/>
-<path class="draw-in" d="M130 80L140 50L115 70" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.2s"/>
-<!-- Step 4: Eyes -->
-<circle class="draw-in" cx="85" cy="90" r="5" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.5s"/>
-<circle class="draw-in" cx="115" cy="90" r="5" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.7s"/>
-<!-- Step 5: Nose and Mouth -->
-<path class="draw-in" d="M100 100L95 105L100 110L105 105L100 100Z" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2s"/>
-<path class="draw-in" d="M100 110C95 115 90 115 85 113" stroke="#6C63FF" stroke-width="2" style="animation-delay: 2.2s"/>
-<path class="draw-in" d="M100 110C105 115 110 115 115 113" stroke="#6C63FF" stroke-width="2" style="animation-delay: 2.4s"/>
-<!-- Step 6: Whiskers -->
-<path class="draw-in" d="M90 105L70 100" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2.6s"/>
-<path class="draw-in" d="M90 108L65 110" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2.8s"/>
-<path class="draw-in" d="M90 111L70 120" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3s"/>
-<path class="draw-in" d="M110 105L130 100" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.2s"/>
-<path class="draw-in" d="M110 108L135 110" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.4s"/>
-<path class="draw-in" d="M110 111L130 120" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.6s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Start with a circle, add triangular ears, then facial features. Simple shapes create character!</p>
-</div>
-</div>
-<div class="appear" style="transition-delay: 0.2s">
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm h-full">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700 text-center">Coffee Cup</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Basic Shape -->
-<ellipse class="draw-in" cx="100" cy="140" rx="40" ry="10" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Cup Body -->
-<path class="draw-in" d="M70 140V80C70 70 130 70 130 80V140" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<!-- Step 3: Cup Top -->
-<ellipse class="draw-in" cx="100" cy="80" rx="30" ry="10" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1s"/>
-<!-- Step 4: Handle -->
-<path class="draw-in" d="M130 90C150 90 150 110 130 110" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.5s"/>
-<!-- Step 5: Steam -->
-<path class="draw-in" d="M90 70C85 60 95 50 90 40" stroke="#FFB6C1" stroke-width="1" stroke-linecap="round" style="animation-delay: 2s"/>
-<path class="draw-in" d="M100 70C105 60 95 50 100 40" stroke="#FFB6C1" stroke-width="1" stroke-linecap="round" style="animation-delay: 2.2s"/>
-<path class="draw-in" d="M110 70C115 60 105 50 110 40" stroke="#FFB6C1" stroke-width="1" stroke-linecap="round" style="animation-delay: 2.4s"/>
-<!-- Step 6: Saucer -->
-<ellipse class="draw-in" cx="100" cy="140" rx="50" ry="15" stroke="#6C63FF" stroke-width="2" style="animation-delay: 2.6s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Begin with cylindrical shapes, add a handle, then details like steam. Ellipses create dimension.</p>
-</div>
-</div>
-<div class="appear" style="transition-delay: 0.4s">
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm h-full">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700 text-center">Potted Plant</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Basic Pot Shape -->
-<path class="draw-in" d="M80 140H120" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Pot -->
-<path class="draw-in" d="M80 140V110C80 100 120 100 120 110V140" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<path class="draw-in" d="M75 140H125" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.7s"/>
-<!-- Step 3: Soil -->
-<path class="draw-in" d="M85 110C85 105 115 105 115 110" stroke="#6C63FF" stroke-width="1" style="animation-delay: 1s"/>
-<!-- Step 4: Main Stem -->
-<path class="draw-in" d="M100 105V70" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.5s"/>
-<!-- Step 5: Leaves -->
-<path class="draw-in" d="M100 90C90 80 70 85 65 75" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2s"/>
-<path class="draw-in" d="M100 90C110 80 130 85 135 75" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2.2s"/>
-<path class="draw-in" d="M100 80C90 70 75 75 70 65" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2.4s"/>
-<path class="draw-in" d="M100 80C110 70 125 75 130 65" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2.6s"/>
-<!-- Step 6: Pot Details -->
-<path class="draw-in" d="M85 120H115" stroke="#6C63FF" stroke-width="1" stroke-dasharray="2 2" style="animation-delay: 3s"/>
-<path class="draw-in" d="M85 130H115" stroke="#6C63FF" stroke-width="1" stroke-dasharray="2 2" style="animation-delay: 3.2s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Draw the pot first, then add the stem and branching leaves. Curved lines create organic shapes.</p>
-</div>
-</div>
-</div>
-<div class="appear">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-<h3 class="hand-drawn text-2xl mb-6 text-gray-700 text-center">Composition Tips</h3>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div class="bg-white p-4 rounded-md">
-<h4 class="hand-drawn text-lg mb-2 text-gray-700">Rule of Thirds</h4>
-<div class="h-40 relative mb-3">
-<svg width="100%" height="100%" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Grid -->
-<path class="draw-in" d="M67 0V150" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<path class="draw-in" d="M133 0V150" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<path class="draw-in" d="M0 50H200" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<path class="draw-in" d="M0 100H200" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Mountain -->
-<path class="draw-in" d="M0 100L50 70L100 90L150 60L200 80V150H0V100Z" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<!-- Sun -->
-<circle class="draw-in" cx="133" cy="50" r="15" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 1s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-sm">Place key elements at the intersections of third-lines for balanced, interesting compositions.</p>
-</div>
-<div class="bg-white p-4 rounded-md">
-<h4 class="hand-drawn text-lg mb-2 text-gray-700">Focal Point</h4>
-<div class="h-40 relative mb-3">
-<svg width="100%" height="100%" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Background Elements -->
-<path class="draw-in" d="M20 130C30 120 40 125 50 130C60 135 70 130 80 120" stroke="#CCCCCC" stroke-width="1"/>
-<path class="draw-in" d="M120 130C130 120 140 125 150 130C160 135 170 130 180 120" stroke="#CCCCCC" stroke-width="1"/>
-<path class="draw-in" d="M30 110C40 100 50 105 60 110C70 115 80 110 90 100" stroke="#CCCCCC" stroke-width="1"/>
-<path class="draw-in" d="M110 110C120 100 130 105 140 110C150 115 160 110 170 100" stroke="#CCCCCC" stroke-width="1"/>
-<!-- Focal Point -->
-<circle class="draw-in" cx="100" cy="75" r="25" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<path class="draw-in" d="M85 75L95 85L115 65" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 1s"/>
-<!-- Directional Lines -->
-<path class="draw-in" d="M40 40L85 65" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2" style="animation-delay: 1.5s"/>
-<path class="draw-in" d="M160 40L115 65" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2" style="animation-delay: 1.7s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-sm">Create a clear center of interest that draws the eye. Use contrast, detail, or positioning to emphasize it.</p>
-</div>
-<div class="bg-white p-4 rounded-md">
-<h4 class="hand-drawn text-lg mb-2 text-gray-700">Balance & Space</h4>
-<div class="h-40 relative mb-3">
-<svg width="100%" height="100%" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Left Element -->
-<rect class="draw-in" x="40" y="50" width="40" height="70" stroke="#6C63FF" stroke-width="2"/>
-<!-- Right Elements -->
-<circle class="draw-in" cx="140" cy="60" r="15" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 0.5s"/>
-<circle class="draw-in" cx="140" cy="100" r="10" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 0.7s"/>
-<circle class="draw-in" cx="160" cy="80" r="5" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 0.9s"/>
-<!-- Balance Line -->
-<path class="draw-in" d="M100 30V130" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2" style="animation-delay: 1.2s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-sm">Balance visual weight across your composition. Use white space to give elements room to breathe.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Daily Objects Section -->
-<section id="daily-objects" class="section bg-white py-20">
-<div class="container mx-auto px-4 max-w-6xl">
-<h2 class="hand-drawn text-4xl text-center mb-16 text-gray-800 appear">Drawing Daily Objects</h2>
-<div class="appear">
-<div class="flex overflow-x-auto pb-8 gap-6 hide-scrollbar">
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm min-w-[300px] w-[300px]">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700">Leaf</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Main Shape -->
-<path class="draw-in" d="M100 40C120 40 150 70 150 100C150 130 120 160 100 160C80 160 50 130 50 100C50 70 80 40 100 40Z" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Center Vein -->
-<path class="draw-in" d="M100 40V160" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<!-- Step 3: Side Veins -->
-<path class="draw-in" d="M100 60C110 65 120 70 130 70" stroke="#6C63FF" stroke-width="1" style="animation-delay: 1s"/>
-<path class="draw-in" d="M100 60C90 65 80 70 70 70" stroke="#6C63FF" stroke-width="1" style="animation-delay: 1.2s"/>
-<path class="draw-in" d="M100 80C115 85 130 90 140 85" stroke="#6C63FF" stroke-width="1" style="animation-delay: 1.4s"/>
-<path class="draw-in" d="M100 80C85 85 70 90 60 85" stroke="#6C63FF" stroke-width="1" style="animation-delay: 1.6s"/>
-<path class="draw-in" d="M100 100C115 105 130 110 140 105" stroke="#6C63FF" stroke-width="1" style="animation-delay: 1.8s"/>
-<path class="draw-in" d="M100 100C85 105 70 110 60 105" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2s"/>
-<path class="draw-in" d="M100 120C110 125 120 130 130 125" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2.2s"/>
-<path class="draw-in" d="M100 120C90 125 80 130 70 125" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2.4s"/>
-<path class="draw-in" d="M100 140C105 145 110 150 115 145" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2.6s"/>
-<path class="draw-in" d="M100 140C95 145 90 150 85 145" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2.8s"/>
-<!-- Step 4: Outline -->
-<path class="draw-in" d="M100 40C120 40 150 70 150 100C150 130 120 160 100 160C80 160 50 130 50 100C50 70 80 40 100 40Z" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 3s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Start with the overall shape, add the main vein, then branch out with smaller veins.</p>
-</div>
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm min-w-[300px] w-[300px]">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700">Book</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Basic Rectangle -->
-<rect class="draw-in" x="50" y="70" width="100" height="60" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Perspective Lines -->
-<path class="draw-in" d="M50 70L60 60" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<path class="draw-in" d="M150 70L160 60" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.7s"/>
-<path class="draw-in" d="M50 130L60 120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.9s"/>
-<path class="draw-in" d="M150 130L160 120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.1s"/>
-<!-- Step 3: Top Face -->
-<path class="draw-in" d="M60 60H160" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.3s"/>
-<path class="draw-in" d="M60 60V120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.5s"/>
-<path class="draw-in" d="M160 60V120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.7s"/>
-<path class="draw-in" d="M60 120H160" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.9s"/>
-<!-- Step 4: Book Cover -->
-<rect class="draw-in" x="50" y="70" width="100" height="60" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2.1s"/>
-<!-- Step 5: Pages -->
-<path class="draw-in" d="M150 70C140 75 140 125 150 130" stroke="#6C63FF" stroke-width="1" style="animation-delay: 2.3s"/>
-<path class="draw-in" d="M150 75C142 80 142 120 150 125" stroke="#CCCCCC" stroke-width="1" style="animation-delay: 2.5s"/>
-<path class="draw-in" d="M150 80C144 85 144 115 150 120" stroke="#CCCCCC" stroke-width="1" style="animation-delay: 2.7s"/>
-<path class="draw-in" d="M150 85C146 90 146 110 150 115" stroke="#CCCCCC" stroke-width="1" style="animation-delay: 2.9s"/>
-<!-- Step 6: Book Title -->
-<path class="draw-in" d="M70 90H130" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.1s"/>
-<path class="draw-in" d="M70 100H110" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.3s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Begin with a rectangle, add perspective lines, then details like pages and cover text.</p>
-</div>
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm min-w-[300px] w-[300px]">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700">Bicycle</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Wheels -->
-<circle class="draw-in" cx="60" cy="120" r="30" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<circle class="draw-in" cx="140" cy="120" r="30" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Frame -->
-<path class="draw-in" d="M60 120L100 80L140 120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<path class="draw-in" d="M100 80L90 120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.7s"/>
-<path class="draw-in" d="M90 120L60 120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.9s"/>
-<path class="draw-in" d="M90 120L140 120" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.1s"/>
-<!-- Step 3: Handlebars -->
-<path class="draw-in" d="M100 80V60" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.3s"/>
-<path class="draw-in" d="M100 60C90 60 85 65 85 70" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.5s"/>
-<!-- Step 4: Seat -->
-<path class="draw-in" d="M90 120V100" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.7s"/>
-<path class="draw-in" d="M90 100H105" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.9s"/>
-<!-- Step 5: Pedals -->
-<circle class="draw-in" cx="90" cy="120" r="10" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 2.1s"/>
-<path class="draw-in" d="M90 110L100 120" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 2.3s"/>
-<path class="draw-in" d="M90 130L80 120" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 2.5s"/>
-<!-- Step 6: Wheel Details -->
-<circle class="draw-in" cx="60" cy="120" r="30" stroke="#6C63FF" stroke-width="2" style="animation-delay: 2.7s"/>
-<circle class="draw-in" cx="140" cy="120" r="30" stroke="#6C63FF" stroke-width="2" style="animation-delay: 2.9s"/>
-<circle class="draw-in" cx="60" cy="120" r="3" fill="#6C63FF" style="animation-delay: 3.1s"/>
-<circle class="draw-in" cx="140" cy="120" r="3" fill="#6C63FF" style="animation-delay: 3.3s"/>
-<!-- Spokes -->
-<path class="draw-in" d="M60 90L60 150" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.5s"/>
-<path class="draw-in" d="M30 120L90 120" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.7s"/>
-<path class="draw-in" d="M39 99L81 141" stroke="#6C63FF" stroke-width="1" style="animation-delay: 3.9s"/>
-<path class="draw-in" d="M39 141L81 99" stroke="#6C63FF" stroke-width="1" style="animation-delay: 4.1s"/>
-<path class="draw-in" d="M140 90L140 150" stroke="#6C63FF" stroke-width="1" style="animation-delay: 4.3s"/>
-<path class="draw-in" d="M110 120L170 120" stroke="#6C63FF" stroke-width="1" style="animation-delay: 4.5s"/>
-<path class="draw-in" d="M119 99L161 141" stroke="#6C63FF" stroke-width="1" style="animation-delay: 4.7s"/>
-<path class="draw-in" d="M119 141L161 99" stroke="#6C63FF" stroke-width="1" style="animation-delay: 4.9s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Start with two circles for wheels, connect with frame lines, then add details like handlebars and pedals.</p>
-</div>
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm min-w-[300px] w-[300px]">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700">Light Bulb</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Bulb Shape -->
-<path class="draw-in" d="M100 40C70 40 60 70 60 90C60 110 80 120 85 130H115C120 120 140 110 140 90C140 70 130 40 100 40Z" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Base -->
-<path class="draw-in" d="M85 130V150" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<path class="draw-in" d="M115 130V150" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.7s"/>
-<path class="draw-in" d="M85 140H115" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.9s"/>
-<path class="draw-in" d="M85 150H115" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.1s"/>
-<!-- Step 3: Filament -->
-<path class="draw-in" d="M95 130C95 120 105 110 105 100C105 90 95 80 95 70" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 1.3s"/>
-<path class="draw-in" d="M105 130C105 120 95 110 95 100C95 90 105 80 105 70" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 1.5s"/>
-<!-- Step 4: Light Rays -->
-<path class="draw-in" d="M100 40L100 30" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 1.7s"/>
-<path class="draw-in" d="M120 45L130 30" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 1.9s"/>
-<path class="draw-in" d="M135 60L150 50" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 2.1s"/>
-<path class="draw-in" d="M80 45L70 30" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 2.3s"/>
-<path class="draw-in" d="M65 60L50 50" stroke="#FFB6C1" stroke-width="1" style="animation-delay: 2.5s"/>
-<!-- Step 5: Bulb Outline -->
-<path class="draw-in" d="M100 40C70 40 60 70 60 90C60 110 80 120 85 130H115C120 120 140 110 140 90C140 70 130 40 100 40Z" stroke="#6C63FF" stroke-width="2" style="animation-delay: 2.7s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Draw the bulb shape first, add the base, then internal filament. Finish with light rays for effect.</p>
-</div>
-<div class="bg-gray-50 p-6 rounded-lg shadow-sm min-w-[300px] w-[300px]">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700">Umbrella</h3>
-<div class="bg-white rounded-md p-4 h-64 flex items-center justify-center relative">
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Step 1: Handle -->
-<path class="draw-in" d="M100 60V150" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<path class="draw-in" d="M100 150C110 150 110 140 100 140" stroke="#CCCCCC" stroke-width="1" stroke-dasharray="4 2"/>
-<!-- Step 2: Top Arc -->
-<path class="draw-in" d="M50 80C60 60 140 60 150 80" stroke="#6C63FF" stroke-width="2" style="animation-delay: 0.5s"/>
-<!-- Step 3: Spokes -->
-<path class="draw-in" d="M100 60L50 80" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1s"/>
-<path class="draw-in" d="M100 60L75 80" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.2s"/>
-<path class="draw-in" d="M100 60L125 80" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.4s"/>
-<path class="draw-in" d="M100 60L150 80" stroke="#6C63FF" stroke-width="2" style="animation-delay: 1.6s"/>
-<!-- Step 4: Fabric Sections -->
-<path class="draw-in" d="M50 80C60 100 90 100 100 80" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2s"/>
-<path class="draw-in" d="M75 80C80 100 95 100 100 80" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2.2s"/>
-<path class="draw-in" d="M100 80C105 100 120 100 125 80" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2.4s"/>
-<path class="draw-in" d="M100 80C110 100 140 100 150 80" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 2.6s"/>
-<!-- Step 5: Handle Details -->
-<path class="draw-in" d="M100 60V150" stroke="#6C63FF" stroke-width="2" style="animation-delay: 3s"/>
-<path class="draw-in" d="M100 150C110 150 110 140 100 140" stroke="#6C63FF" stroke-width="2" style="animation-delay: 3.2s"/>
-</svg>
-</div>
-<p class="text-gray-600 hand-drawn text-base mt-4">Begin with the handle, add the top curve, then spokes. Fill in fabric sections with curved lines.</p>
-</div>
-</div>
-</div>
-<div class="mt-16 appear">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-<h3 class="hand-drawn text-2xl mb-6 text-gray-700 text-center">Drawing Tips</h3>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div>
-<h4 class="hand-drawn text-xl mb-3 text-gray-700">Observe First, Draw Second</h4>
-<p class="text-gray-600 mb-4">Spend more time looking at your subject than at your paper. Notice shapes, proportions, and how light falls across surfaces.</p>
-<h4 class="hand-drawn text-xl mb-3 text-gray-700">Start with Basic Shapes</h4>
-<p class="text-gray-600 mb-4">Break down complex objects into simple geometric forms: circles, squares, triangles. Build detail gradually on this foundation.</p>
-<h4 class="hand-drawn text-xl mb-3 text-gray-700">Use Light Guidelines</h4>
-<p class="text-gray-600">Begin with very light lines that can be adjusted or erased. Darken your lines only when you're confident with the placement.</p>
-</div>
-<div>
-<h4 class="hand-drawn text-xl mb-3 text-gray-700">Practice Regularly</h4>
-<p class="text-gray-600 mb-4">Even 10 minutes daily builds skill faster than occasional long sessions. Keep a small sketchbook with you for quick practice.</p>
-<h4 class="hand-drawn text-xl mb-3 text-gray-700">Embrace Imperfection</h4>
-<p class="text-gray-600 mb-4">Line drawings don't need to be photorealistic. Small quirks and variations add character and a human touch to your work.</p>
-<h4 class="hand-drawn text-xl mb-3 text-gray-700">Vary Your Line Weight</h4>
-<p class="text-gray-600">Use thicker lines for foreground elements and outlines, thinner lines for details and background elements.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Interactive Sketch Page -->
-<section id="interactive" class="section bg-white py-20">
-<div class="container mx-auto px-4 max-w-6xl">
-<h2 class="hand-drawn text-4xl text-center mb-16 text-gray-800 appear">Try Drawing</h2>
-<div class="appear">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-<div class="flex flex-col md:flex-row gap-8">
-<div class="w-full md:w-3/4">
-<div class="drawing-canvas cursor-pencil" id="drawing-canvas">
-<svg width="100%" height="100%" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-<!-- Guide Drawing: Simple House -->
-<path d="M300 300L300 200L400 120L500 200L500 300L300 300Z" stroke="#DDDDDD" stroke-width="2"/>
-<path d="M350 300L350 250L400 250L400 300" stroke="#DDDDDD" stroke-width="2"/>
-<path d="M425 250C425 240 475 240 475 250" stroke="#DDDDDD" stroke-width="2"/>
-<path d="M425 250L425 225L475 225L475 250" stroke="#DDDDDD" stroke-width="2"/>
-<rect x="375" y="175" width="50" height="50" stroke="#DDDDDD" stroke-width="2"/>
-<path d="M375 200L425 200" stroke="#DDDDDD" stroke-width="2"/>
-<path d="M400 175L400 225" stroke="#DDDDDD" stroke-width="2"/>
-</svg>
-<canvas id="user-drawing" class="absolute top-0 left-0 w-full h-full"></canvas>
-</div>
-<div class="flex justify-between mt-4">
-<button class="!rounded-button bg-white border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-all duration-300 flex items-center whitespace-nowrap">
-<div class="w-5 h-5 flex items-center justify-center mr-2">
-<i class="ri-refresh-line"></i>
-</div>
-Clear Canvas
-</button>
-<button class="!rounded-button bg-primary text-white px-4 py-2 hover:bg-opacity-90 transition-all duration-300 flex items-center whitespace-nowrap">
-<div class="w-5 h-5 flex items-center justify-center mr-2">
-<i class="ri-download-line"></i>
-</div>
-Save Drawing
-</button>
-</div>
-</div>
-<div class="w-full md:w-1/4">
-<h3 class="hand-drawn text-xl mb-4 text-gray-700">Drawing Tools</h3>
-<div class="mb-6">
-<label class="block text-gray-700 mb-2">Pencil Color</label>
-<div class="flex gap-3">
-<div class="w-8 h-8 rounded-full bg-black cursor-pointer border-2 border-primary" data-color="#000000"></div>
-<div class="w-8 h-8 rounded-full bg-gray-500 cursor-pointer" data-color="#6b7280"></div>
-<div class="w-8 h-8 rounded-full bg-blue-500 cursor-pointer" data-color="#3b82f6"></div>
-<div class="w-8 h-8 rounded-full bg-red-400 cursor-pointer" data-color="#f87171"></div>
-</div>
-</div>
-<div class="mb-6">
-<label class="block text-gray-700 mb-2">Line Width</label>
-<input type="range" min="1" max="10" value="2" class="w-full" id="line-width">
-</div>
-<div class="mb-6">
-<label class="block text-gray-700 mb-2">Guide Visibility</label>
-<label class="custom-switch">
-<input type="checkbox" checked id="guide-toggle">
-<span class="switch-slider"></span>
-</label>
-<span class="ml-2 text-gray-700">Show guide</span>
-</div>
-<div class="mb-6">
-<h4 class="text-gray-700 mb-2">Try Drawing:</h4>
-<div class="flex flex-wrap gap-2">
-<button class="!rounded-button bg-white border border-gray-300 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap" data-guide="house">House</button>
-<button class="!rounded-button bg-white border border-gray-300 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap" data-guide="flower">Flower</button>
-<button class="!rounded-button bg-white border border-gray-300 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap" data-guide="tree">Tree</button>
-</div>
-</div>
-<div>
-<p class="text-gray-600 hand-drawn text-base">Follow the light gray guide lines to practice your drawing skills. Take your time and enjoy the process!</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Final Page -->
-<section id="final" class="section bg-white py-20">
-<div class="container mx-auto px-4 max-w-6xl">
-<div class="text-center mb-16 appear">
-<h2 class="hand-drawn text-4xl mb-6 text-gray-800">The End... Of The Beginning</h2>
-<p class="text-xl text-gray-600 max-w-2xl mx-auto">Drawing is a journey that never truly ends. Each line you draw builds your skill and confidence. Keep exploring, keep creating!</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-<div class="appear">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm h-full">
-<h3 class="hand-drawn text-2xl mb-6 text-gray-700">What You've Learned</h3>
-<ul class="space-y-4">
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center mr-3 text-primary">
-<i class="ri-check-line"></i>
-</div>
-<span class="text-gray-600">The fundamentals of line drawing techniques</span>
-</li>
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center mr-3 text-primary">
-<i class="ri-check-line"></i>
-</div>
-<span class="text-gray-600">How to break complex objects into simple shapes</span>
-</li>
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center mr-3 text-primary">
-<i class="ri-check-line"></i>
-</div>
-<span class="text-gray-600">Creating composition with balance and focus</span>
-</li>
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center mr-3 text-primary">
-<i class="ri-check-line"></i>
-</div>
-<span class="text-gray-600">Step-by-step approaches to drawing everyday objects</span>
-</li>
-<li class="flex items-start">
-<div class="w-6 h-6 flex items-center justify-center mr-3 text-primary">
-<i class="ri-check-line"></i>
-</div>
-<span class="text-gray-600">Building confidence through practice and patience</span>
-</li>
-</ul>
-<div class="mt-8">
-<h4 class="hand-drawn text-xl mb-3 text-gray-700">Next Steps</h4>
-<p class="text-gray-600 mb-4">Continue your practice with daily sketching. Try drawing objects around your home, or take your sketchbook outside for nature studies.</p>
-<p class="text-gray-600">Remember: progress comes from consistency, not perfection!</p>
-</div>
-</div>
-</div>
-<div class="appear" style="transition-delay: 0.2s">
-<div class="bg-gray-50 p-8 rounded-lg shadow-sm h-full">
-<h3 class="hand-drawn text-2xl mb-6 text-gray-700">Join Our Drawing Community</h3>
-<p class="text-gray-600 mb-6">Sign up to receive weekly drawing prompts, tutorial videos, and connect with fellow artists on your drawing journey.</p>
-<form class="space-y-4">
-<div>
-<label class="block text-gray-700 mb-2" for="name">Your Name</label>
-<input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Jane Smith">
-</div>
-<div>
-<label class="block text-gray-700 mb-2" for="email">Email Address</label>
-<input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-button focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="jane@example.com">
-</div>
-<div>
-<label class="block text-gray-700 mb-2">Experience Level</label>
-<div class="flex gap-4">
-<label class="flex items-center">
-<div class="custom-checkbox" data-value="beginner"></div>
-<span class="ml-2 text-gray-600">Beginner</span>
-</label>
-<label class="flex items-center">
-<div class="custom-checkbox" data-value="intermediate"></div>
-<span class="ml-2 text-gray-600">Intermediate</span>
-</label>
-<label class="flex items-center">
-<div class="custom-checkbox" data-value="advanced"></div>
-<span class="ml-2 text-gray-600">Advanced</span>
-</label>
-</div>
-</div>
-<div>
-<label class="flex items-center">
-<div class="custom-checkbox" data-value="newsletter"></div>
-<span class="ml-2 text-gray-600">I'd like to receive the monthly newsletter with drawing tips and inspiration</span>
-</label>
-</div>
-<button type="submit" class="!rounded-button bg-primary text-white px-6 py-3 w-full hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center whitespace-nowrap">
-Join the Community
-<div class="w-5 h-5 flex items-center justify-center ml-2">
-<i class="ri-arrow-right-line"></i>
-</div>
-</button>
-</form>
-</div>
-</div>
-</div>
-<div class="text-center appear" style="transition-delay: 0.4s">
-<div class="inline-block mb-8">
-<svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path class="draw-in" d="M20 50C40 30 60 70 80 50C100 30 120 70 140 50C160 30 180 70 200 50" stroke="#6C63FF" stroke-width="2"/>
-<path class="draw-in" d="M20 70C40 50 60 90 80 70C100 50 120 90 140 70C160 50 180 90 200 70" stroke="#FFB6C1" stroke-width="2" style="animation-delay: 0.5s"/>
-</svg>
-</div>
-<p class="text-gray-500 hand-drawn text-lg">"Every artist was first an amateur." — Ralph Waldo Emerson</p>
-<div class="mt-8 flex justify-center gap-4">
-<a href="#" class="!rounded-button bg-white border border-gray-300 w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all duration-300">
-<i class="ri-instagram-line"></i>
-</a>
-<a href="#" class="!rounded-button bg-white border border-gray-300 w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all duration-300">
-<i class="ri-pinterest-line"></i>
-</a>
-<a href="#" class="!rounded-button bg-white border border-gray-300 w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all duration-300">
-<i class="ri-youtube-line"></i>
-</a>
-<a href="#" class="!rounded-button bg-white border border-gray-300 w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-all duration-300">
-<i class="ri-twitter-x-line"></i>
-</a>
-</div>
-<p class="mt-8 text-sm text-gray-500">© 2025 Start Drawing Simply. All rights reserved.</p>
-</div>
-</div>
-</section>
-<script id="progress-indicator-script">
-document.addEventListener('DOMContentLoaded', function() {
-const sections = document.querySelectorAll('.section');
-const progressDots = document.querySelectorAll('.progress-dot');
-function updateProgress() {
-const scrollPosition = window.scrollY;
-const windowHeight = window.innerHeight;
-sections.forEach((section, index) => {
-const sectionTop = section.offsetTop;
-const sectionHeight = section.offsetHeight;
-if (scrollPosition >= sectionTop - windowHeight / 2 &&
-scrollPosition < sectionTop + sectionHeight - windowHeight / 2) {
-progressDots.forEach(dot => dot.classList.remove('active'));
-progressDots[index].classList.add('active');
-}
-});
-}
-window.addEventListener('scroll', updateProgress);
-updateProgress();
-progressDots.forEach((dot, index) => {
-dot.addEventListener('click', () => {
-window.scrollTo({
-top: sections[index].offsetTop,
-behavior: 'smooth'
-});
-});
-});
-});
-</script>
-<script id="animation-script">
-document.addEventListener('DOMContentLoaded', function() {
-const appearElements = document.querySelectorAll('.appear');
-function checkScroll() {
-appearElements.forEach(element => {
-const elementTop = element.getBoundingClientRect().top;
-const windowHeight = window.innerHeight;
-if (elementTop < windowHeight * 0.85) {
-element.classList.add('visible');
-}
-});
-}
-window.addEventListener('scroll', checkScroll);
-checkScroll();
-// Animation for SVG drawings
-const drawingContainers = document.querySelectorAll('.bg-white');
-drawingContainers.forEach(container => {
-const paths = container.querySelectorAll('path, circle, rect, ellipse');
-let currentStep = 0;
-let animationInterval;
-function resetAnimation() {
-paths.forEach(path => {
-path.style.strokeDashoffset = '1000';
-path.style.animation = 'none';
-});
-}
-function animateStep(stepIndex) {
-resetAnimation();
-const pathGroups = {};
-paths.forEach(path => {
-const delay = parseFloat(path.style.animationDelay || '0s');
-const stepNumber = Math.floor(delay / 0.5);
-if (!pathGroups[stepNumber]) {
-pathGroups[stepNumber] = [];
-}
-pathGroups[stepNumber].push(path);
-});
-for (let i = 0; i <= stepIndex; i++) {
-if (pathGroups[i]) {
-pathGroups[i].forEach(path => {
-path.style.strokeDashoffset = '0';
-path.style.animation = 'draw 2s linear forwards';
-});
-}
-}
-}
-function nextStep() {
-currentStep = (currentStep + 1) % 6;
-animateStep(currentStep);
-}
-// Initial animation
-animateStep(0);
-animationInterval = setInterval(nextStep, 4000);
-// Reset animation when drawing becomes visible
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-clearInterval(animationInterval);
-currentStep = 0;
-animateStep(0);
-animationInterval = setInterval(nextStep, 4000);
-}
-});
-}, { threshold: 0.5 });
-container.querySelectorAll('svg').forEach(svg => observer.observe(svg));
-});
-});
-</script>
-<script id="drawing-canvas-script">
-document.addEventListener('DOMContentLoaded', function() {
-const canvas = document.getElementById('user-drawing');
-const context = canvas.getContext('2d');
-const clearButton = Array.from(document.querySelectorAll('button')).find(button => button.textContent.includes('Clear Canvas'));
-const saveButton = Array.from(document.querySelectorAll('button')).find(button => button.textContent.includes('Save Drawing'));
-const colorButtons = document.querySelectorAll('[data-color]');
-const lineWidthInput = document.getElementById('line-width');
-const guideToggle = document.getElementById('guide-toggle');
-const guideButtons = document.querySelectorAll('[data-guide]');
-// Set canvas size
-function resizeCanvas() {
-const container = canvas.parentElement;
-canvas.width = container.offsetWidth;
-canvas.height = container.offsetHeight;
-context.lineCap = 'round';
-context.lineJoin = 'round';
-context.strokeStyle = '#000000';
-context.lineWidth = 2;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-// Drawing variables
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-// Drawing functions
-function startDrawing(e) {
-isDrawing = true;
-[lastX, lastY] = getCoordinates(e);
-}
-function draw(e) {
-if (!isDrawing) return;
-const [currentX, currentY] = getCoordinates(e);
-context.beginPath();
-context.moveTo(lastX, lastY);
-context.lineTo(currentX, currentY);
-context.stroke();
-[lastX, lastY] = [currentX, currentY];
-}
-function stopDrawing() {
-isDrawing = false;
-}
-function getCoordinates(e) {
-const rect = canvas.getBoundingClientRect();
-const scaleX = canvas.width / rect.width;
-const scaleY = canvas.height / rect.height;
-if (e.type.includes('touch')) {
-return [
-(e.touches[0].clientX - rect.left) * scaleX,
-(e.touches[0].clientY - rect.top) * scaleY
-];
-} else {
-return [
-(e.clientX - rect.left) * scaleX,
-(e.clientY - rect.top) * scaleY
-];
-}
-}
-// Event listeners for drawing
-canvas.addEventListener('mousedown', startDrawing);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('mouseout', stopDrawing);
-canvas.addEventListener('touchstart', startDrawing);
-canvas.addEventListener('touchmove', draw);
-canvas.addEventListener('touchend', stopDrawing);
-// Clear canvas
-if (clearButton) {
-clearButton.addEventListener('click', function() {
-context.clearRect(0, 0, canvas.width, canvas.height);
-});
-}
-// Save drawing
-if (saveButton) {
-saveButton.addEventListener('click', function() {
-const image = canvas.toDataURL('image/png');
-const link = document.createElement('a');
-link.href = image;
-link.download = 'my-drawing.png';
-link.click();
-});
-}
-// Color selection
-colorButtons.forEach(button => {
-button.addEventListener('click', function() {
-const color = this.getAttribute('data-color');
-context.strokeStyle = color;
-// Update UI
-colorButtons.forEach(btn => btn.classList.remove('border-primary'));
-this.classList.add('border-primary');
-});
-});
-// Line width
-if (lineWidthInput) {
-lineWidthInput.addEventListener('input', function() {
-context.lineWidth = this.value;
-});
-}
-// Guide visibility
-if (guideToggle) {
-guideToggle.addEventListener('change', function() {
-const guides = document.querySelectorAll('#drawing-canvas svg path');
-guides.forEach(guide => {
-guide.style.display = this.checked ? 'block' : 'none';
-});
-});
-}
-// Custom checkboxes
-const customCheckboxes = document.querySelectorAll('.custom-checkbox');
-customCheckboxes.forEach(checkbox => {
-checkbox.addEventListener('click', function() {
-this.classList.toggle('checked');
-});
-});
-// Fix for button selector
-if (!clearButton) {
-const buttons = document.querySelectorAll('button');
-buttons.forEach(button => {
-if (button.textContent.includes('Clear Canvas')) {
-button.addEventListener('click', function() {
-context.clearRect(0, 0, canvas.width, canvas.height);
-});
-}
-if (button.textContent.includes('Save Drawing')) {
-button.addEventListener('click', function() {
-const image = canvas.toDataURL('image/png');
-const link = document.createElement('a');
-link.href = image;
-link.download = 'my-drawing.png';
-link.click();
-});
-}
-});
-}
-});
-</script>
+<body>
+
+  <h2 style="text-align:center">Form Pengaduan</h2>
+
+  <div id="map"></div>
+
+  <div class="form-container">
+    <form id="pengaduanForm">
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label for="pengaduan">Isi Pengaduan:</label>
+      <textarea id="pengaduan" name="pengaduan" rows="4" required></textarea>
+
+      <label for="lat">Latitude:</label>
+      <input type="text" id="lat" name="latitude" readonly>
+
+      <label for="lng">Longitude:</label>
+      <input type="text" id="lng" name="longitude" readonly>
+
+      <button type="submit">Kirim Pengaduan</button>
+    </form>
+  </div>
+
+  <script>
+    let map, marker;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -2.5489, lng: 118.0149 },
+        zoom: 5,
+      });
+
+      // Deteksi lokasi pengguna
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          const userLoc = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          };
+
+          map.setCenter(userLoc);
+          map.setZoom(15);
+
+          // Pasang marker
+          marker = new google.maps.Marker({
+            position: userLoc,
+            map: map,
+            draggable: true,
+            title: "Lokasi kamu",
+          });
+
+          // Isi input lat-lng
+          document.getElementById("lat").value = userLoc.lat;
+          document.getElementById("lng").value = userLoc.lng;
+
+          // Update saat marker dipindah
+          marker.addListener("dragend", () => {
+            const pos = marker.getPosition();
+            document.getElementById("lat").value = pos.lat();
+            document.getElementById("lng").value = pos.lng();
+          });
+        });
+      } else {
+        alert("Browser tidak mendukung geolokasi.");
+      }
+
+      // Event klik di peta
+      map.addListener("click", function(e) {
+        if (marker) {
+          marker.setPosition(e.latLng);
+        } else {
+          marker = new google.maps.Marker({
+            position: e.latLng,
+            map: map,
+          });
+        }
+
+        // Update input
+        document.getElementById("lat").value = e.latLng.lat();
+        document.getElementById("lng").value = e.latLng.lng();
+      });
+    }
+
+    // Tangani submit
+    document.getElementById("pengaduanForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const data = {
+        nama: this.nama.value,
+        pengaduan: this.pengaduan.value,
+        lat: this.latitude.value,
+        lng: this.longitude.value,
+      };
+      console.log("Data terkirim:", data);
+      alert("Pengaduan berhasil dikirim!");
+      this.reset();
+    });
+  </script>
+
+  <!-- GANTI YOUR_API_KEY -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+  </script>
 </body>
 </html>

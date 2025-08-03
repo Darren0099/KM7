@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Informasi Hukum</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A365D',
+                        secondary: '#2B6CB0',
+                        accent: '#4299E1',
+                        light: '#EBF8FF'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    },
+                    boxShadow: {
+                        'card': '0 4px 12px rgba(0, 0, 0, 0.08)',
+                        'card-hover': '0 8px 16px rgba(0, 0, 0, 0.12)'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body { font-family: 'Inter', sans-serif; }
+        .progress-bar { transition: width 0.3s ease; }
+        .module-card { 
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .module-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .quiz-option { transition: all 0.2s ease; }
+        .quiz-option:hover { background-color: #EBF8FF; }
+        .quiz-option.selected { 
+            background-color: #BEE3F8; 
+            border-color: #2B6CB0;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.3);
+        }
+        .infographic-zoom { transition: transform 0.3s ease; cursor: zoom-in; }
+        .infographic-zoom.zoomed { transform: scale(1.5); cursor: zoom-out; }
+        .back-button {
+            transition: all 0.2s ease;
+        }
+        .back-button:hover {
+            transform: translateX(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-primary text-white py-8 relative">
+        <!-- Back button arrow -->
+        <a href="pengaduan.html" class="back-button absolute left-6 top-6 flex items-center gap-2 text-white hover:text-blue-200">
+            <i class="ri-arrow-left-line text-xl"></i>
+            <span class="hidden sm:inline">Kembali</span>
+        </a>
+        
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-3">Layanan Informasi Hukum</h1>
+                <p class="text-xl text-blue-200">Edukasi Hukum Interaktif tentang KDRT & Kekerasan Seksual</p>
+                <p class="text-blue-100 mt-2">Pelajari hak-hak Anda dan proses hukum sesuai undang-undang yang berlaku</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="module-card bg-white rounded-xl shadow-card p-6 cursor-pointer hover:shadow-card-hover" data-module="pkdrt">
+                <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                    <i class="ri-shield-user-line text-3xl text-accent"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">UU PKDRT</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">Undang-Undang Penghapusan Kekerasan Dalam Rumah Tangga untuk melindungi korban dari berbagai bentuk kekerasan domestik.</p>
+                <button class="w-full bg-accent text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors whitespace-nowrap shadow-md hover:shadow-lg">
+                    Pelajari Sekarang
+                </button>
+            </div>
+
+            <div class="module-card bg-white rounded-xl shadow-card p-6 cursor-pointer hover:shadow-card-hover" data-module="tpks">
+                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                    <i class="ri-alert-line text-3xl text-red-500"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">UU TPKS No. 12 Tahun 2022</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">Undang-Undang Tindak Pidana Kekerasan Seksual yang mengatur perlindungan korban dan sanksi tegas bagi pelaku.</p>
+                <button class="w-full bg-accent text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors whitespace-nowrap shadow-md hover:shadow-lg">
+                    Pelajari Sekarang
+                </button>
+            </div>
+
+            <div class="module-card bg-white rounded-xl shadow-card p-6 cursor-pointer hover:shadow-card-hover" data-module="pernikahan">
+                <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                    <i class="ri-heart-line text-3xl text-green-500"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-gray-800">Hukum Pernikahan</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">Ketentuan hukum pernikahan, hak dan kewajiban suami istri, serta prosedur hukum terkait perkawinan.</p>
+                <button class="w-full bg-accent text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors whitespace-nowrap shadow-md hover:shadow-lg">
+                    Pelajari Sekarang
+                </button>
+            </div>
+        </div>
+
+        <div id="module-content" class="bg-white rounded-xl shadow-lg p-8 hidden">
+            <div class="flex items-center justify-between mb-6">
+                <h2 id="module-title" class="text-2xl font-bold text-gray-800"></h2>
+                <button id="close-module" class="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 rounded-full hover:bg-gray-100 transition-colors">
+                    <i class="ri-close-line text-xl"></i>
+                </button>
+            </div>
+
+            <div class="mb-6">
+                <div class="bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="progress-bar bg-accent h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2">Progress Pembelajaran: <span id="progress-text">0%</span></p>
+            </div>
+            
+            <div class="flex border-b mb-6">
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent hover:text-accent transition-colors" data-tab="overview">
+                    <i class="ri-file-list-line mr-2"></i>Ringkasan
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent hover:text-accent transition-colors" data-tab="rights">
+                    <i class="ri-shield-check-line mr-2"></i>Hak Korban
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent hover:text-accent transition-colors" data-tab="process">
+                    <i class="ri-flow-chart mr-2"></i>Proses Hukum
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent hover:text-accent transition-colors" data-tab="sanctions">
+                    <i class="ri-scales-line mr-2"></i>Sanksi
+                </button>
+                <button class="tab-button px-4 py-2 font-medium text-gray-600 border-b-2 border-transparent hover:text-accent transition-colors" data-tab="quiz">
+                    <i class="ri-questionnaire-line mr-2"></i>Kuis
+                </button>
+            </div>
+
+            <div id="overview" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Poin-Poin Utama</h3>
+                        <ul id="main-points" class="space-y-3"></ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Infografis Interaktif</h3>
+                        <div class="bg-gray-50 rounded-xl p-6 text-center border border-gray-200">
+                            <img id="infographic" class="infographic-zoom w-full h-48 object-contain rounded-lg cursor-pointer" alt="Infografis Hukum">
+                            <p class="text-sm text-gray-500 mt-2">Klik untuk memperbesar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rights" class="tab-content">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Hak-Hak Korban</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div id="rights-list"></div>
+                </div>
+            </div>
+
+            <div id="process" class="tab-content">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Alur Proses Hukum</h3>
+                <div id="process-steps" class="space-y-4"></div>
+            </div>
+
+            <div id="sanctions" class="tab-content">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Sanksi Hukum</h3>
+                <div id="sanctions-list" class="space-y-4"></div>
+            </div>
+
+            <div id="quiz" class="tab-content">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Kuis Pemahaman</h3>
+                <div id="quiz-container">
+                    <div id="quiz-question" class="mb-6">
+                        <h4 class="text-lg font-medium mb-4 text-gray-800"></h4>
+                        <div id="quiz-options" class="space-y-3"></div>
+                    </div>
+                    <div class="flex justify-between">
+                        <button id="prev-question" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors whitespace-nowrap shadow-sm">
+                            <i class="ri-arrow-left-line mr-2"></i>Sebelumnya
+                        </button>
+                        <span id="question-counter" class="text-gray-600 flex items-center"></span>
+                        <button id="next-question" class="bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors whitespace-nowrap shadow-md">
+                            Selanjutnya<i class="ri-arrow-right-line ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="quiz-result" class="hidden text-center">
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                        <i class="ri-checkbox-circle-line text-5xl text-green-500 mb-3"></i>
+                        <h4 class="text-xl font-semibold text-green-800 mb-2">Selamat!</h4>
+                        <p class="text-green-700">Anda telah menyelesaikan kuis dengan skor: <span id="final-score" class="font-bold text-green-900"></span></p>
+                        <button id="retry-quiz" class="mt-4 bg-green-100 text-green-800 px-4 py-2 rounded-lg font-medium hover:bg-green-200 transition-colors">
+                            <i class="ri-restart-line mr-2"></i>Coba Lagi
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+                <button id="bookmark-btn" class="flex items-center gap-2 text-gray-600 hover:text-accent transition-colors px-4 py-2 rounded-lg hover:bg-gray-100">
+                    <i class="ri-bookmark-line"></i>
+                    <span>Simpan Bookmark</span>
+                </button>
+                <div class="flex gap-3">
+                    <button id="prev-tab" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors whitespace-nowrap shadow-sm">
+                        <i class="ri-arrow-left-line mr-2"></i>Sebelumnya
+                    </button>
+                    <button id="next-tab" class="bg-accent text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors whitespace-nowrap shadow-md">
+                        Selanjutnya<i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script id="module-data">
+        const moduleData = {
+            pkdrt: {
+                title: "UU PKDRT - Penghapusan Kekerasan Dalam Rumah Tangga",
+                mainPoints: [
+                    "Melindungi korban kekerasan dalam lingkup rumah tangga",
+                    "Mencakup kekerasan fisik, psikis, seksual, dan penelantaran",
+                    "Memberikan perlindungan hukum bagi korban dan saksi",
+                    "Mengatur mekanisme perlindungan dan pemulihan korban",
+                    "Menetapkan sanksi tegas bagi pelaku kekerasan"
+                ],
+                infographic: "https://readdy.ai/api/search-image?query=Indonesian%20domestic%20violence%20law%20infographic%20showing%20protection%20process%20with%20clean%20white%20background%2C%20modern%20minimalist%20design%2C%20blue%20and%20gray%20color%20scheme%2C%20legal%20symbols%20and%20family%20protection%20icons&width=400&height=300&seq=pkdrt1&orientation=landscape",
+                rights: [
+                    "Hak mendapat perlindungan dari keluarga, kepolisian, kejaksaan, pengadilan, advokat, lembaga sosial, atau pihak lainnya",
+                    "Hak mendapat pelayanan kesehatan sesuai dengan kebutuhan medis",
+                    "Hak mendapat penanganan secara khusus berkaitan dengan kerahasiaan korban",
+                    "Hak mendapat pendampingan oleh pekerja sosial dan bantuan hukum",
+                    "Hak mendapat pelayanan bimbingan rohani"
+                ],
+                process: [
+                    { step: 1, title: "Pelaporan", desc: "Korban atau keluarga melaporkan ke polisi atau lembaga terkait" },
+                    { step: 2, title: "Penyelidikan", desc: "Polisi melakukan penyelidikan dan pengumpulan bukti" },
+                    { step: 3, title: "Perlindungan", desc: "Pemberian perlindungan sementara kepada korban" },
+                    { step: 4, title: "Proses Hukum", desc: "Pelimpahan kasus ke kejaksaan dan pengadilan" },
+                    { step: 5, title: "Pemulihan", desc: "Program pemulihan dan rehabilitasi korban" }
+                ],
+                sanctions: [
+                    { type: "Kekerasan Fisik", penalty: "Pidana penjara paling lama 5 tahun atau denda paling banyak Rp 15.000.000" },
+                    { type: "Kekerasan Psikis", penalty: "Pidana penjara paling lama 3 tahun atau denda paling banyak Rp 9.000.000" },
+                    { type: "Kekerasan Seksual", penalty: "Pidana penjara paling lama 12 tahun atau denda paling banyak Rp 36.000.000" },
+                    { type: "Penelantaran", penalty: "Pidana penjara paling lama 3 tahun atau denda paling banyak Rp 15.000.000" }
+                ]
+            },
+            tpks: {
+                title: "UU TPKS No. 12 Tahun 2022 - Tindak Pidana Kekerasan Seksual",
+                mainPoints: [
+                    "Mengatur 9 jenis tindak pidana kekerasan seksual",
+                    "Memberikan perlindungan komprehensif kepada korban",
+                    "Menetapkan sanksi yang lebih berat bagi pelaku",
+                    "Mengatur mekanisme pencegahan dan penanganan",
+                    "Melindungi hak korban dalam proses peradilan"
+                ],
+                infographic: "https://readdy.ai/api/search-image?query=Indonesian%20sexual%20violence%20law%20infographic%20showing%209%20types%20of%20crimes%20with%20legal%20protection%20symbols%2C%20clean%20white%20background%2C%20professional%20design%2C%20red%20and%20blue%20color%20scheme%2C%20justice%20and%20protection%20themes&width=400&height=300&seq=tpks1&orientation=landscape",
+                rights: [
+                    "Hak mendapat informasi yang akurat dan jelas tentang hak korban",
+                    "Hak mendapat pelayanan penanganan yang rahasia, aman, dan nyaman",
+                    "Hak mendapat perlindungan dari ancaman yang membahayakan",
+                    "Hak didampingi advokat dan/atau pendamping lainnya",
+                    "Hak mendapat pelayanan medis dan psikososial yang komprehensif"
+                ],
+                process: [
+                    { step: 1, title: "Pengaduan", desc: "Pelaporan ke polisi atau lembaga yang berwenang" },
+                    { step: 2, title: "Perlindungan Darurat", desc: "Pemberian perlindungan segera kepada korban" },
+                    { step: 3, title: "Penyelidikan", desc: "Proses penyelidikan dengan pendekatan trauma informed" },
+                    { step: 4, title: "Pendampingan", desc: "Pendampingan hukum dan psikososial sepanjang proses" },
+                    { step: 5, title: "Pemulihan", desc: "Program restitusi dan rehabilitasi korban" }
+                ],
+                sanctions: [
+                    { type: "Pelecehan Seksual", penalty: "Pidana penjara paling lama 9 bulan atau denda paling banyak Rp 10.000.000" },
+                    { type: "Eksploitasi Seksual", penalty: "Pidana penjara paling lama 15 tahun atau denda paling banyak Rp 300.000.000" },
+                    { type: "Pemaksaan Perkawinan", penalty: "Pidana penjara paling lama 9 tahun atau denda paling banyak Rp 300.000.000" },
+                    { type: "Kekerasan Seksual Berat", penalty: "Pidana penjara paling lama 18 tahun atau denda paling banyak Rp 1.000.000.000" }
+                ]
+            },
+            pernikahan: {
+                title: "Hukum Pernikahan - Ketentuan dan Perlindungan",
+                mainPoints: [
+                    "Mengatur syarat sah pernikahan menurut hukum Indonesia",
+                    "Menetapkan hak dan kewajiban suami istri",
+                    "Mengatur prosedur perceraian dan pembagian harta",
+                    "Melindungi hak anak dalam perkawinan",
+                    "Mencegah perkawinan paksa dan perkawinan anak"
+                ],
+                infographic: "https://readdy.ai/api/search-image?query=Indonesian%20marriage%20law%20infographic%20showing%20legal%20marriage%20requirements%20and%20family%20rights%20protection%2C%20clean%20white%20background%2C%20elegant%20design%2C%20green%20and%20gold%20color%20scheme%2C%20wedding%20and%20legal%20symbols&width=400&height=300&seq=marriage1&orientation=landscape",
+                rights: [
+                    "Hak untuk menikah atas dasar persetujuan bebas dari kedua belah pihak",
+                    "Hak mendapat perlindungan dari perkawinan paksa",
+                    "Hak atas nafkah lahir dan batin dari pasangan",
+                    "Hak mendapat perlakuan yang sama dalam rumah tangga",
+                    "Hak untuk mengajukan perceraian jika ada alasan yang sah"
+                ],
+                process: [
+                    { step: 1, title: "Persyaratan", desc: "Memenuhi syarat usia, kesehatan, dan administrasi" },
+                    { step: 2, title: "Pendaftaran", desc: "Mendaftar ke KUA atau Catatan Sipil" },
+                    { step: 3, title: "Pemeriksaan", desc: "Pemeriksaan kelengkapan dokumen dan syarat" },
+                    { step: 4, title: "Akad Nikah", desc: "Pelaksanaan akad nikah di hadapan petugas" },
+                    { step: 5, title: "Pencatatan", desc: "Pencatatan dalam register dan penerbitan akta" }
+                ],
+                sanctions: [
+                    { type: "Perkawinan Paksa", penalty: "Pidana penjara paling lama 4 tahun atau denda paling banyak Rp 12.000.000" },
+                    { type: "Perkawinan Anak", penalty: "Pidana penjara paling lama 6 tahun atau denda paling banyak Rp 24.000.000" },
+                    { type: "Poligami Tanpa Izin", penalty: "Pidana penjara paling lama 1 tahun atau denda paling banyak Rp 12.000.000" },
+                    { type: "Pemalsuan Dokumen", penalty: "Pidana penjara paling lama 7 tahun atau denda paling banyak Rp 15.000.000" }
+                ]
+            }
+        };
+
+        const quizData = {
+            pkdrt: [
+                {
+                    question: "Apa yang dimaksud dengan kekerasan dalam rumah tangga menurut UU PKDRT?",
+                    options: [
+                        "Hanya kekerasan fisik terhadap istri",
+                        "Kekerasan fisik, psikis, seksual, dan penelantaran dalam lingkup rumah tangga",
+                        "Kekerasan yang terjadi di luar rumah",
+                        "Hanya pertengkaran biasa antara suami istri"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Siapa saja yang berhak mendapat perlindungan menurut UU PKDRT?",
+                    options: [
+                        "Hanya istri",
+                        "Suami, istri, anak, dan anggota keluarga lainnya",
+                        "Hanya anak-anak",
+                        "Hanya orang dewasa"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Apa sanksi maksimal untuk pelaku kekerasan fisik dalam rumah tangga?",
+                    options: [
+                        "Penjara 3 tahun",
+                        "Penjara 5 tahun atau denda Rp 15.000.000",
+                        "Penjara 1 tahun",
+                        "Hanya denda"
+                    ],
+                    correct: 1
+                }
+            ],
+            tpks: [
+                {
+                    question: "Berapa jenis tindak pidana kekerasan seksual yang diatur dalam UU TPKS?",
+                    options: [
+                        "7 jenis",
+                        "9 jenis",
+                        "5 jenis",
+                        "12 jenis"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Apa yang dimaksud dengan pendekatan trauma informed dalam penanganan kasus?",
+                    options: [
+                        "Pendekatan yang mengabaikan trauma korban",
+                        "Pendekatan yang memahami dampak trauma dan mengintegrasikannya dalam penanganan",
+                        "Pendekatan yang menyalahkan korban",
+                        "Pendekatan yang hanya fokus pada pelaku"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Apa sanksi maksimal untuk kekerasan seksual berat?",
+                    options: [
+                        "Penjara 10 tahun",
+                        "Penjara 18 tahun atau denda Rp 1.000.000.000",
+                        "Penjara 15 tahun",
+                        "Penjara 20 tahun"
+                    ],
+                    correct: 1
+                }
+            ],
+            pernikahan: [
+                {
+                    question: "Apa usia minimal untuk menikah menurut hukum Indonesia?",
+                    options: [
+                        "16 tahun untuk perempuan, 18 tahun untuk laki-laki",
+                        "19 tahun untuk keduanya",
+                        "18 tahun untuk perempuan, 21 tahun untuk laki-laki",
+                        "21 tahun untuk keduanya"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Apa yang dimaksud dengan perkawinan paksa?",
+                    options: [
+                        "Perkawinan yang diatur orang tua",
+                        "Perkawinan tanpa persetujuan bebas dari salah satu atau kedua pihak",
+                        "Perkawinan dengan mahar tinggi",
+                        "Perkawinan beda agama"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Dimana perkawinan harus dicatatkan?",
+                    options: [
+                        "Hanya di KUA",
+                        "KUA untuk Muslim, Catatan Sipil untuk non-Muslim",
+                        "Hanya di Catatan Sipil",
+                        "Tidak perlu dicatatkan"
+                    ],
+                    correct: 1
+                }
+            ]
+        };
+    </script>
+
+    <script id="main-functionality">
+        document.addEventListener('DOMContentLoaded', function() {
+            const moduleCards = document.querySelectorAll('.module-card');
+            const moduleContent = document.getElementById('module-content');
+            const closeModule = document.getElementById('close-module');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            let currentModule = null;
+            let currentTab = 0;
+            let currentQuiz = 0;
+            let quizScore = 0;
+            const tabs = ['overview', 'rights', 'process', 'sanctions', 'quiz'];
+
+            moduleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const module = this.dataset.module;
+                    openModule(module);
+                });
+            });
+            closeModule.addEventListener('click', function() {
+                moduleContent.classList.add('hidden');
+                currentModule = null;
+                resetProgress();
+            });
+
+            function openModule(module) {
+                currentModule = module;
+                const data = moduleData[module];
+                
+                document.getElementById('module-title').textContent = data.title;
+                moduleContent.classList.remove('hidden');
+                
+                loadTabContent('overview');
+                setActiveTab(0);
+                updateProgress();
+                
+                window.scrollTo({
+                    top: moduleContent.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            }
+
+            function loadTabContent(tabName) {
+                const data = moduleData[currentModule];
+                
+                switch(tabName) {
+                    case 'overview':
+                        loadOverview(data);
+                        break;
+                    case 'rights':
+                        loadRights(data);
+                        break;
+                    case 'process':
+                        loadProcess(data);
+                        break;
+                    case 'sanctions':
+                        loadSanctions(data);
+                        break;
+                    case 'quiz':
+                        loadQuiz();
+                        break;
+                }
+            }
+
+            function loadOverview(data) {
+                const pointsList = document.getElementById('main-points');
+                pointsList.innerHTML = '';
+                
+                data.mainPoints.forEach(point => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start gap-3';
+                    li.innerHTML = `
+                        <div class="w-5 h-5 bg-accent rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                            <i class="ri-check-line text-white text-sm"></i>
+                        </div>
+                        <span class="text-gray-700">${point}</span>
+                    `;
+                    pointsList.appendChild(li);
+                });
+
+                document.getElementById('infographic').src = data.infographic;
+            }
+
+            function loadRights(data) {
+                const rightsList = document.getElementById('rights-list');
+                rightsList.innerHTML = '';
+                
+                data.rights.forEach((right, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-blue-50 rounded-lg p-4 border-l-4 border-accent';
+                    div.innerHTML = `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-semibold text-sm">${index + 1}</span>
+                            </div>
+                            <p class="text-gray-700">${right}</p>
+                        </div>
+                    `;
+                    rightsList.appendChild(div);
+                });
+            }
+
+            function loadProcess(data) {
+                const processSteps = document.getElementById('process-steps');
+                processSteps.innerHTML = '';
+                
+                data.process.forEach((step, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'flex items-start gap-4';
+                    div.innerHTML = `
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-semibold">
+                                ${step.step}
+                            </div>
+                            ${index < data.process.length - 1 ? '<div class="w-0.5 h-8 bg-gray-300 mt-2"></div>' : ''}
+                        </div>
+                        <div class="flex-1 pb-8">
+                            <h4 class="font-semibold text-gray-800 mb-1">${step.title}</h4>
+                            <p class="text-gray-600">${step.desc}</p>
+                        </div>
+                    `;
+                    processSteps.appendChild(div);
+                });
+            }
+
+            function loadSanctions(data) {
+                const sanctionsList = document.getElementById('sanctions-list');
+                sanctionsList.innerHTML = '';
+                
+                data.sanctions.forEach(sanction => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-red-50 rounded-lg p-4 border border-red-200';
+                    div.innerHTML = `
+                        <h4 class="font-semibold text-red-800 mb-2">${sanction.type}</h4>
+                        <p class="text-red-700">${sanction.penalty}</p>
+                    `;
+                    sanctionsList.appendChild(div);
+                });
+            }
+
+            function loadQuiz() {
+                const quizContainer = document.getElementById('quiz-container');
+                const quizResult = document.getElementById('quiz-result');
+                
+                if (currentQuiz >= quizData[currentModule].length) {
+                    showQuizResult();
+                    return;
+                }
+                
+                quizContainer.classList.remove('hidden');
+                quizResult.classList.add('hidden');
+                
+                const quiz = quizData[currentModule][currentQuiz];
+                document.querySelector('#quiz-question h4').textContent = quiz.question;
+                document.getElementById('question-counter').textContent = `${currentQuiz + 1} / ${quizData[currentModule].length}`;
+                
+                const optionsContainer = document.getElementById('quiz-options');
+                optionsContainer.innerHTML = '';
+                
+                quiz.options.forEach((option, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'quiz-option p-3 border border-gray-300 rounded-lg cursor-pointer';
+                    div.dataset.index = index;
+                    div.textContent = option;
+                    
+                    div.addEventListener('click', function() {
+                        document.querySelectorAll('.quiz-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                    });
+                    
+                    optionsContainer.appendChild(div);
+                });
+            }
+
+            function showQuizResult() {
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('quiz-result').classList.remove('hidden');
+                document.getElementById('final-score').textContent = `${quizScore}/${quizData[currentModule].length}`;
+            }
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    const tab = this.dataset.tab;
+                    setActiveTab(index);
+                    loadTabContent(tab);
+                    updateProgress();
+                });
+            });
+
+            function setActiveTab(index) {
+                currentTab = index;
+                
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('border-accent', 'text-accent');
+                    btn.classList.add('border-transparent', 'text-gray-600');
+                });
+                
+                tabButtons[index].classList.remove('border-transparent', 'text-gray-600');
+                tabButtons[index].classList.add('border-accent', 'text-accent');
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                document.getElementById(tabs[index]).classList.add('active');
+            }
+            function updateProgress() {
+                const progress = ((currentTab + 1) / tabs.length) * 100;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = Math.round(progress) + '%';
+            }
+
+            function resetProgress() {
+                currentTab = 0;
+                currentQuiz = 0;
+                quizScore = 0;
+                progressBar.style.width = '0%';
+                progressText.textContent = '0%';
+            }
+
+            document.getElementById('prev-tab').addEventListener('click', function() {
+                if (currentTab > 0) {
+                    setActiveTab(currentTab - 1);
+                    loadTabContent(tabs[currentTab]);
+                    updateProgress();
+                }
+            });
+
+            document.getElementById('next-tab').addEventListener('click', function() {
+                if (currentTab < tabs.length - 1) {
+                    setActiveTab(currentTab + 1);
+                    loadTabContent(tabs[currentTab]);
+                    updateProgress();
+                }
+            });
+
+            document.getElementById('prev-question').addEventListener('click', function() {
+                if (currentQuiz > 0) {
+                    currentQuiz--;
+                    loadQuiz();
+                }
+            });
+
+            document.getElementById('next-question').addEventListener('click', function() {
+                const selected = document.querySelector('.quiz-option.selected');
+                if (selected) {
+                    const selectedIndex = parseInt(selected.dataset.index);
+                    const correct = quizData[currentModule][currentQuiz].correct;
+                    
+                    if (selectedIndex === correct) {
+                        quizScore++;
+                    }
+                    
+                    currentQuiz++;
+                    loadQuiz();
+                }
+            });
+
+            document.getElementById('retry-quiz').addEventListener('click', function() {
+                currentQuiz = 0;
+                quizScore = 0;
+                loadQuiz();
+            });
+
+            document.getElementById('bookmark-btn').addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const text = this.querySelector('span');
+                
+                if (icon.classList.contains('ri-bookmark-line')) {
+                    icon.classList.remove('ri-bookmark-line');
+                    icon.classList.add('ri-bookmark-fill');
+                    text.textContent = 'Tersimpan';
+                    this.classList.add('text-accent');
+                } else {
+                    icon.classList.remove('ri-bookmark-fill');
+                    icon.classList.add('ri-bookmark-line');
+                    text.textContent = 'Simpan Bookmark';
+                    this.classList.remove('text-accent');
+                }
+            });
+        });
+    </script>
+
+    <script id="infographic-zoom">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('infographic-zoom')) {
+                    e.target.classList.toggle('zoomed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
