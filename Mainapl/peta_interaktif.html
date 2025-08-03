@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Peta Digital Rumah Aman dan Instansi Pendukung</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +17,7 @@
             height: 100vh;
             width: 100%;
             position: relative;
+            overflow: hidden;
         }
         .map-iframe {
             width: 100%;
@@ -30,6 +31,8 @@
             position: absolute;
             cursor: move;
             z-index: 1000;
+            max-width: calc(100% - 32px);
+            width: 100%;
         }
         #location-popup .popup-header {
             cursor: move;
@@ -37,11 +40,63 @@
         #location-popup .popup-content {
             cursor: auto;
         }
-    </style> 
-        <style>
+        
+        /* Mobile menu styles */
+        .mobile-menu-button {
+            display: none;
+        }
+        
+        /* Sidebar styles for mobile */
+        @media (max-width: 1023px) {
+            body {
+                overflow-x: hidden;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+            }
+            
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 85%;
+                height: 100vh;
+                z-index: 1000;
+                transition: left 0.3s ease;
+                overflow-y: auto;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            .mobile-menu-button {
+                display: block;
+            }
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            .overlay.active {
+                display: block;
+            }
+            
+            /* Close button in sidebar */
+            .sidebar-close {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                z-index: 1001;
+            }
+        }
+        
         /* Header Styles */
         .header-container {
-            background-color: #f4eae4;;
+            background-color: #f4eae4;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: relative;
         }
@@ -224,7 +279,6 @@
             popup.querySelectorAll('p.text-sm.text-gray-600')[2].textContent = location.phone;
             popup.querySelectorAll('p.text-sm.text-gray-600')[3].textContent = location.distance + ' • 5 menit berkendara';
             
-  
             const iconElement = popup.querySelector('.w-4.h-4');
             iconElement.className = 'w-4 h-4 rounded-full flex-shrink-0';
             
@@ -272,6 +326,12 @@
             iframe.classList.remove('hidden-map');
         }
 
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.overlay').classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             changeMapIframe(locations[0].iframeUrl);
             
@@ -281,16 +341,20 @@
             popup.querySelector('.popup-close').addEventListener('click', () => {
                 popup.classList.add('hidden');
             });
+
+            // Mobile menu button
+            document.querySelector('.mobile-menu-button').addEventListener('click', toggleSidebar);
+            document.querySelector('.overlay').addEventListener('click', toggleSidebar);
+            document.querySelector('.sidebar-close').addEventListener('click', toggleSidebar);
         });
     </script>
 </head>
 <body class="bg-gray-50 font-sans">
    
     <main class="min-h-screen">
-           <div class="header-container py-4 border-b border-gray-200">
+        <div class="header-container py-4 border-b border-gray-200">
             <div class="px-6">
                 <div class="flex items-center justify-between max-w-6xl mx-auto">
-            
                     <a href="main.html" class="back-button text-gray-700">
                         <div class="hover-bg"></div>
                         <i class="ri-arrow-left-line icon text-xl mr-2"></i>
@@ -300,6 +364,11 @@
                     <div class="text-gray-600 font-medium">
                         <p>Peta Interaktif</p>
                     </div>
+
+                    <!-- Mobile menu button -->
+                    <button class="mobile-menu-button lg:hidden text-gray-700">
+                        <i class="ri-menu-line text-xl"></i>
+                    </button>
                 </div>
             </div>
             
@@ -307,14 +376,12 @@
                 <p class="text-sm text-white">Selamat datang di Peta Interaktif</p>
             </div>
         </div>
-               <script>
+        <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const welcomePopup = document.querySelector('.welcome-popup');
                 
-            
                 welcomePopup.style.display = 'block';
                 
-             
                 setTimeout(() => {
                     welcomePopup.style.animation = 'fadeIn 0.3s ease-out reverse';
                     setTimeout(() => {
@@ -323,12 +390,21 @@
                 }, 3000);
             });
         </script>
-        <div class="flex h-screen">
-            <div class="w-96 bg-customcream border-r border-gray-200 flex flex-col">
-                <div class="p-6 border-b border-gray-100">
+        
+        <!-- Overlay for mobile sidebar -->
+        <div class="overlay"></div>
+        
+        <div class="flex flex-col lg:flex-row h-screen">
+            <!-- Sidebar - Hidden on mobile by default -->
+            <div class="sidebar w-full lg:w-96 bg-customcream border-r border-gray-200 flex flex-col">
+                <!-- Close button for mobile -->
+                <button class="sidebar-close lg:hidden bg-white p-2 rounded-full shadow-md">
+                    <i class="ri-close-line text-gray-700"></i>
+                </button>
+                
+                <div class="p-4 lg:p-6 border-b border-gray-100 mt-4 lg:mt-0">
                     <h2 class="text-xl font-semibold text-gray-900 mb-4">Filter Pencarian</h2>
                     <div class="space-y-6">
-                        
                         <div>
                             <label class="text-sm font-medium text-gray-700 mb-3 block">Wilayah</label>
                             <div class="relative">
@@ -361,7 +437,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-1 overflow-y-auto p-6">
+                <div class="flex-1 overflow-y-auto p-4 lg:p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Lokasi Terdekat</h3>
                     <div class="space-y-4">
                         <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer bg-white" onclick="showLocationPopup(locations[0])">
@@ -462,11 +538,14 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Map Container -->
             <div class="flex-1 relative">
                 <div id="map-container">
                     <!-- Iframes will be dynamically inserted here -->
                 </div>
 
+                <!-- Map Controls -->
                 <div class="absolute top-4 right-4 flex flex-col space-y-2">
                     <button class="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                         <div class="w-5 h-5 flex items-center justify-center">
@@ -484,8 +563,10 @@
                         </div>
                     </button>
                 </div>
+                
+                <!-- Bottom Buttons -->
                 <div class="absolute bottom-4 right-4 flex space-x-2">
-                  <button id="btn-lokasi-saya" class="bg-ungu px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center space-x-2">
+                    <button id="btn-lokasi-saya" class="bg-ungu px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center space-x-2">
                         <div class="w-4 h-4 flex items-center justify-center">
                             <i class="ri-navigation-line text-white text-sm"></i> 
                         </div>
@@ -499,7 +580,16 @@
                         <span class="text-sm text-white">Bagikan</span> 
                     </button>
                 </div>
-                <div id="location-popup" class="bg-white rounded-xl shadow-xl p-6 max-w-sm w-96 hidden">
+                
+                <!-- Mobile filter button -->
+                <button class="lg:hidden absolute top-4 left-4 bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow" onclick="toggleSidebar()">
+                    <div class="w-5 h-5 flex items-center justify-center">
+                        <i class="ri-filter-line text-gray-700"></i>
+                    </div>
+                </button>
+                
+                <!-- Location Popup -->
+                <div id="location-popup" class="bg-white rounded-xl shadow-xl p-4 lg:p-6 w-full lg:max-w-sm hidden">
                     <div class="flex items-start justify-between mb-4 popup-header">
                         <div class="flex items-center space-x-3">
                             <div class="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
@@ -537,7 +627,7 @@
                             <p class="text-sm text-gray-600">1.5 km • 5 menit berkendara</p>
                         </div>
                     </div>
-                    <div class="flex space-x-3 popup-content">
+                    <div class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-3 popup-content">
                         <button class="flex-1 bg-primary text-white py-3 px-4 !rounded-button text-sm font-medium hover:bg-red-700 transition-colors whitespace-nowrap flex items-center justify-center space-x-2">
                             <i class="ri-navigation-line"></i>
                             <span>Petunjuk Arah</span>
