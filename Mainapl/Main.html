@@ -46,48 +46,49 @@
 <body>
 
   <div class="fixed bottom-6 left-6 z-50">
-  <button id="mainToggle" class="w-14 h-14 bg-[#9b7786] text-white rounded-full shadow-lg flex items-center justify-center text-xl">
-    <i class="ri-headphone-line text-2xl"></i>
-  </button>
+          <button id="mainToggle" class="w-14 h-14 bg-[#9b7786] text-white rounded-full shadow-lg flex items-center justify-center text-xl">
+            <i class="ri-headphone-line text-2xl"></i>
+          </button>
 
-  <div id="dropdownPanel" class="mt-4 space-y-2 hidden">
-    <div>
-      <button id="toggleAkses" class="bg-[#9b7786] text-white px-4 py-2 w-64 flex justify-between items-center font-semibold rounded">
-        AKSESBILITAS <i class="ri-arrow-down-s-line"></i>
-      </button>
-      <div id="aksesMenu" class="bg-white w-64 p-4 mt-1 rounded shadow hidden text-sm text-gray-800 space-y-2">
-        <button class="block w-full text-left hover:text-purple-600">Perbesar Teks</button>
-        <button class="block w-full text-left hover:text-purple-600">Ubah Kontras</button>
-        <button class="block w-full text-left hover:text-purple-600">Text-to-Speech</button>
-      </div>
-    </div>
+          <div id="dropdownPanel" class="mt-4 space-y-2 hidden">
+            <div>
+              <button id="toggleAkses" class="bg-[#9b7786] text-white px-4 py-2 w-64 flex justify-between items-center font-semibold rounded">
+                AKSESBILITAS <i class="ri-arrow-down-s-line"></i>
+              </button>
+              <div id="aksesMenu" class="bg-white w-64 p-4 mt-1 rounded shadow hidden text-sm text-gray-800 space-y-2">
+               <button onclick="togglePerbesarTeks()" class="block w-full text-left hover:text-purple-600">Perbesar Teks</button>
+              <button onclick="perkecilTeks()" class="block w-full text-left hover:text-purple-600">Perkecil Teks</button>
+              <button onclick="toggleUbahKontras()" class="block w-full text-left hover:text-purple-600">Ubah Kontras</button>
+              <button onclick="toggleTextToSpeech()" class="block w-full text-left hover:text-purple-600">Text-to-Speech</button>
+              </div>
+            </div>
 
-    <div>
-      <button id="toggleKrisis" class="bg-[#9b7786] text-white px-4 py-2 w-64 flex justify-between items-center font-semibold rounded">
-        Pusat Bantuan Krisis <i class="ri-arrow-down-s-line"></i>
-      </button>
-      <div id="krisisMenu" class="bg-white w-72 p-4 mt-1 rounded shadow text-sm text-gray-800 space-y-6 hidden">
-        <div>
-          <a href="tel:08111129129" class="text-yellow-600 font-bold text-lg hover:underline block">08111129129</a>
-          <p class="text-sm mt-1">SAPA 129 (Perlindungan Perempuan & Anak)<br><em></em>protection of women and children</p>
-          <p class="font-semibold mt-1">*24 Jam</p>
-          <p class="italic mt-1">Call this number for any emergencies</p>
-          <hr class="mt-2 border-yellow-300">
-        </div><div>
-          <a href="tel:02131901556" class="text-yellow-600 font-bold text-lg hover:underline block">02131901556</a>
-          <p class="text-sm mt-1">KPAI (Komisi Perlindungan Anak Indonesia)<br><em></em>Indonesian Child Protection Commission</p>
-          <p class="font-semibold mt-1">*Senin–Jumat, 08.00–16.00</p>
-          <hr class="mt-2 border-yellow-300">
-        </div><div>
-          <a href="tel:119" class="text-yellow-600 font-bold text-lg hover:underline block">119</a>
-          <p class="text-sm mt-1">Ambulans / Dinas Kesehatan<br><em></em>Indonesian Child Protection Commission</p>
-          <p class="font-semibold mt-1">*24 Jam</p>
-          <hr class="mt-2 border-yellow-300">
-        </div>
-        
-      </div>
-    </div>
-  </div>
+            <div>
+              <button id="toggleKrisis" class="bg-[#9b7786] text-white px-4 py-2 w-64 flex justify-between items-center font-semibold rounded">
+                Pusat Bantuan Krisis <i class="ri-arrow-down-s-line"></i>
+              </button>
+              <div id="krisisMenu" class="bg-white w-72 p-4 mt-1 rounded shadow text-sm text-gray-800 space-y-6 hidden">
+                <div>
+                  <a href="tel:08111129129" class="text-yellow-600 font-bold text-lg hover:underline block">08111129129</a>
+                  <p class="text-sm mt-1">SAPA 129 (Perlindungan Perempuan & Anak)<br><em></em>protection of women and children</p>
+                  <p class="font-semibold mt-1">*24 Jam</p>
+                  <p class="italic mt-1">Call this number for any emergencies</p>
+                  <hr class="mt-2 border-yellow-300">
+                </div><div>
+                  <a href="tel:02131901556" class="text-yellow-600 font-bold text-lg hover:underline block">02131901556</a>
+                  <p class="text-sm mt-1">KPAI (Komisi Perlindungan Anak Indonesia)<br><em></em>Indonesian Child Protection Commission</p>
+                  <p class="font-semibold mt-1">*Senin–Jumat, 08.00–16.00</p>
+                  <hr class="mt-2 border-yellow-300">
+                </div><div>
+                  <a href="tel:119" class="text-yellow-600 font-bold text-lg hover:underline block">119</a>
+                  <p class="text-sm mt-1">Ambulans / Dinas Kesehatan<br><em></em>Indonesian Child Protection Commission</p>
+                  <p class="font-semibold mt-1">*24 Jam</p>
+                  <hr class="mt-2 border-yellow-300">
+                </div>
+                
+              </div>
+            </div>
+          </div>
   </div>
 
   <nav class="navbar" id="mainNavbar">
@@ -648,5 +649,58 @@ myChart.resize();
   });
 </script>
 <script src="asset/js/main.js"></script>
+<script>
+let isBigText = false;
+let isHighContrast = false;
+
+function togglePerbesarTeks() {
+    if (isBigText) {
+        document.body.style.fontSize = "";
+        isBigText = false;
+    } else {
+        document.body.style.fontSize = "larger";
+        isBigText = true;
+    }
+}
+
+function perkecilTeks() {
+    document.body.style.fontSize = "smaller";
+    isBigText = false;
+}
+
+function toggleUbahKontras() {
+    isHighContrast = !isHighContrast;
+    document.body.classList.toggle("high-contrast", isHighContrast);
+}
+
+let isSpeaking = false;
+let utterance;
+function toggleTextToSpeech() {
+    if (!isSpeaking) {
+        utterance = new SpeechSynthesisUtterance(document.body.innerText);
+        speechSynthesis.speak(utterance);
+        isSpeaking = true;
+
+        utterance.onend = () => {
+            isSpeaking = false;
+        };
+    } else {
+        speechSynthesis.cancel();
+        isSpeaking = false;
+    }
+}
+
+const style = document.createElement('style');
+style.innerHTML = `
+    .high-contrast {
+        background-color: black !important;
+        color: yellow !important;
+    }
+    .high-contrast a {
+        color: cyan !important;
+    }
+`;
+document.head.appendChild(style);
+</script>
 
 </html>

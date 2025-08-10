@@ -11,7 +11,8 @@
                 extend: {
                     colors: {
                         primary: '#4F46E5',
-                        secondary: '#F59E0B'
+                        secondary: '#F59E0B',
+                        cream: '#f4eae4'
                     },
                     borderRadius: {
                         'none': '0px',
@@ -39,7 +40,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: #f4eae4;
         }
         
         @keyframes fadeInUp {
@@ -106,43 +107,93 @@
             height: 100%;
             border-radius: 4px;
         }
+             .back-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .back-button .icon {
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        .back-button .text {
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .back-button .hover-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #9b7786;
+            border-radius: 20px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .back-button:hover {
+            color: white;
+        }
+        .back-button:hover .icon {
+            transform: translateX(-4px);
+        }
+        .back-button:hover .hover-bg {
+            transform: scaleX(1);
+        }
     </style>
 </head>
 <body class="min-h-screen">
     <div class="min-h-screen flex flex-col">
         
-        <header class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 px-8 relative">
-            <div class="max-w-6xl mx-auto">
-                <div class="flex justify-between items-center">
-                    <h1 class="font-['Pacifico'] text-2xl">logo</h1>
-                    <button class="bg-white text-primary px-4 py-2 rounded-button flex items-center gap-2 hover:bg-gray-100 transition-colors whitespace-nowrap">
-                        <span class="w-5 h-5 flex items-center justify-center">
-                            <i class="ri-logout-box-line"></i>
-                        </span>
-                        <a href="Main.html">Kembali</a>
-                    </button>
+         <header class="bg-cream border-b border-gray-200 px-6 py-4">
+            <div class="flex items-center justify-between mb-4">
+                 <a href="main.html" class="back-button text-gray-700">
+                        <div class="hover-bg"></div>
+                        <i class="ri-arrow-left-line icon text-xl mr-2"></i>
+                        <span class="text">Kembali</span>
+                    </a>
+                <div class="flex items-center justify-center w-10 h-10">
+                    <i class="ri-question-line ri-lg text-primary"></i>
                 </div>
+            </div>
+            <div class="text-center">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">Modul Pembelajaran</h1>
+                <p class="text-gray-600 text-sm leading-relaxed">Udah sampai mana nih, jangan lupa untuk terus konsisten menyeleasaikan semuanya!</p>
             </div>
         </header>
         
      
-        <div class="w-full bg-white border-b border-gray-200 shadow-sm">
-            <div class="max-w-6xl mx-auto px-8 py-8">
-                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 border border-indigo-100">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                            <span class="w-6 h-6 flex items-center justify-center">
-                                <i class="ri-book-open-line ri-lg"></i>
-                            </span>
-                        </div>
-                        <div>
-                            <h2 class="text-2xl font-bold text-gray-800">Selamat Datang!</h2>
-                            <p class="text-gray-600 mt-1">Mari kita lanjutkan modul pembelajaran nya!</p>
-                        </div>
-                    </div>
-                </div>
+        <div id="welcomeToast" 
+            class="fixed top-5 right-5 bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 shadow-lg rounded-lg p-4 flex items-center gap-3 opacity-0 transform translate-x-5 transition-all duration-500">
+            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                <i class="ri-book-open-line ri-lg"></i>
+            </div>
+            <div>
+                <h2 class="text-lg font-bold text-gray-800">Selamat Datang!</h2>
+                <p class="text-gray-600 text-sm">Mari kita lanjutkan modul pembelajaran nya!</p>
             </div>
         </div>
+
+<script>
+    window.onload = function () {
+        const toast = document.getElementById('welcomeToast');
+        setTimeout(() => {
+            toast.classList.remove('opacity-0', 'translate-x-5');
+        }, 300); 
+
+    
+        setTimeout(() => {
+            toast.classList.add('opacity-0', 'translate-x-5');
+        }, 4300); 
+    };
+</script>
+
         
    
         <main class="flex-grow w-full py-8">
@@ -287,26 +338,7 @@
             </div>
         </main>
         
-        <!-- Footer -->
-        <footer class="w-full bg-white border-t border-gray-200 py-6">
-            <div class="max-w-6xl mx-auto px-8">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p class="text-gray-500 text-sm">© 2025 Pusat Pembelajaran SatuHati. Hak Cipta Dilindungi.</p>
-                    <div class="flex items-center gap-4">
-                        <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-                            <span class="w-5 h-5 flex items-center justify-center">
-                                <i class="ri-question-line"></i>
-                            </span>
-                        </a>
-                        <a href="#" class="text-gray-500 hover:text-primary transition-colors">
-                            <span class="w-5 h-5 flex items-center justify-center">
-                                <i class="ri-settings-line"></i>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+    
     </div>
     
     <script id="module-interaction">
