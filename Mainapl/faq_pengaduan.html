@@ -15,7 +15,8 @@
                 extend: {
                     colors: {
                         primary: '#3B82F6',
-                        secondary: '#10B981'
+                        secondary: '#10B981',
+                        cream: '#f4eae4'
                     },
                     borderRadius: {
                         'none': '0px',
@@ -42,6 +43,7 @@
         }
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f4eae4;
         }
         .accordion-content {
             max-height: 0;
@@ -58,15 +60,56 @@
         .accordion-arrow.rotate {
             transform: rotate(180deg);
         }
+        .back-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .back-button .icon {
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        .back-button .text {
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .back-button .hover-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #9b7786;
+            border-radius: 20px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .back-button:hover {
+            color: white;
+        }
+        .back-button:hover .icon {
+            transform: translateX(-4px);
+        }
+        .back-button:hover .hover-bg {
+            transform: scaleX(1);
+        }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen font-inter">
+<body class="bg-cream min-h-screen font-inter">
     <div class="max-w-4xl mx-auto bg-white min-h-screen shadow-sm">
-        <header class="bg-white border-b border-gray-200 px-6 py-4">
+        <header class="bg-cream border-b border-gray-200 px-6 py-4">
             <div class="flex items-center justify-between mb-4">
-                <a href="pengaduan.html" class="flex items-center justify-center w-10 h-10 text-gray-600 hover:text-blue-600 hover:bg-blue-100 rounded-full transition-colors">
-                    <i class="ri-arrow-left-line ri-lg"></i>
-                </a>
+                 <a href="main.html" class="back-button text-gray-700">
+                        <div class="hover-bg"></div>
+                        <i class="ri-arrow-left-line icon text-xl mr-2"></i>
+                        <span class="text">Kembali</span>
+                    </a>
                 <div class="flex items-center justify-center w-10 h-10">
                     <i class="ri-question-line ri-lg text-primary"></i>
                 </div>
@@ -77,7 +120,7 @@
             </div>
         </header>
 
-        <main class="px-6 py-6">
+        <main class="bg-cream px-6 py-6">
             <div class="space-y-4">
                 <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
                     <button class="accordion-trigger w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" data-target="faq-1">
