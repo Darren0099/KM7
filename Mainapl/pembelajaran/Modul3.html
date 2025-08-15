@@ -274,6 +274,13 @@
             display: inline-flex;
             align-items: center;
         }
+
+        #prevBtn.hidden,
+        #nextBtn.hidden {
+            display: none !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
     </style>
 </head>
 
@@ -1584,15 +1591,29 @@
 
                 // Tambahkan tanggal sekarang
                 const now = new Date();
-                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                document.getElementById('certificate-date').textContent = now.toLocaleDateString('id-ID', options);
+                document.getElementById('certificate-date').textContent = now.toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
 
-                // Sembunyikan hasil quiz dan tampilkan sertifikat
+                // Sembunyikan semua elemen quiz dan navigasi
+                document.getElementById('quiz-container').classList.add('hidden');
                 document.getElementById('quiz-results').classList.add('hidden');
+                document.querySelector('.flex.justify-between.mt-8').classList.add('hidden');
+
+                // Sembunyikan tombol navigasi utama
+                document.getElementById('prevBtn').classList.add('hidden');
+                document.getElementById('nextBtn').classList.add('hidden');
+
+                // Tampilkan sertifikat
                 document.getElementById('certificate-section').classList.remove('hidden');
 
-                // Scroll ke bagian sertifikat
+                // Scroll ke sertifikat
                 document.getElementById('certificate-section').scrollIntoView({ behavior: 'smooth' });
+
+                // Update state halaman saat ini
+                currentPage = 9; // Asumsi halaman sertifikat adalah halaman 9
             }
 
             // Quiz navigation event listeners
@@ -1650,15 +1671,35 @@
             const originalShowPage = showPage;
             showPage = function (page) {
                 originalShowPage(page);
-                if (page === 8) {
+
+                // Atur tampilan tombol navigasi
+                if (page === 9) { // Mode sertifikat
+                    document.getElementById('prevBtn').classList.add('hidden');
+                    document.getElementById('nextBtn').classList.add('hidden');
+                } else {
+                    // Tampilkan tombol sesuai kebutuhan
+                    document.getElementById('prevBtn').classList.toggle('hidden', page === 1);
+                    document.getElementById('nextBtn').classList.remove('hidden');
+                }
+
+                if (page === 8) { // Halaman quiz
                     setTimeout(initQuiz, 100);
                 }
+
+                currentPage = page; // Update current page
             };
         });
 
         document.getElementById('back-to-course').addEventListener('click', function () {
+            // Sembunyikan sertifikat
             document.getElementById('certificate-section').classList.add('hidden');
-            document.getElementById('quiz-results').classList.remove('hidden');
+
+            // Kembali ke halaman pertama (Pendahuluan)
+            currentPage = 1;
+            showPage(currentPage);
+
+            // Scroll ke atas halaman
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 
