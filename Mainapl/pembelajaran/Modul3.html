@@ -216,6 +216,64 @@
             background-color: #a17c8f;
             color: white;
         }
+
+        .certificate-container {
+            background: #fff;
+            border: 15px solid #a17c8f;
+            padding: 40px;
+            position: relative;
+        }
+
+        .certificate-container:before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            bottom: 20px;
+            left: 20px;
+            border: 1px dashed #a17c8f;
+            pointer-events: none;
+        }
+
+        .certificate-header h1 {
+            font-family: 'Pacifico', cursive;
+            color: #a17c8f;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .certificate-body {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .certificate-body:before,
+        .certificate-body:after {
+            content: "❝";
+            font-size: 60px;
+            color: #a17c8f;
+            opacity: 0.2;
+            position: absolute;
+        }
+
+        .certificate-body:before {
+            top: 0;
+            left: 20px;
+        }
+
+        .certificate-body:after {
+            bottom: 0;
+            right: 20px;
+            transform: rotate(180deg);
+        }
+
+        .signature {
+            text-align: center;
+        }
+
+        #back-to-course {
+            display: inline-flex;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -576,7 +634,346 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modul-page hidden" id="page-8">
+                                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+                                    <div class="mb-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h2 class="text-xl font-semibold text-gray-800">Quiz Modul 3: Dampak
+                                                Kesehatan</h2>
+                                            <div class="flex items-center space-x-4">
+                                                <div class="text-sm text-gray-600">
+                                                    <span id="quiz-timer">10:00</span>
+                                                </div>
+                                                <div class="text-sm text-gray-600">
+                                                    Pertanyaan <span id="current-question">1</span> dari <span
+                                                        id="total-questions">5</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div class="h-full bg-primary rounded-full transition-all duration-300"
+                                                id="quiz-progress" style="width: 20%"></div>
+                                        </div>
+                                    </div>
 
+                                    <div id="quiz-container">
+                                        <!-- Pertanyaan 1: Multiple Choice -->
+                                        <div class="quiz-question active" id="question-1">
+                                            <div class="mb-6">
+                                                <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                                    1. Manakah dari berikut ini yang merupakan komplikasi kehamilan
+                                                    paling umum pada remaja?
+                                                </h3>
+                                                <div class="space-y-3">
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q1" value="a"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Diabetes gestasional</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q1" value="b"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Preeklamsia dan anemia</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q1" value="c"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Plasenta previa</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q1" value="d"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Kehamilan kembar</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Pertanyaan 2: Multiple Choice -->
+                                        <div class="quiz-question hidden" id="question-2">
+                                            <div class="mb-6">
+                                                <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                                    2. Dampak psikologis yang paling sering dialami oleh remaja yang
+                                                    menikah dini adalah?
+                                                </h3>
+                                                <div class="space-y-3">
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q2" value="a"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Gangguan bipolar</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q2" value="b"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Stres, depresi, dan kecemasan</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q2" value="c"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Gangguan kepribadian</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q2" value="d"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Skizofrenia</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Pertanyaan 3: True/False -->
+                                        <div class="quiz-question hidden" id="question-3">
+                                            <div class="mb-6">
+                                                <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                                    3. Pernyataan: "Dampak kesehatan akibat pernikahan dini hanya
+                                                    bersifat sementara dan akan hilang setelah dewasa."
+                                                </h3>
+                                                <div class="space-y-3">
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q3" value="true"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Benar</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q3" value="false"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Salah</span>
+                                                    </label>
+                                                </div>
+                                                <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+                                                    <p class="text-sm text-gray-600">
+                                                        <i class="ri-information-line mr-1"></i>
+                                                        Pilih jawaban yang paling tepat berdasarkan materi yang telah
+                                                        dipelajari.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Pertanyaan 4: Multiple Select -->
+                                        <div class="quiz-question hidden" id="question-4">
+                                            <div class="mb-6">
+                                                <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                                    4. Pilih semua langkah pencegahan yang efektif untuk mengurangi
+                                                    pernikahan dini:
+                                                    <span class="text-sm font-normal text-gray-600">(Pilih semua yang
+                                                        benar)</span>
+                                                </h3>
+                                                <div class="space-y-3">
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="checkbox" name="q4" value="education"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Pendidikan kesehatan reproduksi di
+                                                            sekolah</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="checkbox" name="q4" value="counseling"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Konseling pranikah yang menekankan
+                                                            kesiapan fisik-mental</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="checkbox" name="q4" value="healthcare"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Akses layanan kesehatan reproduksi
+                                                            ramah remaja</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="checkbox" name="q4" value="isolation"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Mengisolasi remaja dari lingkungan
+                                                            sosial</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Pertanyaan 5: Scenario Based -->
+                                        <div class="quiz-question hidden" id="question-5">
+                                            <div class="mb-6">
+                                                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4 rounded">
+                                                    <h4 class="font-medium text-blue-800 mb-2">Studi Kasus:</h4>
+                                                    <p class="text-blue-700 text-sm">
+                                                        Sari, seorang remaja berusia 16 tahun, menikah dan hamil 3
+                                                        bulan. Dia mengalami mual muntah berlebihan,
+                                                        sering merasa lelah, dan mulai menunjukkan gejala depresi.
+                                                        Orangtuanya khawatir dengan kondisinya.
+                                                    </p>
+                                                </div>
+                                                <h3 class="text-lg font-medium text-gray-800 mb-4">
+                                                    5. Berdasarkan kasus di atas, tindakan pertama yang sebaiknya
+                                                    dilakukan adalah?
+                                                </h3>
+                                                <div class="space-y-3">
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q5" value="a"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Mengabaikan gejala karena normal
+                                                            dalam kehamilan</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q5" value="b"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Segera membawa ke fasilitas
+                                                            kesehatan untuk pemeriksaan komprehensif</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q5" value="c"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Memberikan suplemen vitamin
+                                                            saja</span>
+                                                    </label>
+                                                    <label
+                                                        class="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-primary hover:bg-gray-50 cursor-pointer transition-all">
+                                                        <input type="radio" name="q5" value="d"
+                                                            class="mt-1 text-primary">
+                                                        <span class="text-gray-700">Menunggu sampai trimester
+                                                            kedua</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-between mt-8">
+                                        <button id="quiz-prev"
+                                            class="flex items-center space-x-2 bg-white text-gray-700 font-medium py-2 px-4 rounded-button border border-gray-300 transition-colors shadow-sm hidden">
+                                            <i class="ri-arrow-left-line"></i>
+                                            <span>Sebelumnya</span>
+                                        </button>
+                                        <button id="quiz-next"
+                                            class="flex items-center space-x-2 bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-button transition-colors shadow-sm ml-auto">
+                                            <span>Selanjutnya</span>
+                                            <i class="ri-arrow-right-line"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Quiz Results -->
+                                <div class="bg-white rounded-lg shadow-md p-6 mt-6 hidden" id="quiz-results">
+                                    <div class="text-center mb-6">
+                                        <div
+                                            class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <i class="ri-check-line text-3xl text-green-600"></i>
+                                        </div>
+                                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Quiz Selesai!</h2>
+                                        <p class="text-gray-600">Selamat! Anda telah menyelesaikan quiz modul ini.</p>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                            <div class="text-2xl font-bold text-primary mb-1" id="final-score">4</div>
+                                            <div class="text-sm text-gray-600">Skor Anda</div>
+                                        </div>
+                                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                            <div class="text-2xl font-bold text-primary mb-1">5</div>
+                                            <div class="text-sm text-gray-600">Total Soal</div>
+                                        </div>
+                                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                                            <div class="text-2xl font-bold text-primary mb-1" id="final-percentage">80%
+                                            </div>
+                                            <div class="text-sm text-gray-600">Persentase</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-6" id="quiz-feedback">
+                                        <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+                                            <h3 class="font-semibold text-green-800 mb-2">Excellent!</h3>
+                                            <p class="text-green-700 text-sm">
+                                                Anda menunjukkan pemahaman yang sangat baik tentang dampak kesehatan
+                                                pernikahan dini.
+                                                Teruskan pembelajaran untuk modul selanjutnya!
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col sm:flex-row gap-3">
+                                        <button
+                                            class="flex items-center justify-center space-x-2 bg-white hover:bg-gray-50 text-primary font-medium py-2 px-4 rounded-button border border-primary transition-colors flex-1">
+                                            <i class="ri-refresh-line"></i>
+                                            <span>Ulangi Quiz</span>
+                                        </button>
+                                        <button
+                                            class="flex items-center justify-center space-x-2 bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-button transition-colors flex-1">
+                                            <span>Lanjut ke Sertifikat</span>
+                                            <i class="ri-arrow-right-line"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="certificate-section" class="hidden">
+                                <div
+                                    class="certificate-container bg-white p-8 rounded-lg shadow-lg border-2 border-primary max-w-3xl mx-auto">
+                                    <div class="certificate-header mb-6 text-center">
+                                        <img src="https://via.placeholder.com/150x80?text=Logo" alt="Logo Institusi"
+                                            class="mx-auto h-20 mb-4">
+                                        <h1 class="text-3xl font-bold text-primary mb-2">SERTIFIKAT PENYELESAIAN</h1>
+                                        <p class="text-gray-600">Diberikan kepada:</p>
+                                    </div>
+
+                                    <div class="certificate-body text-center mb-8">
+                                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Modul 3: Dampak Kesehatan
+                                            Pernikahan Dini</h2>
+                                        <p class="text-lg mb-6">Atas partisipasi dan penyelesaian quiz dengan hasil:</p>
+
+                                        <div class="flex justify-center gap-8 mb-8">
+                                            <div class="bg-gray-50 p-4 rounded-lg">
+                                                <div class="text-3xl font-bold text-primary" id="certificate-score">0
+                                                </div>
+                                                <div class="text-sm text-gray-600">Skor</div>
+                                            </div>
+                                            <div class="bg-gray-50 p-4 rounded-lg">
+                                                <div class="text-3xl font-bold text-primary"
+                                                    id="certificate-percentage">0%</div>
+                                                <div class="text-sm text-gray-600">Persentase</div>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-gray-700 mb-6">Telah menyelesaikan modul pembelajaran tentang
+                                            dampak kesehatan pernikahan dini dengan baik.</p>
+                                    </div>
+
+                                    <div class="certificate-footer flex justify-between items-end mt-8">
+                                        <div class="signature">
+                                            <div class="border-t-2 border-gray-400 w-40 pt-2">
+                                                <p class="text-sm font-semibold">Dr. Budi Santoso, M.Kom</p>
+                                                <p class="text-xs text-gray-600">Instruktur</p>
+                                            </div>
+                                        </div>
+                                        <div class="date">
+                                            <p class="text-sm font-semibold" id="certificate-date">15 Agustus 2025</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-8 text-center">
+                                    <button id="download-certificate"
+                                        class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-6 rounded-button transition-colors shadow-sm">
+                                        <i class="ri-download-line mr-2"></i>Download Sertifikat
+                                    </button>
+                                    <button id="back-to-course"
+                                        class="ml-4 bg-white hover:bg-gray-50 text-primary font-medium py-2 px-6 rounded-button border border-primary transition-colors shadow-sm">
+                                        <i class="ri-arrow-left-line mr-2"></i>Kembali ke Materi
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Navigasi -->
@@ -960,7 +1357,11 @@
             prevBtn.classList.toggle('hidden', page === 1);
 
             // Sembunyikan tombol "Selanjutnya" di halaman terakhir
-            nextBtn.classList.toggle('hidden', page === totalPages);
+            if (page === totalPages) {
+                nextBtn.classList.add('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+            }
         }
 
         document.getElementById('nextBtn').addEventListener('click', () => {
@@ -979,6 +1380,286 @@
 
         // Pertama kali load
         showPage(currentPage);
+    </script>
+
+    <script class="quiz-functionality">
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentQuestionIndex = 1;
+            const totalQuestions = 5;
+            let timeLeft = 600;
+            let timer;
+            let userAnswers = {};
+            let quizStarted = false;
+
+            const currentQuestionEl = document.getElementById('current-question');
+            const totalQuestionsEl = document.getElementById('total-questions');
+            const quizProgressEl = document.getElementById('quiz-progress');
+            const quizTimerEl = document.getElementById('quiz-timer');
+            const quizPrevBtn = document.getElementById('quiz-prev');
+            const quizNextBtn = document.getElementById('quiz-next');
+
+            // Correct answers
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'b',
+                q3: 'false',
+                q4: ['education', 'counseling', 'healthcare'],
+                q5: 'b'
+            };
+
+            // Initialize quiz when user reaches quiz page
+            function initQuiz() {
+                if (!quizStarted && currentPage === 8) {
+                    currentQuestionEl.textContent = currentQuestionIndex;
+                    totalQuestionsEl.textContent = totalQuestions;
+                    updateQuizProgress();
+                    startTimer();
+                    quizStarted = true;
+                }
+            }
+
+            // Start timer
+            function startTimer() {
+                timer = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        autoSubmitQuiz();
+                    }
+                }, 1000);
+            }
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                quizTimerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                // Change color when time is running low
+                if (timeLeft <= 60) {
+                    quizTimerEl.classList.add('text-red-500');
+                    quizTimerEl.classList.add('font-bold');
+                }
+            }
+
+            function updateQuizProgress() {
+                const progress = (currentQuestionIndex / totalQuestions) * 100;
+                quizProgressEl.style.width = `${progress}%`;
+                currentQuestionEl.textContent = currentQuestionIndex;
+
+                // Update navigation buttons
+                quizPrevBtn.classList.toggle('hidden', currentQuestionIndex === 1);
+
+                if (currentQuestionIndex === totalQuestions) {
+                    quizNextBtn.innerHTML = '<span>Selesai</span><i class="ri-check-line"></i>';
+                } else {
+                    quizNextBtn.innerHTML = '<span>Selanjutnya</span><i class="ri-arrow-right-line"></i>';
+                }
+            }
+
+            function showQuestion(index) {
+                document.querySelectorAll('.quiz-question').forEach((el, idx) => {
+                    el.classList.toggle('hidden', idx !== index - 1);
+                    el.classList.toggle('active', idx === index - 1);
+                });
+
+                currentQuestionIndex = index;
+                updateQuizProgress();
+            }
+
+            function saveCurrentAnswer() {
+                const currentQuestion = document.querySelector('.quiz-question.active');
+                if (!currentQuestion) return;
+
+                const questionId = currentQuestion.id.split('-')[1];
+                const questionName = `q${questionId}`;
+
+                // Handle different question types
+                if (questionId === '4') { // Multiple select question
+                    const checkedBoxes = currentQuestion.querySelectorAll('input[type="checkbox"]:checked');
+                    userAnswers[questionName] = Array.from(checkedBoxes).map(cb => cb.value);
+                } else { // Radio button questions
+                    const selectedRadio = currentQuestion.querySelector('input[type="radio"]:checked');
+                    if (selectedRadio) {
+                        userAnswers[questionName] = selectedRadio.value;
+                    }
+                }
+            }
+
+            function calculateScore() {
+                let score = 0;
+
+                // Question 1: Multiple choice
+                if (userAnswers.q1 === correctAnswers.q1) score++;
+
+                // Question 2: Multiple choice  
+                if (userAnswers.q2 === correctAnswers.q2) score++;
+
+                // Question 3: True/False
+                if (userAnswers.q3 === correctAnswers.q3) score++;
+
+                // Question 4: Multiple select - all correct answers must be selected
+                if (userAnswers.q4 && Array.isArray(userAnswers.q4)) {
+                    const userSet = new Set(userAnswers.q4);
+                    const correctSet = new Set(correctAnswers.q4);
+
+                    if (userSet.size === correctSet.size &&
+                        [...userSet].every(answer => correctSet.has(answer)) &&
+                        !userAnswers.q4.includes('isolation')) {
+                        score++;
+                    }
+                }
+
+                // Question 5: Multiple choice
+                if (userAnswers.q5 === correctAnswers.q5) score++;
+
+                return score;
+            }
+
+            function showResults() {
+                clearInterval(timer);
+
+                const score = calculateScore();
+                const percentage = Math.round((score / totalQuestions) * 100);
+
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.querySelector('.flex.justify-between.mt-8').classList.add('hidden');
+                document.getElementById('quiz-results').classList.remove('hidden');
+
+                document.getElementById('final-score').textContent = score;
+                document.getElementById('final-percentage').textContent = `${percentage}%`;
+
+                // Sembunyikan tombol "Lanjut ke Sertifikat" jika tidak lulus
+                const certificateBtn = document.querySelector('.flex.flex-col.sm\\:flex-row.gap-3 button:last-child');
+                if (percentage < 60) { // Ambang batas kelulusan 60%
+                    certificateBtn.classList.add('hidden');
+                } else {
+                    certificateBtn.classList.remove('hidden');
+                }
+            }
+
+            function autoSubmitQuiz() {
+                saveCurrentAnswer();
+                showResults();
+            }
+
+            function resetQuiz() {
+                // Reset semua jawaban
+                userAnswers = {};
+
+                // Reset pilihan yang dipilih
+                document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+                    input.checked = false;
+                    input.closest('label').classList.remove('border-primary', 'bg-primary/5');
+                });
+
+                // Reset timer
+                clearInterval(timer);
+                timeLeft = 600;
+                updateTimerDisplay();
+                quizTimerEl.classList.remove('text-red-500', 'font-bold');
+
+                // Kembali ke pertanyaan pertama
+                currentQuestionIndex = 1;
+                showQuestion(currentQuestionIndex);
+
+                // Sembunyikan hasil dan tampilkan quiz container
+                document.getElementById('quiz-results').classList.add('hidden');
+                document.getElementById('quiz-container').classList.remove('hidden');
+                document.querySelector('.flex.justify-between.mt-8').classList.remove('hidden');
+
+                // Mulai timer baru
+                startTimer();
+            }
+
+            function showCertificate() {
+                // Hitung skor dan persentase
+                const score = calculateScore();
+                const percentage = Math.round((score / totalQuestions) * 100);
+
+                // Update informasi sertifikat
+                document.getElementById('certificate-score').textContent = score;
+                document.getElementById('certificate-percentage').textContent = `${percentage}%`;
+
+                // Tambahkan tanggal sekarang
+                const now = new Date();
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                document.getElementById('certificate-date').textContent = now.toLocaleDateString('id-ID', options);
+
+                // Sembunyikan hasil quiz dan tampilkan sertifikat
+                document.getElementById('quiz-results').classList.add('hidden');
+                document.getElementById('certificate-section').classList.remove('hidden');
+
+                // Scroll ke bagian sertifikat
+                document.getElementById('certificate-section').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Quiz navigation event listeners
+            quizNextBtn.addEventListener('click', () => {
+                saveCurrentAnswer();
+
+                if (currentQuestionIndex < totalQuestions) {
+                    showQuestion(currentQuestionIndex + 1);
+                } else {
+                    showResults();
+                }
+            });
+
+            quizPrevBtn.addEventListener('click', () => {
+                if (currentQuestionIndex > 1) {
+                    saveCurrentAnswer();
+                    showQuestion(currentQuestionIndex - 1);
+                }
+            });
+
+            // Add visual feedback for selected answers
+            document.addEventListener('change', (e) => {
+                if (e.target.type === 'radio' || e.target.type === 'checkbox') {
+                    const label = e.target.closest('label');
+                    if (e.target.type === 'radio') {
+                        // Remove selection style from other radio buttons in the same group
+                        const radioGroup = document.querySelectorAll(`input[name="${e.target.name}"]`);
+                        radioGroup.forEach(radio => {
+                            radio.closest('label').classList.remove('border-primary', 'bg-primary/5');
+                        });
+                    }
+
+                    if (e.target.checked) {
+                        label.classList.add('border-primary', 'bg-primary/5');
+                    } else {
+                        label.classList.remove('border-primary', 'bg-primary/5');
+                    }
+                }
+            });
+
+            // Event listener untuk tombol "Ulangi Quiz"
+            document.querySelector('#quiz-results button:first-child').addEventListener('click', resetQuiz);
+
+            // Event listener untuk tombol "Lanjut ke Sertifikat"
+            document.querySelector('#quiz-results button:last-child').addEventListener('click', showCertificate);
+
+            // Fungsi untuk download sertifikat
+            document.getElementById('download-certificate').addEventListener('click', function () {
+                alert('Sertifikat berhasil didownload! (simulasi)');
+                // Di implementasi nyata, Anda bisa menggunakan library seperti html2canvas atau jsPDF
+                // untuk membuat sertifikat yang bisa didownload dengan benar
+            });
+
+            // Initialize quiz when reaching quiz page
+            const originalShowPage = showPage;
+            showPage = function (page) {
+                originalShowPage(page);
+                if (page === 8) {
+                    setTimeout(initQuiz, 100);
+                }
+            };
+        });
+
+        document.getElementById('back-to-course').addEventListener('click', function () {
+            document.getElementById('certificate-section').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+        });
     </script>
 
 </body>
