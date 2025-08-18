@@ -1,137 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Form Pengaduan dengan Lokasi</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-    #map {
-      height: 400px;
-      width: 100%;
-    }
-    .form-container {
-      padding: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-    }
-  </style>
-</head>
-<body>
 
-  <h2 style="text-align:center">Form Pengaduan</h2>
-
-  <div id="map"></div>
-
-  <div class="form-container">
-    <form id="pengaduanForm">
-      <label for="nama">Nama:</label>
-      <input type="text" id="nama" name="nama" required>
-
-      <label for="pengaduan">Isi Pengaduan:</label>
-      <textarea id="pengaduan" name="pengaduan" rows="4" required></textarea>
-
-      <label for="lat">Latitude:</label>
-      <input type="text" id="lat" name="latitude" readonly>
-
-      <label for="lng">Longitude:</label>
-      <input type="text" id="lng" name="longitude" readonly>
-
-      <button type="submit">Kirim Pengaduan</button>
-    </form>
-  </div>
-
-  <script>
-    let map, marker;
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -2.5489, lng: 118.0149 },
-        zoom: 5,
-      });
-
-      // Deteksi lokasi pengguna
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((pos) => {
-          const userLoc = {
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude,
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://static.readdy.ai/web/favicon-180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://static.readdy.ai/web/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://static.readdy.ai/web/favicon-16.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Readdy</title>
+    <script>
+      (function (w, r) {
+        w._rwq = r;
+        w[r] =
+          w[r] ||
+          function () {
+            (w[r].q = w[r].q || []).push(arguments);
           };
+      })(window, 'rewardful');
+    </script>
+    <script async src="https://r.wdfl.co/rw.js" data-rewardful="e9859a"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FB0NP1MM86"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
 
-          map.setCenter(userLoc);
-          map.setZoom(15);
+      gtag('config', 'G-FB0NP1MM86')
+    </script>
 
-          // Pasang marker
-          marker = new google.maps.Marker({
-            position: userLoc,
-            map: map,
-            draggable: true,
-            title: "Lokasi kamu",
-          });
-
-          // Isi input lat-lng
-          document.getElementById("lat").value = userLoc.lat;
-          document.getElementById("lng").value = userLoc.lng;
-
-          // Update saat marker dipindah
-          marker.addListener("dragend", () => {
-            const pos = marker.getPosition();
-            document.getElementById("lat").value = pos.lat();
-            document.getElementById("lng").value = pos.lng();
-          });
-        });
-      } else {
-        alert("Browser tidak mendukung geolokasi.");
+    <script>
+      function setRootFontSize() {
+        const baseSize = 14; // 基础字体大小
+        const scaleFactor = window.innerWidth / 393;
+        document.documentElement.style.fontSize = `${baseSize * scaleFactor}px`;
       }
 
-      // Event klik di peta
-      map.addListener("click", function(e) {
-        if (marker) {
-          marker.setPosition(e.latLng);
-        } else {
-          marker = new google.maps.Marker({
-            position: e.latLng,
-            map: map,
-          });
-        }
-
-        // Update input
-        document.getElementById("lat").value = e.latLng.lat();
-        document.getElementById("lng").value = e.latLng.lng();
-      });
-    }
-
-    // Tangani submit
-    document.getElementById("pengaduanForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const data = {
-        nama: this.nama.value,
-        pengaduan: this.pengaduan.value,
-        lat: this.latitude.value,
-        lng: this.longitude.value,
-      };
-      console.log("Data terkirim:", data);
-      alert("Pengaduan berhasil dikirim!");
-      this.reset();
-    });
-  </script>
-
-  <!-- GANTI YOUR_API_KEY -->
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-  </script>
-</body>
+      // window.addEventListener('resize', setRootFontSize);
+      // setRootFontSize();
+    </script>
+    <script>
+      // 预加载
+      try {
+        const READDY_PRELOAD = {};
+        READDY_PRELOAD['toggles'] = fetch('/api/public/toggles', {
+          method: 'GET'
+        }).then((res) => res.json());
+        window.READDY_PRELOAD = READDY_PRELOAD;
+      } catch (error) {
+        console.error('Preload proxy error:', error);
+      }
+    </script>
+    <script type="module" crossorigin src="https://static.readdy.ai/static/index-CU4EXX_D.js"></script>
+    <link rel="stylesheet" crossorigin href="https://static.readdy.ai/static/index-DuTCo7jI.css">
+  </head>
+  <body>
+    <div outline="0" id="app"></div>
+  </body>
 </html>
