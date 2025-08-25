@@ -17,7 +17,7 @@ main {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #ff8c6b;
+  background-color: #f4eae4;
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -79,7 +79,7 @@ form.sign-up-form {
 }
 
 .logo img {
-  width: 27px;
+  width: 250px;
   margin-right: 0.3rem;
 }
 
@@ -211,7 +211,7 @@ main.sign-up-mode .carousel {
   width: 55%;
   left: 45%;
   top: 0;
-  background-color: #ffe0d2;
+  background-color: #9b7786;
   border-radius: 2rem;
   display: grid;
   grid-template-rows: auto 1fr;
