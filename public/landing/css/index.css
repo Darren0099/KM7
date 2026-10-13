@@ -1,0 +1,123 @@
+.brand-logo-area {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    padding: 20px 0;
+}
+
+.brand-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    animation: marqueeScroll 15s linear infinite; 
+}
+
+@media screen and (min-width: 1280px) {
+    .brand-logo-wrap {
+        min-width: 215%;
+    }
+}
+
+@keyframes marqueeScroll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.brand-logo {
+    flex-shrink: 0;
+}
+
+.brand-logo img {
+    height: 60px;
+}
+
+.home-banner-section {
+    padding-top: 100px;
+    text-align: center;
+}
+
+.home-banner-text-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.banner-text-bg {
+    font-size: 50px;
+    font-weight: 700;
+}    .home-banner-card-area {
+    margin-top: 120px;
+}
+
+.banner-content-wrap {
+    max-width: 600px;
+    margin: auto;
+}
+
+.home-button-line-wrap {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.home-banner-card-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.home-banner-card {
+    background-color: #8bde6c;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.home-banner-card.first-card {
+    transform: rotate(10deg);
+}
+
+.home-banner-card.second-card {
+    background-color: #f7f7f7;
+    margin-top: 85px;
+    transform: rotate(-20deg);
+}
+
+.home-banner-card.third-card {
+    background-color: #ebfd6b;
+    transform: rotate(10deg);
+}
+
+.home-banner-card.fourth-card {
+    background-color: #f7f7f7;
+    margin-top: 90px;
+    transform: rotate(-10deg);
+}
+
+.home-banner-card.fifth-card {
+    background-color: #9e5aeb;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transform: rotate(5deg);
+}
+
+.home-banner-card.in-view {
+    transform: rotate(0deg);
+    opacity: 1;
+}
+
