@@ -1,0 +1,87 @@
+#magic-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+#ball {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 4px solid #00aaff;
+    
+  backdrop-filter: grayscale(1);
+  mix-blend-mode: difference;
+    border-radius: 50%;
+    background-color: rgba(0, 170, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, opacity 0.3s ease-in-out, background-color 0.3s ease;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1000;
+}
+
+.hover-target:hover #ball {
+    transform: scale(1.5);
+    background-color: rgba(0, 170, 255, 0.5);
+    backdrop-filter: grayscale(1);
+    mix-blend-mode: difference;
+}
+
+.click-effect {
+    transform: scale(0.8);
+}
+
+.dragging {
+    transform: scale(2);
+    background-color: rgba(0, 170, 255, 0.7);
+    
+  backdrop-filter: grayscale(1);
+  mix-blend-mode: difference;
+}
+
+.hidden-ball {
+    opacity: 0 !important;
+    visibility: hidden;
+}
+
+
+.hidden-scrollbar ::-webkit-scrollbar-thumb {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 1px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bd5196;
+    border-radius: 10px;
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a03e7b;
+    opacity: 1;
+}
+*:hover::-webkit-scrollbar-thumb,
+*:active::-webkit-scrollbar-thumb,
+*:focus-within::-webkit-scrollbar-thumb {
+    opacity: 1;
+}
+::selection {
+    background-color: #a03e7b; 
+    color: #fff; 
+}
