@@ -119,36 +119,12 @@ asakita/
 
 ---
 
-## Menjalankan di komputer
+## Struktur konten dan rancangan edukasi
 
-Prasyarat: [Node.js](https://nodejs.org/) 18 atau lebih baru.
-
-```bash
-npm install
-npm run dev        # buka http://localhost:3000
-```
-
-Build produksi:
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## Mengubah isi
-
-- **Materi, pertanyaan, kartu kuis, dan video:** edit `lib/data.ts`. Untuk video, isi `video` dengan ID YouTube (bagian setelah `v=`). Menambah modul cukup dengan menambah satu objek di `MODULES`.
-- **Aturan XP dan kelulusan:** konstanta `PASS`, `XP_V`, `XP_Q`, `XP_PASS` di `lib/data.ts`.
-- **Lokasi peta dan kontak lembaga:** `PLACES` dan `CONTACTS` di `app/bantuan/page.tsx`.
-- **Teks landing page:** `public/landing/index.html`. Gaya responsifnya ada di `public/landing/css/fix.css`.
-
----
-
-## Deploy
-
-Proyek ini siap di-deploy ke [Vercel](https://vercel.com/): impor repo GitHub, lalu deploy. Tidak perlu variabel lingkungan. Pastikan `node_modules` tidak ikut di-commit (lihat `.gitignore`).
+- **Materi, pertanyaan, kartu kuis, dan video:** dikelola secara terstruktur melalui `lib/data.ts`; modul memakai objek dalam `MODULES`.
+- **Aturan XP dan kelulusan:** ditentukan oleh konstanta `PASS`, `XP_V`, `XP_Q`, dan `XP_PASS` di `lib/data.ts`.
+- **Lokasi peta dan kontak lembaga:** dipisahkan ke data `PLACES` dan `CONTACTS` di `app/bantuan/page.tsx`.
+- **Tampilan landing:** konten HTML di `public/landing/index.html` dan stylesheet responsif di `public/landing/css/fix.css`.
 
 ---
 
