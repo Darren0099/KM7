@@ -177,3 +177,19 @@ html[data-motion="1"] .ak-reveal-enter {
     animation: none !important;
   }
 }
+
+/* Subtle feedback on dashboard modules. Disabled modules stay still. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .mcard:not(.lock) {
+    transition: transform .32s cubic-bezier(.22, 1, .36, 1), box-shadow .32s ease;
+  }
+  .mcard:not(.lock):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 36px #2a142020;
+  }
+  .mcard:not(.lock) .mcover {
+    transition: filter .4s ease;
+  }
+  .mcard:not(.lock):hover .mcover { filter: saturate(1.12); }
+}
+html[data-motion="1"] .mcard { transition: none !important; transform: none !important; }
