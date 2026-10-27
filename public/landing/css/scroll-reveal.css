@@ -1,0 +1,67 @@
+/* AsaKita progressive reveal: independent "translate" preserves rotated cards,
+   moving marquees, carousel transforms and 3D quiz flip interactions. */
+@media (prefers-reduced-motion: no-preference) {
+  .ak-reveal-pending {
+    opacity: 0 !important;
+    translate: 0 26px;
+  }
+  [data-ak-reveal="left"].ak-reveal-pending { translate: -30px 0; }
+  [data-ak-reveal="right"].ak-reveal-pending { translate: 30px 0; }
+  [data-ak-reveal="scale"].ak-reveal-pending { scale: .975; translate: 0 12px; }
+
+  .ak-reveal-enter,
+  .service-card.ak-reveal-enter {
+    animation: ak-reveal-up 720ms cubic-bezier(.22, 1, .36, 1) var(--ak-delay, 0ms) both !important;
+  }
+  [data-ak-reveal="left"].ak-reveal-enter { animation-name: ak-reveal-left !important; }
+  [data-ak-reveal="right"].ak-reveal-enter { animation-name: ak-reveal-right !important; }
+  [data-ak-reveal="scale"].ak-reveal-enter { animation-name: ak-reveal-scale !important; }
+
+  @keyframes ak-reveal-up {
+    from { opacity: 0; translate: 0 26px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @keyframes ak-reveal-left {
+    from { opacity: 0; translate: -30px 0; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @keyframes ak-reveal-right {
+    from { opacity: 0; translate: 30px 0; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @keyframes ak-reveal-scale {
+    from { opacity: 0; scale: .975; translate: 0 12px; }
+    to { opacity: 1; scale: 1; translate: 0 0; }
+  }
+}
+
+/* AsaKita's own accessibility switch overrides any pending reveal. */
+html[data-motion="1"] .ak-reveal-pending,
+html[data-motion="1"] .ak-reveal-enter {
+  opacity: 1 !important;
+  translate: none !important;
+  scale: 1 !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ak-reveal-pending,
+  .ak-reveal-enter {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: 1 !important;
+    animation: none !important;
+  }
+  html { scroll-behavior: auto !important; }
+  .brand-logo-wrap { animation: none !important; }
+}
+
+@media print {
+  .ak-reveal-pending,
+  .ak-reveal-enter {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: 1 !important;
+    animation: none !important;
+  }
+}
